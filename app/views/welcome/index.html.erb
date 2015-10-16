@@ -1,1 +1,5 @@
 <h1>Publishing Portal</h1>
+
+<% if signed_in? %>
+	<h2> Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
+<% end %> 
