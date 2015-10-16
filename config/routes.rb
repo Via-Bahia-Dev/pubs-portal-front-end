@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'sign_in' => "sessions#create"
   get 'sign_out' => "sessions#destroy"
 
+  resources :users
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
