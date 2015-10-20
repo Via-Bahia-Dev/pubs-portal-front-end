@@ -1,0 +1,11 @@
+if [[ $# != 1 ]]; then
+	echo "**********************************************************************************"
+	echo "** Pass in the path to the api project and this will copy the models and schema **"
+	echo "**********************************************************************************"
+else
+	api_dir=$1
+	echo "Copying models directory..."
+	cp -r "$api_dir/app/models" "app"
+	echo "Copying schema.rb..."
+	cp "$api_dir/db/schema.rb" "db"
+fi

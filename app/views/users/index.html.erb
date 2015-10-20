@@ -1,3 +1,7 @@
+<% if can? :create, User %>
+	<%= link_to "Add User", new_user_path %>
+<% end %>
+
 <h1>JoyPact Users</h1>
 
 <table>

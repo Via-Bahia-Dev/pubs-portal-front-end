@@ -29,4 +29,23 @@ class UsersController < ApplicationController
 			redirect_to root_path
 		end
 	end
+
+	def new
+		@user = User.new
+	end
+
+	def create
+		res = self.class.post("/users.json", :query => { :user => { :first_name => params[:user][:first_name], 
+																																:last_name => params[:user][:last_name], 
+																																:email => params[:user][:email],
+																																:password => params[:user][:password] } },
+																				 :headers => { "X-User-Email" => session[:user_email], "X-Auth-Token" => session[:auth_token] } )
+		if res.success?
+			flash[:success] = "#{res.parsed_response["data"]["first_name"]} #{res.parsed_response["data"]["last_name"]} added!"
+			redirect_to users_path
+		else
+			flash.now[:error] = res.parsed_response["errors"]
+			render 'new'
+		end
+	end
 end
