@@ -30,6 +30,9 @@ gem 'httparty'
  gem 'bcrypt', '~> 3.1.7'
  gem 'has_secure_token'
 
+ # Use CanCanCan for authorization
+gem 'cancancan', '~> 1.10'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

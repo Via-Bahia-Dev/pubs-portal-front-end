@@ -9,7 +9,11 @@
 <body>
 
 <% if signed_in? %>
-	<%= link_to "Users List", users_path %>
+	<%= link_to "Home", root_path %>
+	<% if can? :index, User %>
+		<%= link_to "Users List", users_path %>
+	<% end %>
+	<%= link_to "View Profile", user_path(current_user) %>
 	<%= link_to "Sign Out", sign_out_path, :method => :delete %>
 <% else %>
 	<%= link_to "Sign In", sign_in_path %>

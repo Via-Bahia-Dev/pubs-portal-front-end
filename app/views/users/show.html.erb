@@ -1,3 +1,7 @@
-<h1><%= @user["first_name"] %> <%= @user["last_name"] %></h1>
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<% if can? :update, @user %>
+	<%= link_to "Edit profile", edit_user_path(@user) %>
+<% end %>
 
-<h3>Email:</h3> <%= @user["email"] %>
+<h3>Email:</h3> <%= @user.email %>
+
