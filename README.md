@@ -7,7 +7,7 @@ Heroku is already set up for this, but for local development it's a bit trickier
 
 This should give you a `pubs-portal_development` database. Feel free to use PGAdmin to examine this database.
 
-This project has the same `database.yml` so it will connect to the same one. However for Active Record to work, the `schema.rb` and `models` folders need to be the same as `pubs-portal-api`. There are links in this repo that point to them on my machine and you can use them to link to `pubs-portal-api` if you are actively working on that project too. However, when pushing, you will need to get hard copies and commit them, since heroku will need them.
+This project has the same `database.yml` so it will connect to the same one. However for Active Record to work, the `schema.rb` and `models` folders need to be the same as `pubs-portal-api`. There is a script called `copy-files-from-api` that will copy these over, when you give it the path to the api project.
 
 Once you have done that, you need both `pubs-portal-api` and `pubs-portal-front-end` to be running. The config is set up to look for the API at `http://localhost:3001` so start that server with 
 >`rails s -p 3001`
