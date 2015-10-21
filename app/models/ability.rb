@@ -6,7 +6,10 @@ class Ability
 
     can :create, :session if user.roles == []
 
-    can :destroy, :session if user.has_role? :user
+    if user.has_role? :user
+      can :destroy, :session # users can sign out
+      can :update, User, :id => user.id # users can update their own profile
+    end
 
     can :manage, :all if user.has_role? :admin
 

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 	def index
 		if signed_in?
@@ -19,7 +20,8 @@ class UsersController < ApplicationController
 		if signed_in?
 			res = self.class.get("/users/#{params[:id]}.json", :headers => { "X-User-Email" => session[:user_email], "X-Auth-Token" => session[:auth_token] })
 			if res.success?
-				@user = res.parsed_response["data"]
+				# @user = res.parsed_response["data"]
+				@user = User.find(res.parsed_response["data"]["id"])
 			else
 				flash[:error] = res.parsed_response["errors"]
 				redirect_to root_path
@@ -45,7 +47,33 @@ class UsersController < ApplicationController
 			redirect_to users_path
 		else
 			flash.now[:error] = res.parsed_response["errors"]
-			render 'new'
+			render :new
 		end
 	end
+
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def update
+		res = self.class.put("/users/#{params[:id]}.json", 
+													:query => { :user => user_params },
+													:headers => { "X-User-Email" => session[:user_email], "X-Auth-Token" => session[:auth_token] })
+		if res.success?
+			flash[:success] = "#{@user.first_name} #{@user.last_name} successfully updated!"
+			redirect_to user_path(@user)
+		else
+			flash.now[:error] = res.parsed_response["errors"]
+			render :edit
+		end
+	end
+
+	private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:email, :password, :first_name, :last_name, :roles_mask)
+    end
 end
