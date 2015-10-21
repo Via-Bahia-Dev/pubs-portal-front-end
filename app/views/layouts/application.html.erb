@@ -10,7 +10,7 @@
 
 <% if signed_in? %>
 	<%= link_to "Home", root_path %>
-	<% if can? :read, User %>
+	<% if can? :index, User %>
 		<%= link_to "Users List", users_path %>
 	<% end %>
 	<%= link_to "View Profile", user_path(current_user) %>
