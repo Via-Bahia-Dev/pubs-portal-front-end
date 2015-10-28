@@ -3,3 +3,19 @@ rvm:
  - "2.2.0"
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
+
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database pubs_portal_test;' -U postgres
+
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate
+  - bundle exec rake db:test:prepare
+  - bundle exec rake
+
+notifications:
+  slack: joypactdev:ZDiuFI4GDQJ0KQzTgJljV29y
+
+addons:
+  code_climate:
+    repo_token: aad05fcc6ef8058d98f13c2afb310fed2ec4c92ef6afe289dc6319557a9761b7
