@@ -33,6 +33,9 @@ gem 'httparty'
  # Use CanCanCan for authorization
 gem 'cancancan', '~> 1.10'
 
+# bootstrap
+gem 'bootstrap-sass', '~> 3.3.5'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
