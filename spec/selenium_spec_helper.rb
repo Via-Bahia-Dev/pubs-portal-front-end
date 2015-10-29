@@ -11,7 +11,13 @@ module Helper
 	end	
 
 	def load_objects()
-  	@webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
+  	# @webdriver = Selenium::WebDriver.for :firefox
+  	caps = Selenium::WebDriver::Remote::Capabilities.chrome
+		caps['platform'] = 'Windows 10'
+		caps['version'] = '31.0'
+ 
+  	sauce_endpoint = "http://davidwosk1:0760394d-b006-4432-a9da-fabc6854f154@ondemand.saucelabs.com:80/wd/hub"
+  	@webdriver = Selenium::WebDriver.for :remote, :url => sauce_endpoint, :desired_capabilities => caps
     @user = User.new(@webdriver)
 	end
 
