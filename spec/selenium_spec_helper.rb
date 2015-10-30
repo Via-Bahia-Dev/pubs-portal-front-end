@@ -25,8 +25,9 @@ module Helper
   	else
   		@webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
     end
-    
+ 
     @user = User.new(@webdriver)
+    @user.visit(false)
 	end
 
 end

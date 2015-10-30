@@ -6,29 +6,30 @@ RSpec.describe WelcomeController, type: :controller do
 
   before :all do
     load_vars
-    puts "Starting Selenium tests..."
+    puts "Starting Welcome Controller tests..."
     load_objects
   end
 
-  describe "GET #index" do
+  describe "GET /" do
     context "when not logged in" do
   	  
       it "should display index page with sign in link" do 
-        puts "testing"
-        result = @user.visit
+        result = @user.visit(false)
         expect(result).to equal(true)
 		  end
-
-      it "should log in (will move later)" do
+    end
+    context "when logged in" do
+      
+      it "should diplay menu bar with sign out option" do
       result = @user.sign_in($EMAIL, $PASSWORD)
       expect(result).to equal(true)
       end
 
-	  end
+    end
   end
 
   after :all do
-    puts "Quitting Selenium tests..."
+    puts "Quitting Welcome Controller tests..."
     @webdriver.quit()
   end
 
