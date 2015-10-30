@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative '../selenium_spec_helper.rb'
 
 RSpec.describe UsersController, type: :controller do
 

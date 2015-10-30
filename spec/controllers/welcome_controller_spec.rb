@@ -15,25 +15,14 @@ RSpec.describe WelcomeController, type: :controller do
   	  
       it "should display index page with sign in link" do 
         puts "testing"
-        @user.visit
-        @wait = Selenium::WebDriver::Wait.new(:timeout => 5)
-    
-        begin
-          @wait.until { @webdriver.find_element(id: 'sign-in') }
-          found_elem = @webdriver.find_element(id: 'sign-in')
-    
-        rescue Selenium::WebDriver::Error::TimeOutError
-          puts "SELENIUM: Timeout - sign-in"
-          return nil
-        rescue Selenium::WebDriver::Error::NoSuchElementError
-          puts "SELENIUM: NoElement - sign-in"
-          return nil
-        rescue Selenium::WebDriver::Error::InvalidSelectorError
-          puts 'SELENIUM: Invalid Selector Error - sign-in'
-          return nil
-        end
-
+        result = @user.visit
+        expect(result).to equal(true)
 		  end
+
+      it "should log in (will move later)" do
+      result = @user.sign_in($EMAIL, $PASSWORD)
+      expect(result).to equal(true)
+      end
 
 	  end
   end

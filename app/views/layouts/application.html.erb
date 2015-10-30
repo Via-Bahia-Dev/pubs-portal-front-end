@@ -14,7 +14,7 @@
 		<%= link_to "Users List", users_path %>
 	<% end %>
 	<%= link_to "View Profile", user_path(current_user) %>
-	<%= link_to "Sign Out", sign_out_path, :method => :delete %>
+	<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
 <% else %>
 	<%= link_to "Sign In", sign_in_path, id: "sign-in" %>
 <% end %> 

@@ -4,7 +4,7 @@ require_relative './lib/user.rb'
 module Helper
 
 	def load_vars()
-		$USERNAME = "test1@test.com"
+		$EMAIL = "test1@test.com"
 		$PASSWORD = "asdfasdf"
 
 		$URL = "http://localhost:3000"
