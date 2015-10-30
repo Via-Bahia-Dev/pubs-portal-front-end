@@ -22,3 +22,6 @@ addons:
   sauce_connect:
     username: "davidwosk1"
     access_key: "0760394d-b006-4432-a9da-fabc6854f154"
+
+env:
+ - USE_SAUCE_LABS=true
