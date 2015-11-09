@@ -1,5 +1,5 @@
 # README
-[![Build Status](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end.svg?branch=master)](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end) [![Code Climate](https://codeclimate.com/repos/56315a786956800a900005ba/badges/79f06c1d00f995ee8324/gpa.svg)](https://codeclimate.com/repos/56315a786956800a900005ba/feed)
+[![Build Status](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end.svg?branch=master)](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end) [![Test Coverage](https://codeclimate.com/repos/563d0347695680793800003b/badges/23b14a11ede38d0775e5/coverage.svg)](https://codeclimate.com/repos/563d0347695680793800003b/coverage)
 
 ## Setup
 This is the front end of the [pubs-portal-api](https://github.com/natyconnor/pubs-portal-api "pubs-portal-api") project. As such, it needs to connect to the API's database if you ever want to access it. As a front-end, this should not be necessary in general, but it might be nice.
