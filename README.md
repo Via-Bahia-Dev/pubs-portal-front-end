@@ -17,6 +17,9 @@ Once you have done that, you need both `pubs-portal-api` and `pubs-portal-front-
 
 Everything should now work. Use the browser to go to `http://localhost:3000` and the app should work, successfully making API calls to the API app. If things seem funny, try using the console and make sure it's accessing the same database.
 
+## Tests
+Tests use `Selenium`, so you need to have the api running on port 3001 as well as the front in running for it to work.
+
 ## Heroku
 The project is already up and running on Heroku, but if you have multiple heroku projects on your machine, it's confusing on how to make that folder a proper Heroku folder. Use
 
