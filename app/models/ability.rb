@@ -10,6 +10,10 @@ class Ability
       can :destroy, :session # users can sign out
       can :show, User, :id => user.id # users can view their own profile
       can :update, User, :id => user.id # users can update their own profile
+      can :read, RequestAttachment
+      can :create, RequestAttachment
+      can :update, RequestAttachment, :user_id => user.id
+      can :destroy, RequestAttachment, :user_id => user.id
     end
 
     can :manage, :all if user.has_role? :admin
