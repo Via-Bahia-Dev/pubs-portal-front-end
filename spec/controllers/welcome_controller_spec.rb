@@ -17,11 +17,11 @@ RSpec.describe WelcomeController, type: :controller do
         puts "testing"
         result = @user.visit
         expect(result).to equal(true)
-		  end
+      end
 
       it "should log in (will move later)" do
-      result = @user.sign_in($EMAIL, $PASSWORD)
-      expect(result).to equal(true)
+        result = @user.sign_in($EMAIL, $PASSWORD)
+        expect(result).to equal(true)
       end
 
 	  end
