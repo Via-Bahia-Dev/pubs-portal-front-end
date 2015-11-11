@@ -4,6 +4,9 @@ rvm:
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
 
+before_install:
+  - gem install selenium-webdriver
+
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database pubs_portal_test;' -U postgres
@@ -14,7 +17,6 @@ before_script:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
-  - xvfb-run bundle exec rake
 
 notifications:
   slack: joypactdev:ZDiuFI4GDQJ0KQzTgJljV29y
