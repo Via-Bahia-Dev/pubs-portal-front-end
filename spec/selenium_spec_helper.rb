@@ -11,7 +11,7 @@ module Helper
 	end	
 
 	def load_objects()
-  	# @webdriver = Selenium::WebDriver.for :firefox
+  	# @webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
 
   	# If true, make webdriver object pointed to Sauce Labs cloud. 
   	# If false, use local webdriver.
@@ -25,8 +25,9 @@ module Helper
   	else
   		@webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
     end
-    
-    @user = User.new(@webdriver)
+ 
+    @user = User1.new(@webdriver)
+    @user.visit(false)
 	end
 
 end

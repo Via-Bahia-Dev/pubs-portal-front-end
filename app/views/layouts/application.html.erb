@@ -9,11 +9,11 @@
 <body>
 
 <% if signed_in? %>
-	<%= link_to "Home", root_path %>
+	<%= link_to "Home", root_path, id: "home" %>
 	<% if can? :index, User %>
-		<%= link_to "Users List", users_path %>
+		<%= link_to "Users List", users_path, id: "users-list" %>
 	<% end %>
-	<%= link_to "View Profile", user_path(current_user) %>
+	<%= link_to "View Profile", user_path(current_user), id: "view-profile" %>
 	<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
 <% else %>
 	<%= link_to "Sign In", sign_in_path, id: "sign-in" %>
