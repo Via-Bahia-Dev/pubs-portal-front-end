@@ -11,7 +11,7 @@ module Helper
 	end	
 
 	def load_objects()
-  	# @webdriver = Selenium::WebDriver.for :firefox
+  	# @webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
 
   	# If true, make webdriver object pointed to Sauce Labs cloud. 
   	# If false, use local webdriver.
@@ -23,7 +23,7 @@ module Helper
   		sauce_endpoint = "http://davidwosk1:0760394d-b006-4432-a9da-fabc6854f154@ondemand.saucelabs.com:80/wd/hub"
   		@webdriver = Selenium::WebDriver.for :remote, :url => sauce_endpoint, :desired_capabilities => caps
   	else
-  		@webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
+  		@webdriver = Selenium::WebDriver.for :firefox
     end
  
     @user = User1.new(@webdriver)
