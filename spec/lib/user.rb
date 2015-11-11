@@ -5,9 +5,8 @@ class User1
 	EMAIL_FIELD = { id: "user_email" }
 	PASSWORD_FIELD = { id: "user_password" }
 
-	SIGN_IN_LINK = { id: "sign-in" }
 	SIGN_OUT_LINK = { id: "sign-out" }
-	LOGIN_BUTTON = { id: "sign-in-btn" }
+	SIGN_IN_BUTTON = { id: "sign-in-btn" }
 
 	EDIT_PROFILE_LINK = { id: "edit-profile" }
 	HOME_LINK = { id: "home" }
@@ -42,11 +41,10 @@ class User1
   def sign_in(email, password)
 		puts "User #{email} logging in"
    
-   	Common.click(@webdriver, SIGN_IN_LINK)
-    Common.find(@webdriver, LOGIN_BUTTON)
+    Common.find(@webdriver, SIGN_IN_BUTTON)
     Common.send_text(@webdriver, EMAIL_FIELD, email)
     Common.send_text(@webdriver, PASSWORD_FIELD, password)
-    Common.click(@webdriver, LOGIN_BUTTON)
+    Common.click(@webdriver, SIGN_IN_BUTTON)
 
     logged_in = true if Common.find(@webdriver, SIGN_OUT_LINK)
   
@@ -56,7 +54,7 @@ class User1
   	# Common.find(@webdriver, SIGN_OUT_LINK)
   	Common.click(@webdriver, SIGN_OUT_LINK)
 
-  	signed_out = true if Common.find(@webdriver, SIGN_IN_LINK)
+  	signed_out = true if Common.find(@webdriver, SIGN_IN_BUTTON)
   end
 
   # Assumes user is logged in unless method is called with false argument.
@@ -65,7 +63,7 @@ class User1
   	if logged_in
   		home_page = true if Common.find(@webdriver, WELCOME_HEADER)
    	else
-   		home_page = true if Common.find(@webdriver, SIGN_IN_LINK)
+   		home_page = true if Common.find(@webdriver, SIGN_IN_BUTTON)
    	end
   end
 
