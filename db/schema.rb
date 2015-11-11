@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018001314) do
+ActiveRecord::Schema.define(version: 20151027194142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,51 @@ ActiveRecord::Schema.define(version: 20151018001314) do
 
   add_index "authentication_tokens", ["user_id"], name: "index_authentication_tokens_on_user_id", using: :btree
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "publication_request_id"
+    t.datetime "date"
+    t.text     "content"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "publication_requests", force: :cascade do |t|
+    t.string   "event"
+    t.text     "description"
+    t.string   "dimensions"
+    t.datetime "rough_date"
+    t.datetime "due_date"
+    t.datetime "event_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "designer_id"
+    t.integer  "admin_id"
+    t.integer  "reviewer_id"
+    t.string   "status"
+  end
+
+  create_table "request_attachments", force: :cascade do |t|
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "publication_request_id"
+    t.integer  "user_id"
+    t.text     "comment"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "dimensions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -41,4 +86,6 @@ ActiveRecord::Schema.define(version: 20151018001314) do
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
   add_foreign_key "authentication_tokens", "users"
+  add_foreign_key "request_attachments", "publication_requests"
+  add_foreign_key "request_attachments", "users"
 end

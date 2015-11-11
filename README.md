@@ -1,5 +1,5 @@
 # README
-[![Build Status](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end.svg?branch=master)](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end) [![Code Climate](https://codeclimate.com/repos/56315a786956800a900005ba/badges/79f06c1d00f995ee8324/gpa.svg)](https://codeclimate.com/repos/56315a786956800a900005ba/feed)
+[![Build Status](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end.svg?branch=master)](https://travis-ci.org/Via-Bahia-Dev/pubs-portal-front-end) [![Code Climate](https://codeclimate.com/repos/563d0347695680793800003b/badges/23b14a11ede38d0775e5/gpa.svg)](https://codeclimate.com/repos/563d0347695680793800003b/feed) [![Test Coverage](https://codeclimate.com/repos/563d0347695680793800003b/badges/23b14a11ede38d0775e5/coverage.svg)](https://codeclimate.com/repos/563d0347695680793800003b/coverage)
 
 ## Setup
 This is the front end of the [pubs-portal-api](https://github.com/natyconnor/pubs-portal-api "pubs-portal-api") project. As such, it needs to connect to the API's database if you ever want to access it. As a front-end, this should not be necessary in general, but it might be nice.
@@ -16,6 +16,9 @@ Once you have done that, you need both `pubs-portal-api` and `pubs-portal-front-
  You can start the server for the front-end as normal `rails s`.
 
 Everything should now work. Use the browser to go to `http://localhost:3000` and the app should work, successfully making API calls to the API app. If things seem funny, try using the console and make sure it's accessing the same database.
+
+## Tests
+Tests use `Selenium`, so you need to have the api running on port 3001 as well as the front in running for it to work. For TravisCI, we're using SauceLabs and it does a bunch of magic.
 
 ## Heroku
 The project is already up and running on Heroku, but if you have multiple heroku projects on your machine, it's confusing on how to make that folder a proper Heroku folder. Use
