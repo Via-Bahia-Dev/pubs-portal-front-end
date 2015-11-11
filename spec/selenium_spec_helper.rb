@@ -24,7 +24,7 @@ module Helper
   	# 	@webdriver = Selenium::WebDriver.for :remote, :url => sauce_endpoint, :desired_capabilities => caps
   	# else
     default = Selenium::WebDriver::Firefox::Profile.new
-  	@webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
+  	@webdriver = Selenium::WebDriver.for :firefox, :profile => default
     # end
  
     @user = User1.new(@webdriver)
