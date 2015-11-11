@@ -11,7 +11,7 @@ RSpec.describe SessionsController, type: :controller do
     @user.sign_in($EMAIL, $PASSWORD)
   end
 	
-	describe "Logged in user" do
+	describe "signed in user" do
     context "clicking 'Sign Out' link" do
       it "should destroy the session" do 
  				result = @user.sign_out

@@ -46,7 +46,7 @@ class User1
     Common.send_text(@webdriver, PASSWORD_FIELD, password)
     Common.click(@webdriver, SIGN_IN_BUTTON)
 
-    logged_in = true if Common.find(@webdriver, SIGN_OUT_LINK)
+    signed_in = true if Common.find(@webdriver, SIGN_OUT_LINK)
   
   end
 
@@ -57,10 +57,10 @@ class User1
   	signed_out = true if Common.find(@webdriver, SIGN_IN_BUTTON)
   end
 
-  # Assumes user is logged in unless method is called with false argument.
-  def visit(logged_in=true)
+  # Assumes user is signed in unless method is called with false argument.
+  def visit(signed_in=true)
   	@webdriver.get $URL
-  	if logged_in
+  	if signed_in
   		home_page = true if Common.find(@webdriver, WELCOME_HEADER)
    	else
    		home_page = true if Common.find(@webdriver, SIGN_IN_BUTTON)

@@ -11,14 +11,14 @@ RSpec.describe WelcomeController, type: :controller do
   end
 
   describe "GET /" do
-    context "when not logged in" do
+    context "when not signed in" do
   	  
       it "should display index page with sign in link" do 
         result = @user.visit(false)
         expect(result).to equal(true)
 		  end
     end
-    context "when logged in" do
+    context "when signed in" do
       
       it "should diplay menu bar with sign out option" do
       result = @user.sign_in($EMAIL, $PASSWORD)
