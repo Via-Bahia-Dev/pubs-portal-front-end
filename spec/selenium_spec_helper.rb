@@ -22,10 +22,8 @@ module Helper
  
   		sauce_endpoint = "http://davidwosk1:0760394d-b006-4432-a9da-fabc6854f154@ondemand.saucelabs.com:80/wd/hub"
   		@webdriver = Selenium::WebDriver.for :remote, :url => sauce_endpoint, :desired_capabilities => caps
-  	elsif ENV['TRAVIS']
-      @webdriver = Selenium::WebDriver.for :phantomjs
     else
-  		@webdriver = Selenium::WebDriver.for :firefox, :profile => 'default'
+  		@webdriver = Selenium::WebDriver.for :firefox
     end
  
     @user = User1.new(@webdriver)
