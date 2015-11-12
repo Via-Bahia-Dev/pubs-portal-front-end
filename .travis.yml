@@ -30,6 +30,9 @@ addons:
   sauce_connect:
     username: "davidwosk1"
     access_key: "0760394d-b006-4432-a9da-fabc6854f154"
+  sauce_connect:
+    username: "natyconnor"
+    access_key: "bf417e1b-5c97-48ee-b091-a3f4f52b46b9"
 
 env:
  - USE_SAUCE_LABS=true
