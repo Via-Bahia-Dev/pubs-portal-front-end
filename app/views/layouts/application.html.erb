@@ -8,23 +8,32 @@
 </head>
 <body>
 
-<% if signed_in? %>
-	<%= link_to "Home", root_path, id: "home" %>
-	<% if can? :index, User %>
-		<%= link_to "Users List", users_path, id: "users-list" %>
-	<% end %>
-	<%= link_to "View Profile", user_path(current_user), id: "view-profile" %>
-	<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
-<% end %> 
+	<div class="container-fluid">
 
-<% if flash[:error] %>
-	<p> <%= flash[:error] %> </p>
-<% end %>
-<% if flash[:success] %>
-	<p> <%= flash[:success] %> </p>
-<% end %>
+		<% if signed_in? %>
+			<%= link_to "Home", root_path, id: "home" %>
+			<% if can? :index, User %>
+				<%= link_to "Users List", users_path, id: "users-list" %>
+			<% end %>
+			<%= link_to "View Profile", user_path(current_user), id: "view-profile" %>
+			<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
+		<% end %> 
 
-<%= yield %>
+		<% if flash[:error] %>
+			<div class="alert alert-warning alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<%= flash[:error] %>
+			</div>
+		<% end %>
+		<% if flash[:success] %>
+			<p> <%= flash[:success] %> </p>
+		<% end %>
+
+		<%= yield %>
+
+	</div>
 
 </body>
 </html>
