@@ -1,12 +1,12 @@
 require 'rails_helper'
 require_relative '../selenium_spec_helper.rb'
 
-RSpec.describe WelcomeController, type: :controller do
+RSpec.describe "Welcome browser" do
   include Helper
 
   before :all do
     load_vars
-    puts "Starting Welcome Controller tests..."
+    puts "Starting Welcome browser tests..."
     load_objects
   end
 
@@ -29,7 +29,7 @@ RSpec.describe WelcomeController, type: :controller do
   end
 
   after :all do
-    puts "Quitting Welcome Controller tests..."
+    puts "Quitting Welcome browser tests..."
     @webdriver.quit()
   end
 

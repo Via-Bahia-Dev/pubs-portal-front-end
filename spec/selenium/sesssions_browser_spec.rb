@@ -1,12 +1,12 @@
 require 'rails_helper'
 require_relative '../selenium_spec_helper.rb'
 
-RSpec.describe SessionsController, type: :controller do
+RSpec.describe "Sessions browser" do
 	include Helper
 
   before :all do
     load_vars
-    puts "Starting Sessions Controller tests..."
+    puts "Starting Sessions browser tests..."
     load_objects
     @user.sign_in($EMAIL, $PASSWORD)
   end
@@ -21,7 +21,7 @@ RSpec.describe SessionsController, type: :controller do
   end
 
 	after :all do
-    puts "Quitting Sessions Controller tests..."
+    puts "Quitting Sessions browser tests..."
     @webdriver.quit()
   end
 
