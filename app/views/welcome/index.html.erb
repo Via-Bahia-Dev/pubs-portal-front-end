@@ -1,5 +1,13 @@
-<h1>Publishing Portal</h1>
+<div class="page-header">
+	<h1>Publishing Portal</h1>
+</div>
 
-<% if signed_in? %> 
-	<h2 id="welcome-header"> Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
-<% end %>
+<div class="row">
+	<% unless signed_in? %>
+		<div class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8">
+			<%= render partial: 'sessions/new' %>
+		</div>
+	<% else %>
+		<h2 id="welcome-header"> Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
+	<% end %>
+</div>

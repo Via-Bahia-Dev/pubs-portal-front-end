@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 				redirect_to root_path
 			end
 		else
-			flash[:error] = "You need to be logged in to access that page"
+			flash[:error] = "You need to be signed in to access that page"
 			redirect_to root_path
 		end
 	end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 				redirect_to root_path
 			end
 		else
-			flash[:error] = "You need to be logged in to access that page"
+			flash[:error] = "You need to be signed in to access that page"
 			redirect_to root_path
 		end
 	end

@@ -1,13 +1,13 @@
 require 'rails_helper'
 require_relative '../selenium_spec_helper.rb'
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe "Users browser" do
 	include Helper
 
   before :all do
   	# user = User.create(email: "user@email.com", password: "af3714ff0ffae", first_name: "user", last_name: "test")
     load_vars
-    puts "Starting Users Controller tests..."
+    puts "Starting Users browser tests..."
     load_objects
     @user.sign_in($EMAIL, $PASSWORD)
   end
@@ -47,7 +47,7 @@ RSpec.describe UsersController, type: :controller do
   end
 
 	after :all do
-    puts "Quitting Users Controller tests..."
+    puts "Quitting Users browser tests..."
     @webdriver.quit()
   end
 

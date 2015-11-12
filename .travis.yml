@@ -12,6 +12,10 @@ before_script:
   - psql -c 'create database pubs_portal_test;' -U postgres
   # - "export DISPLAY=:99.0"
   # - "sh -e /etc/init.d/xvfb start"
+  # - sleep 5
+  # - echo $PATH
+  # - ruby -S bundle exec rails server -d
+  # - sleep 10
   # - sleep 3 # give xvfb some time to start
   # - "wget http://selenium-release.storage.googleapis.com/2.43/selenium-server-standalone-2.43.1.jar"
   # - "java -jar selenium-server-standalone-2.43.1.jar > /dev/null &"
@@ -19,7 +23,7 @@ before_script:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
-  - bundle exec rake
+  # - bundle exec rake
 
 notifications:
   slack: joypactdev:ZDiuFI4GDQJ0KQzTgJljV29y
@@ -27,9 +31,7 @@ notifications:
 addons:
   code_climate:
     repo_token: e49d3aa9c51decadae274fde90b6e34d14082c575af18109752339ed38ac6bae
-  sauce_connect:
-    username: "davidwosk1"
-    access_key: "0760394d-b006-4432-a9da-fabc6854f154"
 
 env:
- - USE_SAUCE_LABS=true
+  - TRAVIS=true
+
