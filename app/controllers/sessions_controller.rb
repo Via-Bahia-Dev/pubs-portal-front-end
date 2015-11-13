@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		response = self.class.delete("/sign_out.json", :headers => { "X-User-Email" => session[:user_email], "X-Auth-Token" => session[:auth_token] })
+		response = self.class.delete("/sign_out.json", :headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token })
 
 		if response.success?
 			session[:user_email] = nil
