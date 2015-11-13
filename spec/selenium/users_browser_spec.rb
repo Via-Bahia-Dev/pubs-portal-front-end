@@ -29,6 +29,17 @@ RSpec.describe "Users browser" do
         expect(result).to equal(true)
 		  end
     end
+    context "should display an 'Add User' link on the users list page if user has ability" do
+      it "that goes to the add user page" do
+        @user.users_list
+        result = @user.add_user
+        expect(result).to equal(true)
+      end
+      it "should successfully create a new user" do
+        @user.create_user
+      end
+    end
+
     context "should display 'View Profile' link" do
       it "that takes user to profile page" do 
  				result = @user.view_profile
