@@ -13,9 +13,12 @@ class User1
 	USER_EMAIL = { id: "user_email" }
 	USER_FIRST_NAME = { id: "user_first_name" }
 	USER_LAST_NAME = { id: "user_last_name" }
+  USER_PASSWORD = { id: "user_password" }
 	USERS_LIST_LINK = { id: "users-list" }
 	USERS_TABLE = { id: "users-table" }
 	VIEW_PROFILE_LINK = { id: "view-profile" }
+  ADD_USER = { id: "add-user" }
+  ADD_USER_BUTTON = { id: "add-user-btn" }
 	WELCOME_HEADER = { id: "welcome-header" }
 
 	def initialize(webdriver)
@@ -79,6 +82,20 @@ class User1
   	Common.click(@webdriver, USERS_LIST_LINK)
 
   	users_list = true if Common.find(@webdriver, USERS_TABLE)
+  end
+
+  def add_user()
+    Common.click(@webdriver, ADD_USER)
+
+    add_user_page = true if Common.find(@webdriver, ADD_USER_BUTTON)
+  end
+
+  def create_user()
+    Common.send_text(@webdriver, USER_FIRST_NAME, "NewFirstName")
+    Common.send_text(@webdriver, USER_LAST_NAME, "NewLastName")
+    Common.send_text(@webdriver, USER_EMAIL, "newemail@test.com")
+    Common.send_text(@webdriver, USER_PASSWORD, "asdfasdf")
+    Common.click(@webdriver, ADD_USER_BUTTON)
   end
 
 end

@@ -27,10 +27,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		res = self.class.post("/users.json", :query => { :user => { :first_name => params[:user][:first_name], 
-																																:last_name => params[:user][:last_name], 
-																																:email => params[:user][:email],
-																																:password => params[:user][:password] } },
+		res = self.class.post("/users.json", :query => { :user => user_params },
 																				 :headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token } )
 		if res.success?
 			flash[:success] = "#{res.parsed_response["data"]["first_name"]} #{res.parsed_response["data"]["last_name"]} added!"
@@ -51,7 +48,7 @@ class UsersController < ApplicationController
 													:headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token })
 		if res.success?
 			flash[:success] = "#{@user.first_name} #{@user.last_name} successfully updated!"
-			redirect_to user_path(@user)
+			redirect_to users_path
 		else
 			flash.now[:error] = res.parsed_response["errors"]
 			render :edit
