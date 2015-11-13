@@ -23,8 +23,7 @@ before_script:
 script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - bundle exec rake db:test:prepare
-  # - bundle exec rake
-  - rspec
+  - bundle exec rake
 
 notifications:
   slack: joypactdev:ZDiuFI4GDQJ0KQzTgJljV29y
