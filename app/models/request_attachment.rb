@@ -24,4 +24,8 @@ class RequestAttachment < ActiveRecord::Base
 		content_type = /\Aimage\/.*\Z/
 	end
 
+	def request_attachment_urls
+		urls = {:thumb => self.file.url(:thumb),:small => self.file.url(:small), :medium => self.file.url(:medium),:large => self.file.url(:large)}
+	end
+
 end

@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not signed in)
+    user ||= User.new # guest user (not logged in)
 
     can :create, :session if user.roles == []
 
@@ -20,7 +20,7 @@ class Ability
 
     # Define abilities for the passed in user here. For example:
     #
-    #   user ||= User.new # guest user (not signed in)
+    #   user ||= User.new # guest user (not logged in)
     #   if user.admin?
     #     can :manage, :all
     #   else
