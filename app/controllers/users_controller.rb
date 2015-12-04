@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 	def index
-			res = self.class.get("/users.json", :headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token })
+			res = self.class.get("/users.json", :headers => auth_headers)
 			if res.success?
 				@users = res.parsed_response["data"]
 			else
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-			res = self.class.get("/users/#{params[:id]}.json", :headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token })
+			res = self.class.get("/users/#{params[:id]}.json", :headers => auth_headers )
 			if res.success?
 				# @user = res.parsed_response["data"]
 				@user = User.find(res.parsed_response["data"]["id"])
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
 	def create
 		res = self.class.post("/users.json", :query => { :user => user_params },
-																				 :headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token } )
+																				 :headers => auth_headers )
 		if res.success?
 			flash[:success] = "#{res.parsed_response["data"]["first_name"]} #{res.parsed_response["data"]["last_name"]} added!"
 			redirect_to users_path
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 	def update
 		res = self.class.put("/users/#{params[:id]}.json", 
 													:query => { :user => user_params },
-													:headers => { "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token })
+													:headers => auth_headers )
 		if res.success?
 			flash[:success] = "#{@user.first_name} #{@user.last_name} successfully updated!"
 			redirect_to users_path
