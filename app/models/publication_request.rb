@@ -7,5 +7,6 @@ class PublicationRequest < ActiveRecord::Base
 	belongs_to :designer, :class_name => 'User', :foreign_key => 'designer_id'
 	belongs_to :reviewer, :class_name => 'User', :foreign_key => 'reviewer_id'
 	has_many :comments
+	has_and_belongs_to_many :templates
 
 end

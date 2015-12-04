@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027194142) do
+ActiveRecord::Schema.define(version: 20151203192902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 20151027194142) do
     t.string   "status"
   end
 
+  create_table "publication_requests_templates", force: :cascade do |t|
+    t.integer "publication_request_id"
+    t.integer "template_id"
+  end
+
+  add_index "publication_requests_templates", ["publication_request_id"], name: "index_publication_requests_templates_on_publication_request_id", using: :btree
+  add_index "publication_requests_templates", ["template_id"], name: "index_publication_requests_templates_on_template_id", using: :btree
+
   create_table "request_attachments", force: :cascade do |t|
     t.string   "file_file_name"
     t.string   "file_content_type"
@@ -69,8 +77,14 @@ ActiveRecord::Schema.define(version: 20151027194142) do
     t.string   "name"
     t.integer  "user_id"
     t.string   "dimensions"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "link"
+    t.string   "category"
   end
 
   create_table "users", force: :cascade do |t|
