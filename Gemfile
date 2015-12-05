@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # HTTParty to consume pubs-portal-api
 gem 'httparty'
+#HTTMultiparty for multipart uploads
+gem 'httmultiparty'
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt', '~> 3.1.7'

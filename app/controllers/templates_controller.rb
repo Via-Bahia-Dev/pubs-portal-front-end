@@ -5,8 +5,9 @@ class TemplatesController < ApplicationController
 	end
 
 	def create
+		params[:template][:user_id] = current_user.id # cheating, not using api, but just getting it to work
 		res = self.class.post("/templates.json", :query => { :template => template_params },
-																				 :headers => auth_headers )
+																				 :headers => auth_headers, :detect_mime_type => true)
 		if res.success?
 			flash[:success] = "#{res.parsed_response["data"]["name"]} template uploaded!"
 			redirect_to root_path
