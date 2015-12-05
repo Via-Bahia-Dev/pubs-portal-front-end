@@ -9,7 +9,16 @@
 		</div>
 	<% else %>
 		<h2 id="welcome-header" class="col-md-4 col-xs-8"> Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
+		<div class="col-md-2 col-xs-4">
+			<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
+		</div>
+	<% end %>
+</div>
 
-		
+<div class="row">
+	<% @templates.each do |template| %>
+		<div>
+			<%= image_tag(template['image_medium']) %>
+		</div>
 	<% end %>
 </div>

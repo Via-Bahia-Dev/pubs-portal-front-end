@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :templates # will change this when done testing
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
