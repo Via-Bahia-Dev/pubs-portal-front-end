@@ -1,25 +1,50 @@
+<%= stylesheet_link_tag "templates.css" %>
+
 <div class="page-header">
 	<h1>Publishing Portal</h1>
 </div>
 
-<div class="row">
-	<% unless signed_in? %>
+
+<% unless signed_in? %>
+	<div class="row">
 		<div class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8">
 			<%= render partial: 'sessions/new' %>
 		</div>
-	<% else %>
+	</div>
+<% else %>
+	<div class="row">
 		<h2 id="welcome-header" class="col-md-4 col-xs-8"> Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
 		<div class="col-md-2 col-xs-4">
 			<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
 		</div>
+	</div>
 
-		<div class="row">
-			<% @templates.each do |template| %>
-				<div>
-					<%= image_tag(template['image_medium']) %>
-				</div>
-			<% end %>
-		</div>
-	<% end %>
-</div>
+	<div class="row wall" id="templates-wall">
+		<% @templates.each do |template| %>
+			<div class="item">
+				<%= image_tag(template['image_medium'], class: "img-thumbnail") %>
+			</div>
+		<% end %>
+	</div>
+
+	<script>
+		$(function() {
+			var wall = new freewall("#templates-wall");
+			wall.reset({
+				selector: '.item',
+				animate: true,
+				cellW: 20,
+				cellH: 200,
+				onResize: function() {
+					wall.fitWidth();
+				}
+			});
+			wall.fitWidth();
+
+			$(window).trigger("resize");
+		});
+	
+	</script>
+<% end %>
+
 
