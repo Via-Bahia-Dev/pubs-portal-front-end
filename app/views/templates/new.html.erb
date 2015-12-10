@@ -1,33 +1,33 @@
 
 <div class="row">
 	<div class="col-md-offset-4 col-xs-offset-2 col-md-4 col-xs-8">
-		<%= form_tag("/templates", method: "post", multipart: true) do %>
+		<%= form_for(@template, multipart: true) do |f|%>
 			<div class="field form-group">
-			    <%= label_tag :name, "Name", class: "sr-only" %>
-			    <%= text_field :template, :name, autofocus: true, class: "form-control input-lg", placeholder: "Name" %>
+			    <%= f.label :name, "Name", class: "sr-only" %>
+			    <%= f.text_field :name, autofocus: true, class: "form-control input-lg", placeholder: "Name" %>
 			</div>
 
 			<div class="field form-group">
-			    <%= label_tag :dimensions, "Dimensions", class: "sr-only" %>
-			    <%= text_field :template, :dimensions, class: "form-control input-lg", placeholder: "Diemnsions (e.g. 2x3)" %>
+			    <%= f.label :dimensions, "Dimensions", class: "sr-only" %>
+			    <%= f.text_field :dimensions, class: "form-control input-lg", placeholder: "Diemnsions (e.g. 2x3)" %>
 			</div>
 
 			<div class="field form-group">
-			    <%= label_tag :link, "Link", class: "sr-only" %>
-			    <%= text_field :template, :link, class: "form-control input-lg", placeholder: "Url to assets for this template" %>
+			    <%= f.label :link, "Link", class: "sr-only" %>
+			    <%= f.text_field :link, class: "form-control input-lg", placeholder: "Url to assets for this template" %>
 			</div>
 
 			<div class="field form-group">
-			    <%= label_tag :category, "Category", class: "sr-only" %>
-			    <%= text_field :template, :category, class: "form-control input-lg", placeholder: "Category of template (e.g. Welcome Night)" %>
+			    <%= f.label :category, "Category", class: "sr-only" %>
+			    <%= f.text_field :category, class: "form-control input-lg", placeholder: "Category of template (e.g. Welcome Night)" %>
 			</div>
 
 			<div class="field form-group">
-			    <%= label_tag :name, "Name", class: "sr-only" %>
-			    <%= file_field :template, :image %>
+			    <%= f.label :name, "Name", class: "sr-only" %>
+			    <%= f.file_field :image %>
 			</div>
 
-			<%= submit_tag("Upload", id: "upload-btn", class: "btn btn-primary btn-lg btn-block") %>
+			<%= f.submit("Upload", id: "upload-btn", class: "btn btn-primary btn-lg btn-block") %>
 		<% end %>
 	</div>
 </div>
