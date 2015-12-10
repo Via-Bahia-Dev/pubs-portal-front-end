@@ -12,3 +12,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(freewall.js)
 
 Rails.application.config.assets.precompile += %w( templates.css )
+Rails.application.config.assets.precompile += %w( publication_requests.css )
+Rails.application.config.assets.precompile += %w( sessions.css )
+Rails.application.config.assets.precompile += %w( users.css )
+Rails.application.config.assets.precompile += %w( welcome.css )
