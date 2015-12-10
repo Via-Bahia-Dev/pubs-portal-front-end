@@ -5,6 +5,13 @@ class PublicationRequestsController < ApplicationController
 		if params[:template_id]
 			@publication_request.templates << Template.find(params[:template_id])
 		end
+
+		template_res = self.class.get("/templates/#{params[:template_id]}", :headers => auth_headers)
+		if template_res.success?
+			@template = template_res.parsed_response["data"]
+		else
+			@template = nil
+		end
 	end
 
 	def create
