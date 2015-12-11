@@ -8,5 +8,6 @@
 }
 
 .template-cell img:hover {
-	padding: 0px;
+	transform: scale(1.1);
+	z-index: 999;
 }
