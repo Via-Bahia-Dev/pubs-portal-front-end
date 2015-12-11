@@ -3,6 +3,8 @@
 	<div class="col-md-offset-4 col-xs-offset-2 col-md-4 col-xs-8">
 		<h1>Upload a Template</h1>
 		<%= form_for(@template, multipart: true) do |f|%>
+			<%= form_errors_for @template %>
+
 			<div class="field form-group <%=field_class(@template, :name) %>">
 			    <%= f.label :name, "Name of the template", class: "control-label" %> <div class="form-required">*</div> </br>
 			    <%= f.text_field :name, autofocus: true, class: "form-control input-lg", placeholder: "Name" %>

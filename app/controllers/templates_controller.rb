@@ -14,8 +14,10 @@ class TemplatesController < ApplicationController
 			redirect_to root_path
 		else
 			@template.save #this will get the errors in the model
+			# we're actually using these errors for error messages for now, not the json from the api
+			# just more convenient
 
-			flash.now[:error] = errors_from_json(res.parsed_response["errors"])
+			# flash.now[:error] = errors_from_json(res.parsed_response["errors"]) # old use of flash
 			render :new
 		end
 	end

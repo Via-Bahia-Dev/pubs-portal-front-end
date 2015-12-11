@@ -10,6 +10,11 @@ module ApplicationHelper
 		end
 	end
 
+	# Displays object errors
+	def form_errors_for(object=nil)
+	  render('layouts/form_errors', object: object) unless object.blank?
+	end
+
 	def errors_from_json(json)
 		error_message = ""
 		json.each do |field, messages|
