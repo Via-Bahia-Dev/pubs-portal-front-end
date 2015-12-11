@@ -14,6 +14,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$red: #C9302C;
+
 .wall {
 	margin: 15px;
+}
+
+.form-required {
+	color: $red;
+	display: inline-block;
 }

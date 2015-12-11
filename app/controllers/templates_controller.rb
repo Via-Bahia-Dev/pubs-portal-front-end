@@ -13,7 +13,9 @@ class TemplatesController < ApplicationController
 			flash[:success] = "#{res.parsed_response["data"]["name"]} template uploaded!"
 			redirect_to root_path
 		else
-			flash.now[:error] = res.parsed_response["errors"]
+			@template.save #this will get the errors in the model
+
+			flash.now[:error] = errors_from_json(res.parsed_response["errors"])
 			render :new
 		end
 	end

@@ -17,6 +17,8 @@ class PublicationRequestsController < ApplicationController
 	def create
 		params[:publication_request][:user_id] = current_user.id
 		@publication_request = PublicationRequest.new(publication_request_params)
+		# Need to define @template as well
+
 		res = self.class.post("/publication_requests.json", :query => { :publication_request => publication_request_params },
 																				 :headers => auth_headers, :detect_mime_type => true)
 		if res.success?
