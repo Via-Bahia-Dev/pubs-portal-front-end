@@ -1,0 +1,14 @@
+// Place all the styles related to the Templates controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.template-cell {
+	// background-color: lightgrey;
+	// padding:5px;
+	display: inline-block;
+}
+
+.template-cell img:hover {
+	transform: scale(1.1);
+	box-shadow: 2px 2px 8px 8px rgba(0,0,0,0.5);
+	z-index: 999;
+}

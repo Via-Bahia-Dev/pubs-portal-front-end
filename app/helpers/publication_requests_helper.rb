@@ -1,0 +1,2 @@
+module PublicationRequestsHelper
+end

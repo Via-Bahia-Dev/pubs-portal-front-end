@@ -1,0 +1,36 @@
+
+<div class="row">
+	<div class="col-md-offset-4 col-xs-offset-2 col-md-4 col-xs-8">
+		<h1>Upload a Template</h1>
+		<%= form_for(@template, multipart: true) do |f|%>
+			<%= form_errors_for @template %>
+
+			<div class="field form-group <%=field_class(@template, :name) %>">
+			    <%= f.label :name, "Name of the template", class: "control-label" %> <div class="form-required">*</div> </br>
+			    <%= f.text_field :name, autofocus: true, class: "form-control input-lg", placeholder: "Name" %>
+			</div>
+
+			<div class="field form-group <%=field_class(@template, :dimensions) %>">
+			    <%= f.label :dimensions, "Dimensions of the template", class: "control-label" %> <div class="form-required">*</div> </br>
+			    <%= f.text_field :dimensions, class: "form-control input-lg", placeholder: "e.g. 3x2" %>
+			</div>
+
+			<div class="field form-group <%=field_class(@template, :link) %>">
+			    <%= f.label :link, "URL to assets for this template", class: "control-label" %>
+			    <%= f.text_field :link, class: "form-control input-lg", placeholder: "e.g. Dropbox link" %>
+			</div>
+
+			<div class="field form-group <%=field_class(@template, :category) %>">
+			    <%= f.label :category, "Category of the template", class: "control-label" %>
+			    <%= f.text_field :category, class: "form-control input-lg", placeholder: "e.g. Welcome Night" %>
+			</div>
+
+			<div class="field form-group <%=field_class(@template, :image) %>">
+			    <%= f.label :image, "Image to upload", class: "control-label" %> <div class="form-required">*</div></br>
+			    <%= f.file_field :image %>
+			</div>
+
+			<%= f.submit("Upload", id: "upload-btn", class: "btn btn-primary btn-lg btn-block") %>
+		<% end %>
+	</div>
+</div>

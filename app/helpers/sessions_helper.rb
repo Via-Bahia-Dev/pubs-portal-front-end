@@ -15,4 +15,8 @@ module SessionsHelper
 	def signed_in?
 		!session[:auth_token].nil?
 	end
+
+	def auth_headers
+		{ "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token }
+	end
 end
