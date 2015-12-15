@@ -4,11 +4,12 @@
 
 <div class="row">
 	<div class="col-md-4 col-xs-4" id="chosen-template">
-		<strong>Template for this Request</strong>
+		<strong>Template for this Request</strong></br>
 		<%= image_tag(@template["image_large"], class: "img-thumbnail") %>
 	</div>
 	<div class="col-md-8 col-xs-8">
 		<%= form_for(@publication_request) do |f| %>
+			<%= form_errors_for @publication_request %>
 			<div class="row">
 				<%= f.hidden_field :template_id, :value => @template["id"] %>
 
@@ -25,12 +26,12 @@
 			<div class="row">
 				<div class="field form-group col-md-8 col-xs-12">
 				    <%= f.label :description, "Description", class: "sr-only" %>
-				    <%= f.text_area :description, class: "form-control input-lg", placeholder: "Description of what you are requesting" %>
+				    <%= f.text_area :description, class: "form-control input-lg", placeholder: "Description of what you are requesting", rows: "4" %>
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="field form-group col-md-4 col-xs-12">
+				<div class="field form-group col-md-6 col-xs-12">
 				    <%= f.label :dimensions, "Dimensions", class: "sr-only" %>
 				    <%= f.text_field :dimensions, class: "form-control input-lg", placeholder: "Dimensions e.g. (3x2)" %>
 				</div>
@@ -49,17 +50,17 @@
 			</div>
 
 			<div class="row">
-				<div class="field form-group col-md-4 col-xs-12 form-inline">
+				<div class="field form-group col-md-4 col-xs-12">
 					<%= f.label :admin_id, "Admin for this request" %> </br>
 					<%= f.select :admin_id, @admins_options, {}, class: "form-control" %>
 				</div>
 
-				<div class="field form-group col-md-4 col-xs-12 form-inline">
+				<div class="field form-group col-md-4 col-xs-12">
 					<%= f.label :designer_id, "Designer for this request" %> </br>
 					<%= f.select :designer_id, @designers_options, {}, class: "form-control" %>
 				</div>
 
-				<div class="field form-group col-md-4 col-xs-12 form-inline">
+				<div class="field form-group col-md-4 col-xs-12">
 					<%= f.label :reviewer_id, "Reviewer for this request" %> </br>
 					<%= f.select :reviewer_id, @reviewers_options, {}, class: "form-control" %>
 				</div>
