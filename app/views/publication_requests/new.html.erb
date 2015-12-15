@@ -10,6 +10,8 @@
 	<div class="col-md-8 col-xs-8">
 		<%= form_for(@publication_request) do |f| %>
 			<div class="row">
+				<%= f.hidden_field :template_id, :value => @template["id"] %>
+
 				<div class="field form-group col-md-6 col-xs-12">
 				    <%= f.label :event, "Name of the event" %>
 				    <%= f.text_field :event, autofocus: true, class: "form-control input-lg", placeholder: "Event" %>
@@ -35,17 +37,33 @@
 			</div>
 
 			<div class="row">
-				<div class="field form-group col-md-4 col-xs-12 form-inline">
+				<div class="field form-group col-md-6 col-xs-12 form-inline">
 				    <%= f.label :rough_date, "Date the rough draft is due" %> </br>
 				    <%= f.date_select :rough_date, { :order => [:day, :month, :year] }, { class: "form-control" } %>
 				</div>
 
-				<div class="field form-group col-md-4 col-xs-12 form-inline">
-				    <%= f.label :due_date, "Date the request is due" %> </br>
+				<div class="field form-group col-md-6 col-xs-12 form-inline">
+				    <%= f.label :due_date, "Date the final version is due" %> </br>
 				    <%= f.date_select :due_date, { :order => [:day, :month, :year] }, { class: "form-control" } %>
 				</div>
 			</div>
 
+			<div class="row">
+				<div class="field form-group col-md-4 col-xs-12 form-inline">
+					<%= f.label :admin_id, "Admin for this request" %> </br>
+					<%= f.select :admin_id, @admins_options, {}, class: "form-control" %>
+				</div>
+
+				<div class="field form-group col-md-4 col-xs-12 form-inline">
+					<%= f.label :designer_id, "Designer for this request" %> </br>
+					<%= f.select :designer_id, @designers_options, {}, class: "form-control" %>
+				</div>
+
+				<div class="field form-group col-md-4 col-xs-12 form-inline">
+					<%= f.label :reviewer_id, "Reviewer for this request" %> </br>
+					<%= f.select :reviewer_id, @reviewers_options, {}, class: "form-control" %>
+				</div>
+			</div>
 			
 			<div class="row">
 				<div class="col-md-offset-4 col-xs-offset-2 col-md-4 col-xs-8">
