@@ -83,7 +83,7 @@ class PublicationRequestsController < ApplicationController
 			flash[:success] = "Request for #{res.parsed_response["data"]["event"]} submitted!"
 			redirect_to root_path
 		else
-			# @publication_request.save
+			@publication_request.save
 			@errors = res.parsed_response["errors"]
 			render :new
 		end
