@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-md-8 col-xs-8">
 		<%= form_for(@publication_request) do |f| %>
-			<%= form_errors_for @publication_request %>
+			<%= errors_from_json @errors %>
 			<div class="row">
 				<%= f.hidden_field :template_id, :value => @template["id"] %>
 
