@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "templates.css" %>
+<%= stylesheet_link_tag "publication_requests" %>
 
 <div class="page-header">
 	<h1>Publishing Portal</h1>
@@ -35,6 +36,8 @@
 		<% end %>
 	</div>
 
+	<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
+
 	<script>
 		$(document).ready(function() {
 			var wall = new freewall("#templates-wall");
@@ -49,7 +52,20 @@
 			});
 			wall.fitWidth();
 
+			// var wall2 = new freewall("#requests-wall");
+			// wall2.reset({
+			// 	selector: '.request-cell',
+			// 	animate: true,
+			// 	cellW: 20,
+			// 	cellH: 200,
+			// 	onResize: function() {
+			// 		wall2.fitWidth();
+			// 	}
+			// });
+			// wall2.fitWidth();
+
 			$(window).trigger("resize");
+
 		});
 	
 	</script>
