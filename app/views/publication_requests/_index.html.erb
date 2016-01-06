@@ -2,10 +2,12 @@
 	<div class="col-md-12">
 		<h1>Requests</h1>
 		<% requests.each do |request| %>
-			<div class="request-thumb img-thumbnail request-cell">
-				<h3><%= request["event"] %></h3>
-				<p><%= request["status"] %></p>
-			</div>
+			<%= link_to(publication_request_path(request["id"])) do %>
+				<div class="request-thumb img-thumbnail request-cell">
+					<h3><%= request["event"] %></h3>
+					<p><%= request["status"] %></p>
+				</div>
+			<% end %>
 		<% end %>
 	</div>
 </div>
