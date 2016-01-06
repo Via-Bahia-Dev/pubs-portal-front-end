@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-md-4 col-xs-4" id="chosen-template">
+		<strong>Template for this Request</strong></br>
+		<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
+	</div>
+	<div class="col-md-8 col-xs-8">
+		<div class="row">
+			<div class="field form-group col-md-6 col-xs-12 %>">
+			    <%= label_tag :event, "Name of the event", class: "control-label" %>
+			    <p> <%= @publication_request["event"] %> </p>
+			</div>
+			<div class="field form-group col-md-6 col-xs-12 form-inline">
+			    <%= label_tag :event_date, "Date of the event this is for" %> </br>
+			    <p> <%= @publication_request["event_date"] %> </p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="field form-group col-md-8 col-xs-12 %>">
+			    <%= label_tag :description, "Description", class: "control-label" %>
+			    <p> <%= @publication_request["description"] %> </p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="field form-group col-md-6 col-xs-12 %>">
+			    <%= label_tag :dimensions, "Dimensions", class: "control-label" %>
+			    <p> <%= @publication_request["dimensions"] %> </p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="field form-group col-md-6 col-xs-12 form-inline">
+			    <%= label_tag :rough_date, "Date the rough draft is due" %> </br>
+			    <p> <%= @publication_request["rough_date"] %> </p>
+			</div>
+
+			<div class="field form-group col-md-6 col-xs-12 form-inline">
+			    <%= label_tag :due_date, "Date the final version is due" %> </br>
+			    <p> <%= @publication_request["due_date"] %> </p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="field form-group col-md-4 col-xs-12">
+				<%= label_tag :admin_id, "Admin for this request" %> </br>
+				<p> <%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %> </p>
+			</div>
+
+			<div class="field form-group col-md-4 col-xs-12">
+				<%= label_tag :designer_id, "Designer for this request" %> </br>
+				<p> <%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %> </p>
+			</div>
+
+			<div class="field form-group col-md-4 col-xs-12">
+				<%= label_tag :reviewer_id, "Reviewer for this request" %> </br>
+				<p> <%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %> </p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row comments">
+	<!-- Show comments here -->
+</div>
+

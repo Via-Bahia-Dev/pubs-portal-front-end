@@ -1,5 +1,14 @@
 class PublicationRequestsController < ApplicationController
 
+  def show
+    request_res = self.class.get("/publication_requests/#{params[:id]}", :headers => auth_headers)
+    if request_res.success?
+      @publication_request = request_res.parsed_response["data"]
+    else
+      @publication_request = nil
+    end
+  end
+
 	def new
 		@publication_request = PublicationRequest.new
 		if params[:template_id]
