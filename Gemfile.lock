@@ -225,8 +225,6 @@ DEPENDENCIES
   byebug
   cancancan (~> 1.10)
   codeclimate-test-reporter
-  coffee-rails (~> 4.1.0)
-  coffee-script-source (= 1.8.0)
   has_secure_token
   httmultiparty
   httparty
