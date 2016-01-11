@@ -3,6 +3,15 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready(function() {
+	$("#create-request-templates").hide();
+
+	$("#create-request-btn").click(function() {
+		$("#create-request-btn span").toggleClass("rotate");
+		$("#create-request-templates").slideToggle()
+		createWall();
+	});
+
+
 	var parent, ink, d, x, y;
 	$(".request-thumb a").click(function(e) {
 		parent = $(this).parent();
@@ -31,3 +40,31 @@ $(document).ready(function() {
 		ink.css({top: y+'px', left: x+'px'}).addClass("animate");
 	})
 })
+
+function createWall() {
+	var wall = new freewall("#templates-wall");
+	wall.reset({
+		selector: '.template-cell',
+		animate: true,
+		cellW: 20,
+		cellH: 200,
+		onResize: function() {
+			wall.fitWidth();
+		}
+	});
+	wall.fitWidth();
+
+	// var wall2 = new freewall("#requests-wall");
+	// wall2.reset({
+	// 	selector: '.request-cell',
+	// 	animate: true,
+	// 	cellW: 20,
+	// 	cellH: 200,
+	// 	onResize: function() {
+	// 		wall2.fitWidth();
+	// 	}
+	// });
+	// wall2.fitWidth();
+
+	$(window).trigger("resize");
+}
