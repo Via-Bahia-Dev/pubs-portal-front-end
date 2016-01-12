@@ -16,7 +16,7 @@ module ApplicationHelper
 
 	# Displays errors like object errors but when given json
 	def errors_from_json(json)
-		render('layouts/_json_errors', locals: {errors: json} ) unless json.blank?
+		render('layouts/json_errors', errors: json ) unless json.blank?
 	end
 
 end
