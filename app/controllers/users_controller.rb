@@ -2,24 +2,11 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 	def index
-			res = self.class.get("/users.json", :headers => auth_headers)
-			if res.success?
-				@users = res.parsed_response["data"]
-			else
-				flash[:error] = res.parsed_response["errors"]
-				redirect_to root_path
-			end
+    @users = get("/users")
 	end
 
 	def show
-			res = self.class.get("/users/#{params[:id]}.json", :headers => auth_headers )
-			if res.success?
-				# @user = res.parsed_response["data"]
-				@user = User.find(res.parsed_response["data"]["id"])
-			else
-				flash[:error] = res.parsed_response["errors"]
-				redirect_to root_path
-			end
+    @user = User.find(get("/users/#{params[:id]}")["id"])
 	end
 
 	def new
@@ -27,13 +14,12 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		res = self.class.post("/users.json", :query => { :user => user_params },
-																				 :headers => auth_headers )
-		if res.success?
-			flash[:success] = "#{res.parsed_response["data"]["first_name"]} #{res.parsed_response["data"]["last_name"]} added!"
+		res = post("/users.json",{ :user => user_params })
+		if res["errors"].nil?
+			flash[:success] = "#{res["first_name"]} #{res["last_name"]} added!"
 			redirect_to users_path
 		else
-			flash.now[:error] = res.parsed_response["errors"]
+			flash.now[:error] = res["errors"]
 			render :new
 		end
 	end
@@ -43,10 +29,8 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		res = self.class.put("/users/#{params[:id]}.json", 
-													:query => { :user => user_params },
-													:headers => auth_headers )
-		if res.success?
+		res = self.class.put("/users/#{params[:id]}.json", { :user => user_params })
+		if res["errors"].nil?
 			flash[:success] = "#{@user.first_name} #{@user.last_name} successfully updated!"
 			redirect_to users_path
 		else
