@@ -7,8 +7,14 @@ $(document).ready(function() {
 
 	$("#create-request-btn").click(function() {
 		$("#create-request-btn span").toggleClass("rotate");
-		$("#create-request-templates").slideToggle()
+		$("#create-request-templates").slideToggle();
 		createWall();
+	});
+
+	$("#current-requests").hide();
+	$("#view-requests-btn").click(function() {
+		$("#view-requests-btn span").toggleClass("rotate");
+		$("#current-requests").slideToggle();
 	});
 
 

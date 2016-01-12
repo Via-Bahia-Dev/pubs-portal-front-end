@@ -1,6 +1,5 @@
 <div class="row" id="requests-wall">
 	<div class="col-md-12">
-		<h1>Requests</h1>
 		<% requests.each do |request| %>	
 			<div class="request-thumb img-thumbnail request-cell">
 				<%= link_to(publication_request_path(request["id"])) do %>
