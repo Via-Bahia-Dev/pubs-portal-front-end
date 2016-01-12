@@ -7,10 +7,9 @@ class TemplatesController < ApplicationController
 	def create
 		params[:template][:user_id] = current_user.id # cheating, not using api, but just getting it to work
 		@template = Template.new(template_params) # This is needed for the form_for to repopulate fields
-		res = self.class.post("/templates.json", :query => { :template => template_params },
-																				 :headers => auth_headers, :detect_mime_type => true)
-		if res.success?
-			flash[:success] = "#{res.parsed_response["data"]["name"]} template uploaded!"
+		res = post("/templates.json", { :template => template_params })
+		if res["errors"].nil?
+			flash[:success] = "#{res["name"]} template uploaded!"
 			redirect_to root_path
 		else
 			@template.save #this will get the errors in the model

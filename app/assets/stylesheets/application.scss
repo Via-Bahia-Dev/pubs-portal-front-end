@@ -14,13 +14,27 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-$red: #C9302C;
 
 .wall {
 	margin: 15px;
 }
 
 .form-required {
-	color: $red;
+	color: $brand-danger;
 	display: inline-block;
+}
+
+.ink {
+	display: block;
+	position: absolute;
+	background: $brand-info;
+	border-radius: 100%;
+	transform: scale(0);
+}
+
+/* animation effect */
+.ink.animate { animation: ripple 0.65s linear; }
+
+@keyframes ripple {
+	100% { opacity: 0; transform: scale(2.5);}
 }

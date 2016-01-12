@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "templates.css" %>
+<%= stylesheet_link_tag "publication_requests" %>
 
 <div class="page-header">
 	<h1>Publishing Portal</h1>
@@ -21,38 +22,30 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col-md-12">
-			<h3>Choose a template to base your publication request on</h3>
+	<div id="create-request-btn">
+		Submit a Publication Request <span class="glyphicon glyphicon-chevron-right"></span>
+	</div>
+
+	<div id="create-request-templates">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>Choose a template to base your publication request on</h3>
+			</div>
+		</div>
+
+		<div class="row wall" id="templates-wall">
+			<div class="col-md-12">
+				<% @templates.each do |template| %>
+					<div class="template-cell">
+						<%= link_to(image_tag(template['image_medium'], class: "img-thumbnail"), new_publication_request_path(:template_id => template['id'])) %>
+					</div>
+				<% end %>
+			</div>
 		</div>
 	</div>
 
-	<div class="row wall" id="templates-wall">
-		<% @templates.each do |template| %>
-			<div class="template-cell">
-				<%= link_to(image_tag(template['image_medium'], class: "img-thumbnail"), new_publication_request_path(:template_id => template['id'])) %>
-			</div>
-		<% end %>
-	</div>
+	<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
 
-	<script>
-		$(document).ready(function() {
-			var wall = new freewall("#templates-wall");
-			wall.reset({
-				selector: '.template-cell',
-				animate: true,
-				cellW: 20,
-				cellH: 200,
-				onResize: function() {
-					wall.fitWidth();
-				}
-			});
-			wall.fitWidth();
-
-			$(window).trigger("resize");
-		});
-	
-	</script>
 <% end %>
 
 

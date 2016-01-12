@@ -15,8 +15,6 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 8 }, on: :create
   validates :password, length: { minimum: 8 }, on: :update, allow_blank: true
 
-  
-
   before_save :give_user_role
 
   def self.ROLES
