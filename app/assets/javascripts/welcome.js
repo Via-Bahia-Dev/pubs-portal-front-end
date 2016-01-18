@@ -5,16 +5,24 @@
 $(document).ready(function() {
 	$("#create-request-templates").hide();
 
-	$("#create-request-btn").click(function() {
+	$("#create-request-btn").click(function(e) {
 		$("#create-request-btn span").toggleClass("rotate");
 		$("#create-request-templates").slideToggle();
 		createWall();
+	});
+
+	$("#create-request-templates").click(function(e) {
+		e.stopImmediatePropagation();
 	});
 
 	$("#current-requests").hide();
 	$("#view-requests-btn").click(function() {
 		$("#view-requests-btn span").toggleClass("rotate");
 		$("#current-requests").slideToggle();
+	});
+
+	$("#current-requests").click(function(e) {
+		e.stopImmediatePropagation();
 	});
 
 

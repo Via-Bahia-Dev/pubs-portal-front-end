@@ -5,11 +5,23 @@
 
 #create-request-btn, #view-requests-btn {
 	font-size: 24px;
-	padding: 5px;
-	display: inline-block;
+	padding: 10px;
+	margin: 10px;
+	// display: inline-block;
+	text-align: center;
+	border-top: 1px solid darkgray;
+	border-bottom: 1px solid darkgray;
 	&:hover {
 		background-color: $gray-lighter;
 		cursor: pointer;
+	}
+}
+
+#create-request-templates, #current-requests {
+	padding: 10px;
+	// background-color: $gray-lighter;
+	&:hover {
+		cursor: default;
 	}
 }
 
@@ -55,8 +67,5 @@ span.rotate {
 // 	}
 // }
 
-#create-request-templates {
-	padding: 10px;
-	background-color: $gray-lighter;
-}
+
 
