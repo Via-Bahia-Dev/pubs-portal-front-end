@@ -21,53 +21,71 @@
 	</div>
 
 	<div class="col-md-8 col-xs-8">
-		<table class="table">
-			<tbody>
-				<tr>
-					<td class="lead">Name of the event</td>
-					<td><%= @publication_request["event"] %></td>
-					<td></td>
-					<td class="lead">Date of the event</td>
-					<td><%= date_from(@publication_request["event_date"]) %> </td>
-				</tr>
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td class="lead">Name of the event</td>
+						<td><%= @publication_request["event"] %></td>
+						<td></td>
+						<td class="lead">Date of the event</td>
+						<td><%= date_from(@publication_request["event_date"]) %> </td>
+					</tr>
 
-				<tr>
-					<td rowspan="2" class="lead">Dimensions</td>
-					<td rowspan="2"><%= @publication_request["dimensions"] %></td>
-					<td rowspan="2"></td>
-					<td class="lead">Date the rough draft is due</td>
-					<td><%=date_from(@publication_request["rough_date"]) %></td>
-				</tr>
+					<tr>
+						<td rowspan="2" class="lead">Dimensions</td>
+						<td rowspan="2"><%= @publication_request["dimensions"] %></td>
+						<td rowspan="2"></td>
+						<td class="lead">Date the rough draft is due</td>
+						<td><%=date_from(@publication_request["rough_date"]) %></td>
+					</tr>
 
-				<tr>
-					<td class="lead">Date the final version is due</td>
-					<td><%= date_from(@publication_request["due_date"]) %></td>
-				</tr>
+					<tr>
+						<td class="lead">Date the final version is due</td>
+						<td><%= date_from(@publication_request["due_date"]) %></td>
+					</tr>
 
-				<tr>
-					<td rowspan="3" class="lead">Description</td>
-					<td colspan="2" rowspan="3"><%= @publication_request["description"] %></td>
-					<td class="lead">Admin for this request</td>
-					<td><%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %></td>
-				</tr>
-				<tr>
-					<td class="lead">Designer for this request</td>
-					<td><%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %></td>
-				</tr>
-				<tr>
-					<td class="lead">Reviewer for this request</td>
-					<td><%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %></td>
-				</tr>
+					<tr>
+						<td rowspan="3" class="lead">Description</td>
+						<td colspan="2" rowspan="3"><%= @publication_request["description"] %></td>
+						<td class="lead">Admin for this request</td>
+						<td><%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %></td>
+					</tr>
+					<tr>
+						<td class="lead">Designer for this request</td>
+						<td><%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %></td>
+					</tr>
+					<tr>
+						<td class="lead">Reviewer for this request</td>
+						<td><%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %></td>
+					</tr>
 
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		</div>
 
 	</div>
 </div>
 
 <hr>
 
-<div class="row comments">
-	<!-- Show comments here -->
+<div class="comments">
+	<h2>Comments</h2>
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-5 col-xs-12 field form-group">
+			<label for="comment">
+				<span class="glyphicon glyphicon-comment"></span>
+				<strong class="control-label">Add Comment</strong>
+			</label>
+			<textarea id="comment" class="form-control" rows="3" placeholder="Write a comment..."></textarea>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-5 col-xs-12">
+			<input class="btn btn-primary" type="submit" value="Comment">
+		</div>
+	</div>
+
 </div>
 
