@@ -60,8 +60,8 @@ function createWall() {
 	wall.reset({
 		selector: '.template-cell',
 		animate: true,
-		cellW: 20,
-		cellH: 200,
+		cellW: 300, // we're using medium images which always have a width of 300
+		cellH: 'auto',
 		onResize: function() {
 			wall.fitWidth();
 		}
