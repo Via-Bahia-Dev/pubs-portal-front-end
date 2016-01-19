@@ -38,3 +38,11 @@
 @keyframes ripple {
 	100% { opacity: 0; transform: scale(2.5);}
 }
+
+.top-bar {
+	padding: 5px;
+}
+
+.right {
+	float: right !important;
+}

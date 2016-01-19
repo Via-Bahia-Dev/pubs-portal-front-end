@@ -5,9 +5,11 @@
 	// background-color: lightgrey;
 	// padding:5px;
 	display: inline-block;
+
 }
 
 .template-cell img:hover {
+	position: relative;
 	transform: scale(1.1);
 	box-shadow: 2px 2px 8px 8px rgba(0,0,0,0.4);
 	z-index: 999;

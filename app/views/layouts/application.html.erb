@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid top-bar">
 
 		<% if signed_in? %>
 			<%= link_to "Home", root_path, id: "home" %>
@@ -20,6 +20,11 @@
 			<% end %>
 			<%= link_to "View Profile", user_path(current_user), id: "view-profile" %>
 			<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
+			<div class="col-md-2 col-xs-4 right">
+				<% if can? :create, Template %>
+					<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
+				<% end %>
+			</div>
 		<% end %> 
 
 		<% if flash[:error] %>

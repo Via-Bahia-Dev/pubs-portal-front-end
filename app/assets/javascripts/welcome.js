@@ -5,10 +5,24 @@
 $(document).ready(function() {
 	$("#create-request-templates").hide();
 
-	$("#create-request-btn").click(function() {
+	$("#create-request-btn").click(function(e) {
 		$("#create-request-btn span").toggleClass("rotate");
-		$("#create-request-templates").slideToggle()
+		$("#create-request-templates").slideToggle();
 		createWall();
+	});
+
+	$("#create-request-templates").click(function(e) {
+		e.stopImmediatePropagation();
+	});
+
+	$("#current-requests").hide();
+	$("#view-requests-btn").click(function() {
+		$("#view-requests-btn span").toggleClass("rotate");
+		$("#current-requests").slideToggle();
+	});
+
+	$("#current-requests").click(function(e) {
+		e.stopImmediatePropagation();
 	});
 
 
@@ -46,8 +60,8 @@ function createWall() {
 	wall.reset({
 		selector: '.template-cell',
 		animate: true,
-		cellW: 20,
-		cellH: 200,
+		cellW: 300, // we're using medium images which always have a width of 300
+		cellH: 'auto',
 		onResize: function() {
 			wall.fitWidth();
 		}

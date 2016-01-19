@@ -5,7 +5,6 @@
 	<h1>Publishing Portal</h1>
 </div>
 
-
 <% unless signed_in? %>
 	<div class="row">
 		<div class="col-md-offset-4 col-md-4 col-xs-offset-2 col-xs-8">
@@ -15,36 +14,44 @@
 <% else %>
 	<div class="row">
 		<h2 id="welcome-header" class="col-md-4 col-xs-8"> Welcome <%= current_user.first_name %> <%= current_user.last_name %></h2>
-		<div class="col-md-2 col-xs-4">
-			<% if can? :create, Template %>
-				<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
-			<% end %>
-		</div>
 	</div>
 
-	<div id="create-request-btn">
-		Submit a Publication Request <span class="glyphicon glyphicon-chevron-right"></span>
-	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="create-request-btn">
+				<div class="title">Submit a Publication Request</div> <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
 
-	<div id="create-request-templates">
-		<div class="row">
-			<div class="col-md-12">
-				<h3>Choose a template to base your publication request on</h3>
-			</div>
-		</div>
-
-		<div class="row wall" id="templates-wall">
-			<div class="col-md-12">
-				<% @templates.each do |template| %>
-					<div class="template-cell">
-						<%= link_to(image_tag(template['image_medium'], class: "img-thumbnail"), new_publication_request_path(:template_id => template['id'])) %>
+				<div id="create-request-templates" class="well">
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Choose a template to base your publication request on</h3>
+						</div>
 					</div>
-				<% end %>
+
+					<div class="wall" id="templates-wall">
+						<div class="col-md-12">
+							<%= render partial: '/templates/index', locals: { templates: @templates } %>
+						</div>
+					</div>
+				</div>
 			</div>
+
+			
 		</div>
 	</div>
 
-	<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="view-requests-btn">
+				<div class="title">Current In-Progress Requests</div> <!--<span class="glyphicon glyphicon-chevron-right"></span> -->
+
+				<div id="current-requests" class="well">
+					<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
+				</div>
+			</div>
+			
+		</div>
+	</div>
 
 <% end %>
 
