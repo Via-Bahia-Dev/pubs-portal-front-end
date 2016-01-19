@@ -21,105 +21,46 @@
 	</div>
 
 	<div class="col-md-8 col-xs-8">
-		
-		<div class="row">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td class="lead">Name of the event</td>
+					<td><%= @publication_request["event"] %></td>
+					<td></td>
+					<td class="lead">Date of the event</td>
+					<td><%= date_from(@publication_request["event_date"]) %> </td>
+				</tr>
 
-			<div class="col-md-6 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Name of the event</h3>
-					</div>
-				    <div class="panel-body"> <%= @publication_request["event"] %> </div>
-				</div>
-			</div>
+				<tr>
+					<td rowspan="2" class="lead">Dimensions</td>
+					<td rowspan="2"><%= @publication_request["dimensions"] %></td>
+					<td rowspan="2"></td>
+					<td class="lead">Date the rough draft is due</td>
+					<td><%=date_from(@publication_request["rough_date"]) %></td>
+				</tr>
 
-			<div class="col-md-6 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Date of the event this is for</h3>
-					</div>
-					<div class="panel-body"><%= date_from(@publication_request["event_date"]) %> </div>
-				</div>
-			</div>
+				<tr>
+					<td class="lead">Date the final version is due</td>
+					<td><%= date_from(@publication_request["due_date"]) %></td>
+				</tr>
 
-		</div>
+				<tr>
+					<td rowspan="3" class="lead">Description</td>
+					<td colspan="2" rowspan="3"><%= @publication_request["description"] %></td>
+					<td class="lead">Admin for this request</td>
+					<td><%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %></td>
+				</tr>
+				<tr>
+					<td class="lead">Designer for this request</td>
+					<td><%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %></td>
+				</tr>
+				<tr>
+					<td class="lead">Reviewer for this request</td>
+					<td><%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %></td>
+				</tr>
 
-		<div class="row">
-			<div class="col-md-8 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-			    		<h3 class="panel-title">Description</h3>
-			    	</div>
-			    	<div class="panel-body"><%= @publication_request["description"] %></div>
-			    </div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Dimensions</h3>
-					</div>
-					<div class="panel-body"><%= @publication_request["dimensions"] %></div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Date the rought draft is due</h3>
-					</div>
-					<div class="panel-body"><%= date_from(@publication_request["rough_date"]) %></div>
-				</div>
-			</div>
-
-			<div class="col-md-6 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Date the final version is due</h3>
-					</div>
-					<div class="panel-body"><%= date_from(@publication_request["due_date"]) %></div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Admin for this request</h3>
-					</div>
-					<div class="panel-body">
-						<%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Designer for this request</h3>
-					</div>
-					<div class="panel-body">
-						<%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-md-4 col-xs-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Reviewer for this request</h3>
-					</div>
-					<div class="panel-body">
-						<%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %>
-					</div>
-				</div>
-			</div>
-		</div>
+			</tbody>
+		</table>
 
 	</div>
 </div>
