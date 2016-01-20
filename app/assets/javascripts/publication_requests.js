@@ -12,7 +12,8 @@ $(document).ready(function() {
 			data: { comment: { content: $("#comment_content").val() } }
 		})
 			.done(function(data) {
-				$("#comments").prepend($(data).hide().fadeIn());
+				$new_comment = $("#comments").prepend($(data).hide().fadeIn());
+				$('html, body').animate( { scrollTop: $new_comment.offset().top - ($(window).height() / 2)}, 1000);
 
 				$("#comment_content").val('');
 				formatCommentForm();
