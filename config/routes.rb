@@ -13,7 +13,13 @@ Rails.application.routes.draw do
 
   resources :templates # will change this when done testing
 
-  resources :publication_requests
+  resources :publication_requests do
+    resources :request_attachments, only: [:index, :create]
+    resources :comments, only: [:index, :create]
+  end
+
+  resources :request_attachments, only: [:show, :update, :destroy]
+  resources :comments, only: [:show, :update, :destroy]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "comments" %>
+<%= javascript_include_tag "comments" %>
+
 <div class="page-header">
 	<h1><%= @publication_request["event"] %></h1>
 </div>
@@ -69,23 +72,32 @@
 
 <hr>
 
-<div class="comments">
-	<h2>Comments</h2>
+<div id="comments-area">
 
 	<div class="row">
-		<div class="col-md-offset-1 col-md-5 col-xs-12 field form-group">
-			<label for="comment">
-				<span class="glyphicon glyphicon-comment"></span>
-				<strong class="control-label">Add Comment</strong>
-			</label>
-			<textarea id="comment" class="form-control" rows="3" placeholder="Write a comment..."></textarea>
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-md-offset-1 col-md-5 col-xs-12">
-			<input id="comment-btn" class="btn btn-primary" type="submit" value="Comment" disabled="disabled">
+			<h2>Comments</h2>
+			<%= form_for([@publication_request_obj, @comment], multipart: true ) do |f| %>
+				<div class="field form-group">
+					<span class="glyphicon glyphicon-comment"></span>
+					<%= f.label :content, "Add Comment", class: "control-label"%>
+					<%= f.text_area :content, class: "form-control", placeholder: "Write a comment...", rows: "3" %>
+				</div>
+
+				<%= f.submit("Comment", id: "comment-btn", class: "btn btn-primary", remote: true, disabled: true) %>
+			<% end %>
+			<hr>
 		</div>
 	</div>
+
+	<div class="row">
+		<div id="comments" class="col-md-offset-1 col-md-5 col-xs-12">
+			<% @publication_request["comments"].each do |comment| %>
+				<%= render partial: '/comments/show', locals: { comment: comment } %>
+			<% end %>
+		</div>
+	</div>
+	
 
 </div>
 

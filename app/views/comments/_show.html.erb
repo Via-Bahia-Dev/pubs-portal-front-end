@@ -1,0 +1,22 @@
+<div class="comment">
+	<div class="user">
+		<span class="user-initials">
+			<strong><%= "#{comment['user']['first_name'][0]}#{comment['user']['last_name'][0]}" %></strong>
+		</span>
+	</div>
+	<div>
+		<span class="user-name">
+			<strong><%= "#{comment['user']['first_name']} #{comment['user']['last_name']}" %></strong>
+		</span>
+	</div>
+	<div class="comment-content well">
+		<%= "#{comment['content']}" %>
+	</div>
+	<div class="footer">
+		<small>
+			<%= "#{comment_date_format(datetime_from(comment['created_at']))}" %>
+			- <%= link_to "Delete", "#", class: "comment-delete", val: "#{comment_path(comment['id'])}" %>
+		</small>
+		
+	</div>
+</div>
