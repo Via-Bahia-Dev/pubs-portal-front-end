@@ -1,66 +1,103 @@
+<%= stylesheet_link_tag "comments" %>
+<%= javascript_include_tag "comments" %>
+
+<div class="page-header">
+	<h1><%= @publication_request["event"] %></h1>
+</div>
+
 <div class="row">
 	<div class="col-md-4 col-xs-4" id="chosen-template">
-		<strong>Template for this Request</strong></br>
-		<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Template for this Request</h3>
+			</div>
+			<div class="panel-body">
+				<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
+			</div>
+			<div class="panel-footer">
+				<p><%= @publication_request["template"]["name"] %>, <%= @publication_request["template"]["dimensions"] %></p>
+				<% if @publication_request["template"]["url"] %>
+					<pre><%= @publication_request["template"]["url"] %> </pre>
+				<% end %>
+			</div>
+		</div>
 	</div>
+
 	<div class="col-md-8 col-xs-8">
-		<div class="row">
-			<div class="field form-group col-md-6 col-xs-12 %>">
-			    <%= label_tag :event, "Name of the event", class: "control-label" %>
-			    <p> <%= @publication_request["event"] %> </p>
-			</div>
-			<div class="field form-group col-md-6 col-xs-12 form-inline">
-			    <%= label_tag :event_date, "Date of the event this is for" %> </br>
-			    <p> <%= @publication_request["event_date"] %> </p>
-			</div>
+		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td class="lead">Name of the event</td>
+						<td><%= @publication_request["event"] %></td>
+						<td></td>
+						<td class="lead">Date of the event</td>
+						<td><%= date_from(@publication_request["event_date"]) %> </td>
+					</tr>
+
+					<tr>
+						<td rowspan="2" class="lead">Dimensions</td>
+						<td rowspan="2"><%= @publication_request["dimensions"] %></td>
+						<td rowspan="2"></td>
+						<td class="lead">Date the rough draft is due</td>
+						<td><%=date_from(@publication_request["rough_date"]) %></td>
+					</tr>
+
+					<tr>
+						<td class="lead">Date the final version is due</td>
+						<td><%= date_from(@publication_request["due_date"]) %></td>
+					</tr>
+
+					<tr>
+						<td rowspan="3" class="lead">Description</td>
+						<td colspan="2" rowspan="3"><%= @publication_request["description"] %></td>
+						<td class="lead">Admin for this request</td>
+						<td><%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %></td>
+					</tr>
+					<tr>
+						<td class="lead">Designer for this request</td>
+						<td><%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %></td>
+					</tr>
+					<tr>
+						<td class="lead">Reviewer for this request</td>
+						<td><%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %></td>
+					</tr>
+
+				</tbody>
+			</table>
 		</div>
 
-		<div class="row">
-			<div class="field form-group col-md-8 col-xs-12 %>">
-			    <%= label_tag :description, "Description", class: "control-label" %>
-			    <p> <%= @publication_request["description"] %> </p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="field form-group col-md-6 col-xs-12 %>">
-			    <%= label_tag :dimensions, "Dimensions", class: "control-label" %>
-			    <p> <%= @publication_request["dimensions"] %> </p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="field form-group col-md-6 col-xs-12 form-inline">
-			    <%= label_tag :rough_date, "Date the rough draft is due" %> </br>
-			    <p> <%= @publication_request["rough_date"] %> </p>
-			</div>
-
-			<div class="field form-group col-md-6 col-xs-12 form-inline">
-			    <%= label_tag :due_date, "Date the final version is due" %> </br>
-			    <p> <%= @publication_request["due_date"] %> </p>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="field form-group col-md-4 col-xs-12">
-				<%= label_tag :admin_id, "Admin for this request" %> </br>
-				<p> <%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %> </p>
-			</div>
-
-			<div class="field form-group col-md-4 col-xs-12">
-				<%= label_tag :designer_id, "Designer for this request" %> </br>
-				<p> <%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %> </p>
-			</div>
-
-			<div class="field form-group col-md-4 col-xs-12">
-				<%= label_tag :reviewer_id, "Reviewer for this request" %> </br>
-				<p> <%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %> </p>
-			</div>
-		</div>
 	</div>
 </div>
 
-<div class="row comments">
-	<!-- Show comments here -->
+<hr>
+
+<div id="comments-area">
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-5 col-xs-12">
+			<h2>Comments</h2>
+			<%= form_for([@publication_request_obj, @comment], multipart: true, id: "comment-form" ) do |f| %>
+				<div class="field form-group">
+					<span class="glyphicon glyphicon-comment"></span>
+					<%= f.label :content, "Add Comment", class: "control-label"%>
+					<%= f.text_area :content, class: "form-control", placeholder: "Write a comment...", rows: "3" %>
+				</div>
+
+				<%= f.submit("Comment", id: "comment-btn", class: "btn btn-primary", remote: true, disabled: true) %>
+			<% end %>
+			<hr>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="comments" class="col-md-offset-1 col-md-5 col-xs-12">
+			<% @publication_request["comments"].each do |comment| %>
+				<%= render partial: '/comments/show', locals: { comment: comment } %>
+			<% end %>
+		</div>
+	</div>
+	
+
 </div>
 

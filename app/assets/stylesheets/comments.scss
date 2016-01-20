@@ -1,0 +1,25 @@
+// Place all the styles related to the comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+.comment {
+	padding: 9px 0 9px 38px;
+	border-bottom: 1px $gray-lighter solid;
+}
+
+.user {
+	left: 15px;
+	height: 30px;
+	width: 30px;
+	position: absolute;
+	background-color: $brand-primary;
+	color: white;
+	border-radius: 3px;
+}
+
+.user-initials {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	display: block;
+}

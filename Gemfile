@@ -45,6 +45,9 @@ gem 'bootstrap-sass', '~> 3.3.5'
 # tzinfo for windows
 gem 'tzinfo-data'
 
+# Clickable URLs in text
+gem 'rails_autolink'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
