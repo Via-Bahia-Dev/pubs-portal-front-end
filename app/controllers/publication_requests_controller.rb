@@ -7,13 +7,22 @@ class PublicationRequestsController < ApplicationController
   end
 
   def new
+  	puts "*********************"
+  	puts "starting new pub request"
+  	puts "*************************"
     @publication_request = PublicationRequest.new
     if params[:template_id]
       @publication_request.template_id = params[:template_id]
     end
 
-    @template = get("/templates/#{params[:template_id]}")
+    puts "**********************"
+    puts "Set template"
+    puts "***********************"
 
+    @template = get("/templates/#{params[:template_id]}")
+    puts "***************************"
+    puts "Got template"
+    puts "***************************"
     admins = get("/users/admins")
     @admins_options = admins.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
 
