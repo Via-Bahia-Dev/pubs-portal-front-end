@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
-	$(".comment-delete").click(function(e){
+	$("#comments").on('click', ".comment-delete", function(e){
 		e.preventDefault();
 		$.ajax({
 			url: $(this).attr('val'),

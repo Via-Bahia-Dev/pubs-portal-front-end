@@ -77,7 +77,7 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-5 col-xs-12">
 			<h2>Comments</h2>
-			<%= form_for([@publication_request_obj, @comment], multipart: true ) do |f| %>
+			<%= form_for([@publication_request_obj, @comment], multipart: true, id: "comment-form" ) do |f| %>
 				<div class="field form-group">
 					<span class="glyphicon glyphicon-comment"></span>
 					<%= f.label :content, "Add Comment", class: "control-label"%>

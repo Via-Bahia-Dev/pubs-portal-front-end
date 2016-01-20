@@ -3,7 +3,7 @@ $(document).ready(function() {
 		formatCommentForm();
 	});
 
-	$('#comment-btn').click(function(e) {
+	$('#comment-btn').on('click', function(e) {
 		e.preventDefault();
 		// Make ajax call to create comment
 		$.ajax({
