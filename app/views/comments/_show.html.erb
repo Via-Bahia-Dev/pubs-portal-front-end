@@ -10,7 +10,7 @@
 		</span>
 	</div>
 	<div class="comment-content well">
-		<%= "#{comment['content']}" %>
+		<%= auto_link(simple_format("#{comment['content']}")) %>
 	</div>
 	<div class="footer">
 		<small>
