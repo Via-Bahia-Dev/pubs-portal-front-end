@@ -15,7 +15,9 @@
 	<div class="footer">
 		<small>
 			<%= "#{comment_date_format(datetime_from(comment['created_at']))}" %>
-			- <%= link_to "Delete", "#", class: "comment-delete", val: "#{comment_path(comment['id'])}" %>
+			- <a href="#" class="comment-delete" val=<%="#{comment_path(comment['id'])}"%> data-content= '<%= render partial: "/comments/confirm_delete" %>' >
+				Delete
+			</a>
 		</small>
 		
 	</div>
