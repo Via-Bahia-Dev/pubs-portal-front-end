@@ -15,9 +15,14 @@
 	<div class="footer">
 		<small>
 			<%= "#{comment_date_format(datetime_from(comment['created_at']))}" %>
+
+			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
+			<% this_comment = Comment.find(comment['id']) %>
+			<% if can? :destroy, this_comment %>
 			- <a href="#" class="comment-delete" val=<%="#{comment_path(comment['id'])}"%> data-content= '<%= render partial: "/comments/confirm_delete" %>' >
 				Delete
 			</a>
+			<% end %>
 		</small>
 		
 	</div>
