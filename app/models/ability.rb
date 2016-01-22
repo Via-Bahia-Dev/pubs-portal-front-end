@@ -23,7 +23,17 @@ class Ability
       can :destroy, Comment, :user_id => user.id
       can :read, Template
 
-      can :manage, PublicationRequest
+      can :read, PublicationRequest, :user_id => user.id
+    end
+
+    if user.has_role? :designer
+      can :read, PublicationRequest, :designer_id => user.id
+      can :design, PublicationRequest, :designer_id => user.id
+    end
+
+    if user.has_role? :reviewer
+      can :read, PublicationRequest, :reviewer_id => user.id
+      can :review, PublicationRequest, :reviewer_id => user.id
     end
 
     can :manage, :all if user.has_role? :admin

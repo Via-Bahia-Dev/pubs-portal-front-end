@@ -1,13 +1,15 @@
 <div class="row" id="requests-wall">
 	<div class="col-md-12">
-		<% requests.each do |request| %>	
-			<div class="request-thumb img-thumbnail request-cell">
-				<%= link_to(publication_request_path(request["id"])) do %>
-					<h3><%= request["event"] %></h3>
-					<hr>
-					<p><%= request["status"] %></p>
-				<% end %>
-			</div>
+		<% requests.each do |request| %>
+			<% if can? :read, PublicationRequest.find(request["id"]) %>
+				<div class="request-thumb img-thumbnail request-cell">
+					<%= link_to(publication_request_path(request["id"])) do %>
+						<h3><%= request["event"] %></h3>
+						<hr>
+						<p><%= request["status"] %></p>
+					<% end %>
+				</div>
+			<% end %>
 		<% end %>
 	</div>
 </div>
