@@ -2,6 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
+
 	$("#comments").on('click', ".comment-delete", function(e){
 		e.preventDefault();
 	});

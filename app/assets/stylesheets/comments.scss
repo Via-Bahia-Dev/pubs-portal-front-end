@@ -32,3 +32,11 @@
 		margin-right: 15px;
 	}
 }
+
+.attachment-link {
+	padding: 10px;
+	border-radius: 3px;
+	&:hover {
+		background-color: $gray-lighter;
+	}
+}
