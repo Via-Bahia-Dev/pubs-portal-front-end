@@ -17,7 +17,7 @@
 			<div class="panel-footer">
 				<p><%= @publication_request["template"]["name"] %>, <%= @publication_request["template"]["dimensions"] %></p>
 				<% if (@publication_request["template"]["link"] != "") && (can? :design, PublicationRequest.find(@publication_request['id'])) %>
-					<pre><%= link_to("Download Assets", @publication_request["template"]["link"], :target => "_blank") %> </pre>
+					<pre><%= sanitize(link_to("Download Assets", @publication_request["template"]["link"], :target => "_blank")) %> </pre>
 				<% end %>
 			</div>
 		</div>
