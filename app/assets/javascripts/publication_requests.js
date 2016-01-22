@@ -1,24 +1,29 @@
 $(document).ready(function() {
+	var ctrlKeyCode = 17;
+	var enterKeyCode = 13;
+
+	$('[data-toggle="tooltip"]').tooltip();
+
 	$('#comment_content').keyup(function() {
 		formatCommentForm();
 	});
 
 	$('#comment-btn').on('click', function(e) {
 		e.preventDefault();
-		// Make ajax call to create comment
-		$.ajax({
-			url: $("form#new_comment").attr('action'),
-			type: 'POST',
-			data: { comment: { content: $("#comment_content").val() } }
-		})
-			.done(function(data) {
-				$new_comment = $("#comments").prepend($(data).hide().fadeIn());
-				$('html, body').animate( { scrollTop: $new_comment.offset().top - ($(window).height() / 2)}, 1000);
-
-				$("#comment_content").val('');
-				formatCommentForm();
-			});
+		postComment();
 	});
+
+	var isCtrlDown = false;
+	$('#comment_content').keyup(function(e) {
+		if(e.which == ctrlKeyCode)  isCtrlDown = false;
+	}).keydown(function(e) {
+		if(e.which == ctrlKeyCode) isCtrlDown = true;
+		if(isCtrlDown == true) {
+			if(e.which == enterKeyCode) {
+				postComment();
+			}
+		}
+	})
 })
 
 
@@ -28,4 +33,20 @@ function formatCommentForm () {
 	} else {
 		$("#comment-btn").attr('disabled', false);
 	}
+}
+
+function postComment() {
+	// Make ajax call to create comment
+	$.ajax({
+		url: $("form#new_comment").attr('action'),
+		type: 'POST',
+		data: { comment: { content: $("#comment_content").val() } }
+	})
+		.done(function(data) {
+			$new_comment = $("#comments").prepend($(data).hide().fadeIn());
+			$('html, body').animate( { scrollTop: $new_comment.offset().top - ($(window).height() / 2)}, 1000);
+
+			$("#comment_content").val('');
+			formatCommentForm();
+		});
 }
