@@ -22,6 +22,8 @@ module APIHelper
   def check_success(res)
     if res.success?
       res.parsed_response["data"]
+    elsif res.code == 403
+      render :file => "layouts/unauthorized", status: :unauthorized
     else
       res
     end
