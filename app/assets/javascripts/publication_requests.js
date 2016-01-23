@@ -37,9 +37,13 @@ $(document).ready(function() {
 		// trigger: 'focus',
 		title: "Attach From..."
 	}).parent().on('click', '.attach-file', function(e) {
-		e.preventDefault();
-		alert("You chose to attach a file from your computer!");
+		
 	});
+
+	$("#new_comment").on('change', ".attach-file", function() {
+		var fileName = $(this).val();
+		alert(fileName);
+	})
 })
 
 
