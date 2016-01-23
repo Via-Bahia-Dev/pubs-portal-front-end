@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	// Popover for comment delete link
 	// using body and selector allows new comments to be selected
-	$("body").popover({
+	$("#comments").popover({
 		selector: '.comment-delete',
 		placement: 'right',
 		html: true,

@@ -77,15 +77,15 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-5 col-xs-12">
 			<h2>Comments</h2>
-			<%= form_for([@publication_request_obj, @comment], multipart: true, id: "comment-form" ) do |f| %>
+			<%= form_for([@publication_request_obj, @comment], multipart: true) do |f| %>
 				<div class="field form-group">
 					<span class="glyphicon glyphicon-comment"></span>
 					<%= f.label :content, "Add Comment", class: "control-label"%>
 					<%= f.text_area :content, class: "form-control", placeholder: "Write a comment...", rows: "3" %>
 				</div>
 				<%= f.submit("Comment", id: "comment-btn", class: "btn btn-primary", remote: true, disabled: true) %>
-				<a class="attachment-btn" href="#" title="Add an attachment..." data-toggle="tooltip" data-placement="top">
-					<span class="attachment-link glyphicon glyphicon-paperclip"></span>
+				<a class="attachment-btn" href="#" title="Add an attachment..." data-content= '<%= render( partial: "/request_attachments/choose_type", locals: { request: @publication_request_obj, attachment: @attachment } )%>'>
+					<span class="glyphicon glyphicon-paperclip"></span>
 				</a>
 			<% end %>
 			<hr>

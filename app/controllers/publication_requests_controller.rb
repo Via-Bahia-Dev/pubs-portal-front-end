@@ -4,6 +4,7 @@ class PublicationRequestsController < ApplicationController
     @publication_request = get("/publication_requests/#{params[:id]}")
     @publication_request_obj = PublicationRequest.find(params[:id])
     @comment = Comment.new(:publication_request => @publication_request_obj)
+    @attachment = RequestAttachment.new(:publication_request => @publication_request_obj)
   end
 
   def new

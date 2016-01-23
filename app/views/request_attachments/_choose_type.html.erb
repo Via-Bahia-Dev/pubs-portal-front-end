@@ -1,0 +1,11 @@
+<ul class="popup-list">
+	<li class="uploader">
+		<%= link_to "Computer", "#", class: "fakefile" %>
+		<%= form_for([request, attachment], multipart: true) do |f| %>
+			<%= f.file_field :request_attachment, class: "attach-file", hidden: true %>
+		<% end %>
+	</li>
+	<li>
+		<a class="google-drive-attachment" href="#">Google Drive</a>
+	</li>
+</ul>

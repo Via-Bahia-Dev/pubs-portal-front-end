@@ -1,0 +1,2 @@
+class RequestAttachmentsController < ApplicationController
+end

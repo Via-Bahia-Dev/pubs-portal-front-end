@@ -23,7 +23,23 @@ $(document).ready(function() {
 				postComment();
 			}
 		}
+	});
+
+	$('.attachment-btn').on('click', function(e) {
+		e.preventDefault();
 	})
+
+
+	$("#new_comment").popover({
+		selector: '.attachment-btn',
+		placement: 'right',
+		html: true,
+		// trigger: 'focus',
+		title: "Attach From..."
+	}).parent().on('click', '.attach-file', function(e) {
+		e.preventDefault();
+		alert("You chose to attach a file from your computer!");
+	});
 })
 
 
