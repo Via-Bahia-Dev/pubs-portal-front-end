@@ -5,6 +5,7 @@ class TemplatesController < ApplicationController
 	end
 
 	def create
+		byebug
 		params[:template][:user_id] = current_user.id # cheating, not using api, but just getting it to work
 		@template = Template.new(template_params) # This is needed for the form_for to repopulate fields
 		res = post("/templates.json", { :template => template_params })

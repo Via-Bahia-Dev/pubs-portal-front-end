@@ -2,7 +2,7 @@
 	<li class="uploader">
 		<%= link_to "Computer", "#", class: "fakefile" %>
 		<%= form_for([request, attachment], multipart: true) do |f| %>
-			<%= f.file_field :request_attachment, class: "attach-file"%>
+			<%= f.file_field :file, class: "attach-file"%>
 		<% end %>
 	</li>
 	<li>

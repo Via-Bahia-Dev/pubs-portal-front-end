@@ -1,14 +1,7 @@
 <div class="comment">
-	<div class="user">
-		<span class="user-initials">
-			<strong><%= "#{comment['user']['first_name'][0]}#{comment['user']['last_name'][0]}" %></strong>
-		</span>
-	</div>
-	<div>
-		<span class="user-name">
-			<strong><%= "#{comment['user']['first_name']} #{comment['user']['last_name']}" %></strong>
-		</span>
-	</div>
+	
+	<%= render partial: "users/label", locals: { user: comment['user'] } %>
+
 	<div class="comment-content well">
 		<%= auto_link(simple_format("#{comment['content']}")) %>
 	</div>
@@ -19,7 +12,7 @@
 			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
 			<% this_comment = Comment.find(comment['id']) %>
 			<% if can? :destroy, this_comment %>
-			- <a href="#" class="comment-delete" val=<%="#{comment_path(comment['id'])}"%> data-content= '<%= render partial: "/comments/confirm_delete" %>' >
+			- <a href="#" class="comment-delete delete-link" val=<%="#{comment_path(comment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Comment" } %>' >
 				Delete
 			</a>
 			<% end %>
