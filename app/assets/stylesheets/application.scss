@@ -118,3 +118,17 @@ textarea {
 		}
 	}
 }
+
+// .progress-container {
+
+	// border: 1px solid $brand-info;
+
+
+	.progress {
+		position: fixed;
+		z-index: 999;
+		width: 200px;
+
+		// box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $brand-info;
+		// border: 1px solid $brand-info;
+	}

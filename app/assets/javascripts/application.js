@@ -19,4 +19,6 @@
 $(document).ready(function(){
 	var tz = jstz.determine();
 	document.cookie = 'jstz_time_zone='+window.RailsTimeZone.to(tz.name())+';';
+
+	$('.progress').hide();
 })

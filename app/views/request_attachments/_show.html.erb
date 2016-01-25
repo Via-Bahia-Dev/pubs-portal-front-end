@@ -4,8 +4,9 @@
 
 	<div class="attachment-content well">
 		<% if is_image_file?(attachment['file_content_type']) %>
-			<%= image_tag attachment['file_small'] %>
+			<%= link_to(image_tag(attachment['file_small']), attachment['file_original']) %>
 		<% end %>
+		<%= attachment['file_file_name'] %>
 	</div>
 	<div class="footer">
 		<small>

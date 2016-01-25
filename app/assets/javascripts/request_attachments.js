@@ -4,6 +4,11 @@ $(document).ready(function() {
 
 	$('.attachment-btn').on('click', function(e) {
 		e.preventDefault();
+	});
+
+	$("#new_comment").on('change', ".attach-file", function() {
+		// When the file is chosen, show the progress bar
+		
 	})
 
 	$("#new_comment").popover({
@@ -18,10 +23,28 @@ $(document).ready(function() {
 		// create action with params based off the form
 		$("#new_request_attachment").fileupload({
 			dataType: 'html',
+			send: function(e, data) {
+				$(".progress").show();
+			},
 			done: function(e, data) {
 				// prepend the new attachment 
 				$new_attachment = $("#attachments").prepend($(data.result).hide().fadeIn());
+				$('.progress-bar').toggleClass('progress-bar-info progress-bar-success progress-bar-striped');
+				// $('.progress').css('box-shadow', 'inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #5cb85c');
+				$('.progress-bar').html('Upload Complete');
+				setTimeout(function(){
+					$('.progress').hide();
+					$('.progress-bar').toggleClass('progress-bar-info progress-bar-success progress-bar-striped');
+					$('.progress-bar').html('');
+				}, 3000);
 				$('html, body').animate( { scrollTop: $new_attachment.offset().top - ($(window).height() / 2)}, 1000);
+			},
+			progress: function(e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				$('.progress .progress-bar').css(
+		            'width',
+		            progress + '%'
+		        );
 			}
 		});
 	});

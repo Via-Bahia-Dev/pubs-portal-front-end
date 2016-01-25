@@ -27,11 +27,6 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#new_comment").on('change', ".attach-file", function() {
-		// When the file is chosen, automatically upload
-		
-	})
-
 	$("#comments").on('click', ".comment-delete", function(e){
 		e.preventDefault();
 	});
