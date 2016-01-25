@@ -33,7 +33,7 @@ $(document).ready(function() {
 		selector: '.attachment-btn',
 		placement: 'right',
 		html: true,
-		// trigger: 'focus',
+		trigger: 'focus',
 		title: "Attach From..."
 	}).parent().on('click', '.attach-file', function(e) {
 		// attach the jquery fileupload event listener on the file attachment form
@@ -43,7 +43,6 @@ $(document).ready(function() {
 			dataType: 'html',
 			done: function(e, data) {
 				// prepend the new attachment 
-
 				$new_attachment = $("#attachments").prepend($(data.result).hide().fadeIn());
 				$('html, body').animate( { scrollTop: $new_attachment.offset().top - ($(window).height() / 2)}, 1000);
 			}

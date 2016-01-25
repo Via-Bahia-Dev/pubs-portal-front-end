@@ -14,7 +14,7 @@
 			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
 			<% this_attachment = RequestAttachment.find(attachment['id']) %>
 			<% if can? :destroy, this_attachment %>
-			- <a href="#" class="attachment-delete delete-link" val=<%="#{request_attachment_path(attachment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Attachments" } %>' >
+			- <a href="#" class="attachment-delete delete-link" val=<%="#{request_attachment_path(attachment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Attachment" } %>' data-title="Delete Attachment?" >
 				Delete
 			</a>
 			<% end %>

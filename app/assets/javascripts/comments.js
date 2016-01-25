@@ -13,8 +13,7 @@ $(document).ready(function() {
 		selector: '.comment-delete',
 		placement: 'right',
 		html: true,
-		trigger: 'focus',
-		title: "Delete comment?"
+		trigger: 'focus'
 	}).parent().on('click', '#confirm-delete', function() {
 		$.ajax({
 			// the url is stored in the delete link's val
@@ -23,7 +22,6 @@ $(document).ready(function() {
 			type: 'DELETE'
 		})
 			.done(function(data) {
-				console.log(data);
 				// find the link with the url and close the parent comment div
 				$("a[val=\""+$(this)[0].url+"\"]").parents('div.comment').slideToggle('slow');
 			})

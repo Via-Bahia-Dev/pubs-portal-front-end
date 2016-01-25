@@ -7,6 +7,17 @@ class RequestAttachmentsController < ApplicationController
     end
   end
 
+  def destroy
+    res = delete("/request_attachments/#{params[:id]}")
+
+    if res['errors'].nil?
+      head :no_content 
+    else
+      flash[:errors] = res['errors']
+      render 'show'
+    end
+  end
+
   private
   def request_attachment_params
     params.require(:request_attachment).permit(:file, :comment)
