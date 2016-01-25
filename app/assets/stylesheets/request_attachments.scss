@@ -6,12 +6,28 @@
 .attachment {
 	padding: 9px 0 9px 38px;
 	border-bottom: 1px $gray-lighter solid;
-}
 
-.attachment-content {
-	display: inline-block;
+	&:hover {
+		background-color: $gray-lighter;
+	}
 }
 
 .attachment-options {
 	min-width: 200px;
 }
+
+a.attachment-thumb-options-item {
+	margin-right: 3px;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.attachment-thumb-options-icon {
+	// margin-right: 3px;
+}
+
+.attachment-thumb-options-text {
+	text-decoration: underline;
+}
+

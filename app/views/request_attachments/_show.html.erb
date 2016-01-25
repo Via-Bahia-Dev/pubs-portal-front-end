@@ -2,23 +2,40 @@
 	
 	<%= render partial: "/users/label", locals: { user: attachment['user'] } %>
 
-	<div class="attachment-content well">
-		<% if is_image_file?(attachment['file_content_type']) %>
-			<%= link_to(image_tag(attachment['file_small']), attachment['file_original']) %>
-		<% end %>
-		<%= attachment['file_file_name'] %>
+	<div class="attachment-content media">
+		<div class="media-left">
+			<% if is_image_file?(attachment['file_content_type']) %>
+				<%= link_to(image_tag(attachment['file_small'], class: "media-object"), attachment['file_original']) %>
+			<% end %>
+		</div>
+		<div class="media-body media-middle">
+			<div>
+				<%= attachment['file_file_name'] %>
+			</div>
+			<div>
+				<%= "#{comment_date_format(datetime_from(attachment['created_at']))}" %>
+			</div>
+
+			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
+			<div class="attachment-thumb-options">
+				<a href=<%= attachment['file_original'] %> class="attachment-thumb-options-item" target="_blank" download>
+					<span class="glyphicon glyphicon-download-alt attachment-thumb-options-icon"></span>
+					<span class="attachment-thumb-options-text">Download</span>
+				</a>
+
+				<% this_attachment = RequestAttachment.find(attachment['id']) %>
+				<% if can? :destroy, this_attachment %>
+					<a href="#" class="attachment-delete delete-link attachment-thumb-options-item" val=<%="#{request_attachment_path(attachment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Attachment" } %>' data-title="Delete Attachment?" >
+						<span class="glyphicon glyphicon-remove attachment-thumb-options-icon"></span>
+						<span class="attachment-thumb-options-text">Delete</span>
+					</a>
+				<% end %>
+			</div>
+		</div>
 	</div>
 	<div class="footer">
 		<small>
-			<%= "#{comment_date_format(datetime_from(attachment['created_at']))}" %>
-
-			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
-			<% this_attachment = RequestAttachment.find(attachment['id']) %>
-			<% if can? :destroy, this_attachment %>
-			- <a href="#" class="attachment-delete delete-link" val=<%="#{request_attachment_path(attachment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Attachment" } %>' data-title="Delete Attachment?" >
-				Delete
-			</a>
-			<% end %>
+			
 		</small>
 		
 	</div>
