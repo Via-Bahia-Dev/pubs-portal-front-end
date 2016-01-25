@@ -40,8 +40,12 @@ $(document).ready(function() {
 		// This will automatically send an ajax request to the request_attachment 
 		// create action with params based off the form
 		$("#new_request_attachment").fileupload({
+			dataType: 'html',
 			done: function(e, data) {
 				// prepend the new attachment 
+
+				$new_attachment = $("#attachments").prepend($(data.result).hide().fadeIn());
+				$('html, body').animate( { scrollTop: $new_attachment.offset().top - ($(window).height() / 2)}, 1000);
 			}
 		});
 	});

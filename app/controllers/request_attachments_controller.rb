@@ -1,10 +1,9 @@
 class RequestAttachmentsController < ApplicationController
 
   def create
-    byebug
     res = post("/publication_requests/#{params[:publication_request_id]}/request_attachments", {:request_attachment => request_attachment_params })
     if res["errors"].nil?
-      # render partial: 'show', locals: { comment: res }
+      render partial: 'show', locals: { attachment: res }
     end
   end
 

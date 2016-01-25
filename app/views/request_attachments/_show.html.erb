@@ -3,9 +3,8 @@
 	<%= render partial: "/users/label", locals: { user: attachment['user'] } %>
 
 	<div class="attachment-content well">
-		<%= byebug %>
 		<% if is_image_file?(attachment['file_content_type']) %>
-			<%= image_tag attachment['file_medium'] %>
+			<%= image_tag attachment['file_small'] %>
 		<% end %>
 	</div>
 	<div class="footer">

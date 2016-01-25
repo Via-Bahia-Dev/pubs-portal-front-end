@@ -55,6 +55,15 @@ textarea {
 	resize: vertical;
 }
 
+.popover {
+	text-align: center !important;
+	.confirm-text {
+		margin-bottom: 5px !important;
+		margin-left: 15px !important;
+		margin-right: 15px !important;
+	}
+}
+
 .popup-list {
 	list-style: none;
 	padding: 0px;
