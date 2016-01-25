@@ -2,6 +2,30 @@
 // All this logic will automatically be available in application.js.
 $(document).ready(function() {
 
+	$('.attachment-btn').on('click', function(e) {
+		e.preventDefault();
+	})
+
+	$("#new_comment").popover({
+		selector: '.attachment-btn',
+		placement: 'right',
+		html: true,
+		trigger: 'focus',
+		title: "Attach From..."
+	}).parent().on('click', '.attach-file', function(e) {
+		// attach the jquery fileupload event listener on the file attachment form
+		// This will automatically send an ajax request to the request_attachment 
+		// create action with params based off the form
+		$("#new_request_attachment").fileupload({
+			dataType: 'html',
+			done: function(e, data) {
+				// prepend the new attachment 
+				$new_attachment = $("#attachments").prepend($(data.result).hide().fadeIn());
+				$('html, body').animate( { scrollTop: $new_attachment.offset().top - ($(window).height() / 2)}, 1000);
+			}
+		});
+	});
+
 	$("#attachments").on('click', ".attachment-delete", function(e){
 		e.preventDefault();
 	});
