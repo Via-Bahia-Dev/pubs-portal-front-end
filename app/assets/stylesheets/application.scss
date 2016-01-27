@@ -14,6 +14,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.container-fluid {
+	overflow-y: scroll;
+	height: 100%;
+}
+html, body {
+	overflow: hidden;
+	height: 100%;
+}
+
+
 .row {
 	margin-left: 0px;
 	margin-right: 0px;
