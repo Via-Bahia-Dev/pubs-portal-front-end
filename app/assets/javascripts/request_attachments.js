@@ -77,7 +77,12 @@ $(document).ready(function() {
 	});
 
 	$("#attachments").on('click', ".attachment", function(e) {
-		$("#attachments-carousel .carousel-indicators [data-slide-to=" + $(this).data('index') + "]").addClass("active");
-		$($(".carousel-inner").children('.item')[$(this).data('index')]).addClass('active');
+		$("#attachment-modal").css('display', 'block');
+		$("#attachment-modal .modal-content").attr('src', $(this).find(".media-object").data('orig'));
+		$("#attachment-modal #caption").html($(this).find(".filename").html());
+	});
+
+	$("#attachment-modal .close").click(function(){
+		$("#attachment-modal").css('display', 'none');
 	})
 })

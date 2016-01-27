@@ -5,11 +5,11 @@
 	<div class="attachment-content media">
 		<div class="media-left">
 			<% if is_image_file?(attachment['file_content_type']) %>
-				<%= link_to(image_tag(attachment['file_small'], class: "media-object"), attachment['file_original']) %>
+				<%= image_tag(attachment['file_small'], class: "media-object", "data-orig" => attachment['file_original']) %>
 			<% end %>
 		</div>
 		<div class="media-body media-middle">
-			<div>
+			<div class="filename">
 				<%= attachment['file_file_name'] %>
 			</div>
 			<div>
