@@ -87,6 +87,11 @@ $(document).ready(function() {
 		$("#attachment-modal").css('display', 'none');
 	});
 
+	$(document).keyup(function(e) {
+		if(e.keyCode == 27 && $("#attachment-modal").css('display') === 'block')
+			$("#attachment-modal").css('display', 'none');
+	});
+
 	$("#attachments").on('click', '.attachment-delete', function(e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
