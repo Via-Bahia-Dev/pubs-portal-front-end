@@ -1,4 +1,4 @@
-<div class="attachment" data-index=<%=index%>>
+<div class="attachment">
 	
 	<%= render partial: "/users/label", locals: { user: attachment['user'] } %>
 
@@ -18,7 +18,7 @@
 
 			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
 			<div class="attachment-thumb-options">
-				<a href=<%= attachment['file_original'] %> class="attachment-thumb-options-item" target="_blank" download>
+				<a href=<%= attachment['file_original'] %> class="attachment-download attachment-thumb-options-item" target="_blank" download>
 					<span class="glyphicon glyphicon-download-alt attachment-thumb-options-icon"></span>
 					<span class="attachment-thumb-options-text">Download</span>
 				</a>

@@ -85,8 +85,8 @@
 
 	<div class="row">
 		<div id="attachments" class="col-md-offset-1 col-md-5 col-xs-12">
-			<% @publication_request["request_attachments"].each_with_index do |attachment, index| %>
-				<%= render partial: "/request_attachments/show", locals: { attachment: attachment, index: index } %>
+			<% @publication_request["request_attachments"].each do |attachment| %>
+				<%= render partial: "/request_attachments/show", locals: { attachment: attachment } %>
 			<% end %>
 		</div>
 	</div>
