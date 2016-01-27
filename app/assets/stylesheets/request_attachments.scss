@@ -53,16 +53,19 @@ a.attachment-thumb-options-item {
     margin: auto;
     display: block;
     width: 80%;
-    // max-width: 700px;
+    margin-bottom: 150px;
 }
 
 /* Caption of Modal Image */
 #caption {
+	position: fixed;
+	bottom: 0;
     margin: auto;
     display: block;
-    width: 80%;
-    // max-width: 700px;
+    width: 100%;
     text-align: center;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.7);
     color: #ccc;
     padding: 10px 0;
     height: 150px;
@@ -88,7 +91,7 @@ a.attachment-thumb-options-item {
 
 /* The Close Button */
 .close {
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 35px;
     color: #f1f1f1;

@@ -79,7 +79,9 @@ $(document).ready(function() {
 	$("#attachments").on('click', ".attachment", function(e) {
 		$("#attachment-modal").css('display', 'block');
 		$("#attachment-modal .modal-content").attr('src', $(this).find(".media-object").data('orig'));
-		$("#attachment-modal #caption").html($(this).find(".filename").html());
+		$("#attachment-modal #caption #name").html($(this).find(".filename").html());
+		$("#attachment-modal #caption #details").html($(this).find(".details").html());
+		$("#attachment-modal #caption #options a").attr('href', $(this).find(".attachment-thumb-options a").attr('href'));
 	});
 
 	$("#attachment-modal .close").click(function(){
