@@ -10,7 +10,7 @@
 		</div>
 		<div class="media-body media-middle">
 			<div class="filename">
-				<%= attachment['file_file_name'] %>
+				<strong><%= attachment['file_file_name'] %></strong>
 			</div>
 			<div class="details">
 				<%= "#{comment_date_format(datetime_from(attachment['created_at']))}" %> - <%= "#{file_size_string(attachment['file_file_size'])}" %>

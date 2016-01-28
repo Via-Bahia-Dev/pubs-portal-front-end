@@ -2,6 +2,8 @@
 // All this logic will automatically be available in application.js.
 $(document).ready(function() {
 
+	// $('.progress').hide();
+
 	$('.attachment-btn').on('click', function(e) {
 		e.preventDefault();
 	});
