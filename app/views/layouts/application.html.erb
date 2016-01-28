@@ -22,9 +22,10 @@
 			<% end %>
 			<%= link_to "View Profile", user_path(current_user), id: "view-profile" %>
 			<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
-			<div class="col-md-2 col-xs-4 right">
+			<div class="col-md-4 col-xs-4 right">
 				<% if can? :create, Template %>
 					<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
+					<%= link_to "Administer Templates", templates_path, class: "btn btn-primary" %>
 				<% end %>
 			</div>
 		<% end %> 

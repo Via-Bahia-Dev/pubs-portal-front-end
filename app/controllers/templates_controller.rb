@@ -1,5 +1,10 @@
 class TemplatesController < ApplicationController
 
+	def index
+		@templates = get("/templates")
+	end
+
+
 	def new
 		@template = Template.new
 	end
@@ -19,6 +24,18 @@ class TemplatesController < ApplicationController
 			# flash.now[:error] = errors_from_json(res.parsed_response["errors"]) # old use of flash
 			render :new
 		end
+	end
+
+	def destroy
+		res = delete("/templates/#{params[:id]}")
+
+	    if res['errors'].nil?
+	      flash[:success] = "Template deleted!" 
+	      redirect_to templates_path
+	    else
+	      flash[:errors] = res['errors']
+	      redirect_to templates_path
+	    end
 	end
 
 	private

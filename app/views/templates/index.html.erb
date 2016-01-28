@@ -1,0 +1,46 @@
+<table class="templates table table-striped">
+	<thead>
+		<th>
+			Image
+		</th>
+		<th>
+			Name
+		</th>
+		<th>
+			Dimensions
+		</th>
+		<th>
+			Category
+		</th>
+		<th>
+			Assets URL
+		</th>
+		<th colspan="2">
+		</th>
+	</thead>
+	<% @templates.each do |template| %>
+		<tr class="template">
+			<td class="">
+				<%= image_tag(template["image_small"], class: "image-thumbnail") %>
+			</td>
+			<td class="">
+				<%= template["name"] %>
+			</td>
+			<td class="">
+				<%= template["dimensions"] %>
+			</td>
+			<td class="">
+				<%= template["category"] %>
+			</td>
+			<td class="">
+				<%= template["url"] %>
+			</td>
+			<td class="">
+				<%= link_to "Edit", template_path(template['id']) %>
+			</td>
+			<td>
+				<%= link_to "Delete", template_path(template['id']), method: :delete %>
+			</td>
+		</tr>
+	<% end %>
+</div>
