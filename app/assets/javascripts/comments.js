@@ -72,7 +72,7 @@ function postComment() {
 	})
 		.done(function(data) {
 			$new_comment = $("#comments").prepend($(data).hide().fadeIn());
-			$('html, body').animate( { scrollTop: $new_comment.offset().top - ($(window).height() / 2)}, 1000);
+			$('.container-fluid').animate( { scrollTop: $('.container-fluid').scrollTop() + ($new_comment.offset().top - ($(window).height() / 2))}, 1000);
 			$("#comment_content").val('');
 			formatCommentForm();
 	});

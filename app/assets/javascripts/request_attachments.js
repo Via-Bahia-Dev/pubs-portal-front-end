@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 $(document).ready(function() {
 
-	// $('.progress').hide();
+	$('.progress').hide();
 
 	$('.attachment-btn').on('click', function(e) {
 		e.preventDefault();
@@ -39,7 +39,7 @@ $(document).ready(function() {
 					$('.progress-bar').toggleClass('progress-bar-info progress-bar-success progress-bar-striped');
 					$('.progress-bar').html('');
 				}, 3000);
-				$('html, body').animate( { scrollTop: $new_attachment.offset().top - ($(window).height() / 2)}, 1000);
+				$('.container-fluid').animate( { scrollTop: $('.container-fluid').scrollTop() + ($new_attachment.offset().top - ($(window).height() / 2))}, 1000);
 			},
 			progress: function(e, data) {
 				var progress = parseInt(data.loaded / data.total * 100, 10);
