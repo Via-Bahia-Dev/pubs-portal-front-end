@@ -12,12 +12,18 @@
 				<h3 class="panel-title">Template for this Request</h3>
 			</div>
 			<div class="panel-body">
-				<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
+				<% if @publication_request["template"] %>
+					<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
+				<% else %>
+					<h3>No template for this request</h3>
+				<% end %>
 			</div>
 			<div class="panel-footer">
-				<p><%= @publication_request["template"]["name"] %>, <%= @publication_request["template"]["dimensions"] %></p>
-				<% if (@publication_request["template"]["link"] != "") && (can? :design, PublicationRequest.find(@publication_request['id'])) %>
-					<pre><%= sanitize(link_to("Download Assets", @publication_request["template"]["link"], :target => "_blank")) %> </pre>
+				<% if @publication_request["template"] %>
+					<p><%= @publication_request["template"]["name"] %>, <%= @publication_request["template"]["dimensions"] %></p>
+					<% if (@publication_request["template"]["link"] != "") && (can? :design, PublicationRequest.find(@publication_request['id'])) %>
+						<pre><%= sanitize(link_to("Download Assets", @publication_request["template"]["link"], :target => "_blank")) %> </pre>
+					<% end %>
 				<% end %>
 			</div>
 		</div>
