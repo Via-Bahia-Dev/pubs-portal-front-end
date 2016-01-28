@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
 //= require jquery_ujs
+//= require jquery-fileupload/basic
 
 $(document).ready(function(){
 	var tz = jstz.determine();

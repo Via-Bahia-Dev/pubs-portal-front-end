@@ -1,0 +1,42 @@
+<div class="attachment">
+	
+	<%= render partial: "/users/label", locals: { user: attachment['user'] } %>
+
+	<div class="attachment-content media">
+		<div class="media-left">
+			<% if is_image_file?(attachment['file_content_type']) %>
+				<%= image_tag(attachment['file_large_thumb'], class: "media-object", "data-orig" => attachment['file_original']) %>
+			<% end %>
+		</div>
+		<div class="media-body media-middle">
+			<div class="filename">
+				<strong><%= attachment['file_file_name'] %></strong>
+			</div>
+			<div class="details">
+				<%= "#{comment_date_format(datetime_from(attachment['created_at']))}" %> - <%= "#{file_size_string(attachment['file_file_size'])}" %>
+			</div>
+
+			<!-- YUCK!! Hitting db in view! But cancancan needs active record model, so not sure how else to do this -->
+			<div class="attachment-thumb-options">
+				<a href=<%= attachment['file_original'] %> class="attachment-download attachment-thumb-options-item" target="_blank" download>
+					<span class="glyphicon glyphicon-download-alt attachment-thumb-options-icon"></span>
+					<span class="attachment-thumb-options-text">Download</span>
+				</a>
+
+				<% this_attachment = RequestAttachment.find(attachment['id']) %>
+				<% if can? :destroy, this_attachment %>
+					<a href="#" class="attachment-delete delete-link attachment-thumb-options-item" val=<%="#{request_attachment_path(attachment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Attachment" } %>' data-title="Delete Attachment?" >
+						<span class="glyphicon glyphicon-remove attachment-thumb-options-icon"></span>
+						<span class="attachment-thumb-options-text">Delete</span>
+					</a>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<small>
+			
+		</small>
+		
+	</div>
+</div>

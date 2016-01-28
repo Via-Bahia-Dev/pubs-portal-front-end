@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "comments" %>
+<%= stylesheet_link_tag "request_attachments" %>
 <%= javascript_include_tag "comments" %>
+<%= javascript_include_tag "request_attachments" %>
 
 <div class="page-header">
 	<h1><%= @publication_request["event"] %></h1>
@@ -72,19 +74,41 @@
 
 <hr>
 
+<div id="attachments-area">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-5 col-xs-12">
+			<% if @publication_request["request_attachments"].any? %>
+				<h2><span class="glyphicon glyphicon-paperclip"></span> Attachments</h2>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div id="attachments" class="col-md-offset-1 col-md-5 col-xs-12">
+			<% @publication_request["request_attachments"].each do |attachment| %>
+				<%= render partial: "/request_attachments/show", locals: { attachment: attachment } %>
+			<% end %>
+		</div>
+	</div>
+</div>
+
 <div id="comments-area">
 
 	<div class="row">
 		<div class="col-md-offset-1 col-md-5 col-xs-12">
 			<h2>Comments</h2>
-			<%= form_for([@publication_request_obj, @comment], multipart: true, id: "comment-form" ) do |f| %>
+			<%= form_for([@publication_request_obj, @comment], multipart: true) do |f| %>
 				<div class="field form-group">
 					<span class="glyphicon glyphicon-comment"></span>
 					<%= f.label :content, "Add Comment", class: "control-label"%>
 					<%= f.text_area :content, class: "form-control", placeholder: "Write a comment...", rows: "3" %>
 				</div>
-
+				
 				<%= f.submit("Comment", id: "comment-btn", class: "btn btn-primary", remote: true, disabled: true) %>
+				<a class="attachment-btn" href="#" title="Add an attachment..." data-content= '<%= render( partial: "/request_attachments/choose_type", locals: { request: @publication_request_obj, attachment: @attachment } )%>'>
+					<span class="glyphicon glyphicon-paperclip"></span>
+				</a>
+				<%= render partial: 'layouts/progress_bar' %>
 			<% end %>
 			<hr>
 		</div>
@@ -97,7 +121,8 @@
 			<% end %>
 		</div>
 	</div>
-	
 
 </div>
+
+<%= render partial: '/request_attachments/modal', locals: { attachments: @publication_request["request_attachments"] } %>
 
