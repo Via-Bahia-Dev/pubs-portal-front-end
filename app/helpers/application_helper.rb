@@ -36,12 +36,19 @@ module ApplicationHelper
     "#{(bytes / (1000.0 ** times_to_square)).round(2)} #{abbreviations[times_to_square]}"
   end
 
+  def remove_hash(hex_color)
+    hex_color[1..-1]
+  end
+
   def hex_color_to_int(hex)
+    if(hex[0] == '#')
+      hex = remove_hash(hex)
+    end
     hex.to_i(16)
   end
 
   def int_color_to_hex(int)
-    int.to_s(16)
+    int.to_s(16).rjust(6, '0')
   end
 
 end

@@ -38,5 +38,26 @@ $(document).ready(function() {
     });
   });
 
+  $("input.color").blur(function(event) {
+    $.ajax({
+      url: '/statuses/' + $(this).parents(".status").data('id'),
+      type: 'PUT',
+      dataType: 'json',
+      data: {status: {color: $(this).val()}}
+    })
+    .done(function(data) {
+      console.log("success");
+      var id = data['id']
+      $(".status[data-id="+id+"] .status-display").css('background-color', data['status']['color']);
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+  });
+
 
 })

@@ -4,7 +4,7 @@
 
 <div class="statuses">
   <% @statuses.each do |status| %>
-    <div class="row status">
+    <div class="row status" data-id="<%=status['id']%>">
       <div class="col-md-4 name">
         <span class="label label-default status-display" style="background-color: #<%=int_color_to_hex(status['color'])%>"><%=status['name']%></span>
       </div>
