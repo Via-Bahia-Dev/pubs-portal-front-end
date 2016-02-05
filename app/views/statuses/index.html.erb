@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>Request Workflow</h1>
+</div>
+
+<div class="statuses">
+  <% @statuses.each do |status| %>
+    <div class="row">
+      <div class="col-md-4">
+        <span class="label label-default status-display" style="background-color: #<%=int_color_to_hex(status['color'])%>"><%=status['name']%></span>
+      </div>
+      <div class="col-md-3">
+        Color
+      </div>
+      <div class="col-md-3">
+        Order
+      </div>
+    </div>
+  <% end %>
+</div>

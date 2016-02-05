@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   resources :templates # will change this when done testing
 
+  resources :statuses
+
   resources :publication_requests do
     resources :request_attachments, only: [:index, :create]
     resources :comments, only: [:index, :create]
