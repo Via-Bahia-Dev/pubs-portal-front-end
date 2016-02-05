@@ -3,7 +3,7 @@
 </div>
 
 <div class="statuses">
-  <% @statuses.each do |status| %>
+  <% @statuses.each_with_index do |status, index| %>
     <div class="row status" data-id="<%=status['id']%>">
       <div class="col-md-4 name">
         <%= render partial: 'label', locals: { status: status } %>
@@ -15,8 +15,12 @@
         </div>
       </div>
       <div class="col-md-3 order">
-        Order
+        Order: <%= status['order'] %>
       </div>
     </div>
+
+    <% unless index == @statuses.size - 1 %>
+      <h2 class="arrow"><span class="glyphicon glyphicon-arrow-down"></span></h2>
+    <% end %>
   <% end %>
 </div>

@@ -1,8 +1,20 @@
+@import "bootstrap";
 
 .status-display {
   font-size: 25px;
 }
 
-.statuses .row {
-  padding: 10px 0px;
+.status {
+  background-color: $gray-lighter;
+  padding: 20px;
+}
+
+// .statuses {
+//   .row {
+//     padding: 10px 0px;
+//   }
+// }
+
+.arrow {
+  margin-left: 30px;
 }
