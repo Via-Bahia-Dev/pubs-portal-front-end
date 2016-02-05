@@ -6,7 +6,7 @@
 					<%= link_to(publication_request_path(request["id"])) do %>
 						<h3><%= request["event"] %></h3>
 						<hr>
-						<p><%= request["status"] %></p>
+						<p><%= render partial: 'statuses/label', locals: { status: request['status'] } %></p>
 					<% end %>
 				</div>
 			<% end %>
