@@ -19,6 +19,9 @@ gem 'uglifier', '>= 1.3.0'
 # jquery file upload
 gem 'jquery-fileupload-rails'
 
+# jquery color picker
+gem 'jquery-minicolors-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -79,4 +82,3 @@ group :development, :test do
 
   gem 'selenium-webdriver'
 end
-
