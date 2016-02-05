@@ -11,10 +11,12 @@ class RequestAttachment < ActiveRecord::Base
 
 	validates_presence_of :publication_request_id
 	validates_presence_of :user_id
+
+	default_scope { order(created_at: :desc) }
 	
 	def check_file_type
 		if is_image_type?
-			{ large: "500x500>", medium: "300x300>", small: "100x100>", thumb: "50x50#" }
+			{ large: "x500>", medium: "x300>", small: "x100>", large_thumb: "100x100#", thumb: "50x50#" }
 		else
 			{}
 		end
