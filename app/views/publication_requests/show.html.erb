@@ -2,6 +2,7 @@
 <%= stylesheet_link_tag "request_attachments" %>
 <%= javascript_include_tag "comments" %>
 <%= javascript_include_tag "request_attachments" %>
+<%= javascript_include_tag "statuses" %>
 
 <div class="page-header">
 	<h1><%= @publication_request["event"] %></h1>
@@ -12,7 +13,7 @@
 	  <div class="btn-group btn-group-lg">
 			<% @statuses.each do |status| %>
 				<% if status['name'] != @publication_request['status']['name'] %>
-					<button type="button" class="btn btn-default">
+					<button type="button" class="btn btn-default" data-id="<%=status['id']%>">
 						<% if @publication_request['status']['order'] > status['order'] %>
 							Back to
 						<% else %>

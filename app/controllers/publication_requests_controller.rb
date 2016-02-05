@@ -58,10 +58,22 @@ class PublicationRequestsController < ApplicationController
     end
   end
 
+  def update
+    res = put("/publication_requests/#{params[:id]}", {:publication_request => publication_request_params})
+    if res["errors"].nil?
+      # flash[:success] = "Request for #{res["event"]} submitted!"
+      # redirect_to root_path
+      head :no_content
+    else
+      # @publication_request.save
+      render :json => res.parsed_response["errors"]
+    end
+  end
+
 
   private
 
   def publication_request_params
-    params.require(:publication_request).permit(:event, :description, :dimensions, :rough_date, :due_date, :event_date, :admin_id, :reviewer_id, :designer_id, :status, :template_id)
+    params.require(:publication_request).permit(:event, :description, :dimensions, :rough_date, :due_date, :event_date, :admin_id, :reviewer_id, :designer_id, :status_id, :template_id)
   end
 end

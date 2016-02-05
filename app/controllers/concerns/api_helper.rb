@@ -1,6 +1,6 @@
 module APIHelper
   # include HTTParty
-  
+
   def get(url)
     check_success(self.class.get(url, :headers => auth_headers))
   end
@@ -10,7 +10,7 @@ module APIHelper
   end
 
   def put(url, params = {})
-    check_success(self.class.put(url, :query => params, :headers => auth_headers, :detect_mime_type => true ))
+    self.class.put(url, :query => params, :headers => auth_headers, :detect_mime_type => true )
   end
 
   def delete(url, params = {})
