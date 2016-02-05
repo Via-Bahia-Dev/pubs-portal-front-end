@@ -3,6 +3,10 @@ class PublicationRequestsController < ApplicationController
   def show
     @publication_request = get("/publication_requests/#{params[:id]}")
     @publication_request_obj = PublicationRequest.find(params[:id])
+
+    @statuses = get("/statuses")
+
+    # dummy models for form_for
     @comment = Comment.new(:publication_request => @publication_request_obj)
     @attachment = RequestAttachment.new(:publication_request => @publication_request_obj)
   end
