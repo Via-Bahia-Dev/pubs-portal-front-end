@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Request Workflow</h1>
+</div>
+
+<div class="statuses">
+  <% @statuses.each_with_index do |status, index| %>
+    <div class="row status" data-id="<%=status['id']%>">
+      <div class="col-md-4 name">
+        <%= render partial: 'label', locals: { status: status } %>
+      </div>
+      <div class="col-md-3 color">
+        <div class="input-group">
+          <span class="input-group-addon">Color</span>
+          <input type="text" class="form-control color" placeholder="">
+        </div>
+      </div>
+      <div class="col-md-3 order">
+        Order: <%= status['order'] %>
+      </div>
+    </div>
+
+    <% unless index == @statuses.size - 1 %>
+      <h2 class="arrow"><span class="glyphicon glyphicon-arrow-down"></span></h2>
+    <% end %>
+  <% end %>
+</div>

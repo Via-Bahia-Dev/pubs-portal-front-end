@@ -2,9 +2,14 @@
 <%= stylesheet_link_tag "request_attachments" %>
 <%= javascript_include_tag "comments" %>
 <%= javascript_include_tag "request_attachments" %>
+<%= javascript_include_tag "statuses" %>
 
 <div class="page-header">
 	<h1><%= @publication_request["event"] %></h1>
+</div>
+
+<div class="row workflow">
+	<%= render partial: 'workflow', locals: { publication_request: @publication_request } %>
 </div>
 
 <div class="row">
@@ -109,7 +114,7 @@
 					<%= f.label :content, "Add Comment", class: "control-label"%>
 					<%= f.text_area :content, class: "form-control", placeholder: "Write a comment...", rows: "3" %>
 				</div>
-				
+
 				<%= f.submit("Comment", id: "comment-btn", class: "btn btn-primary", remote: true, disabled: true) %>
 				<a class="attachment-btn" href="#" title="Add an attachment..." data-content= '<%= render( partial: "/request_attachments/choose_type", locals: { request: @publication_request_obj, attachment: @attachment } )%>'>
 					<span class="glyphicon glyphicon-paperclip"></span>
@@ -131,4 +136,3 @@
 </div>
 
 <%= render partial: '/request_attachments/modal', locals: { attachments: @publication_request["request_attachments"] } %>
-

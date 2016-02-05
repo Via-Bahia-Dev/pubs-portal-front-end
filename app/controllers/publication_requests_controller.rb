@@ -3,6 +3,10 @@ class PublicationRequestsController < ApplicationController
   def show
     @publication_request = get("/publication_requests/#{params[:id]}")
     @publication_request_obj = PublicationRequest.find(params[:id])
+
+    @statuses = get("/statuses")
+
+    # dummy models for form_for
     @comment = Comment.new(:publication_request => @publication_request_obj)
     @attachment = RequestAttachment.new(:publication_request => @publication_request_obj)
   end
@@ -54,10 +58,22 @@ class PublicationRequestsController < ApplicationController
     end
   end
 
+  def update
+    res = put("/publication_requests/#{params[:id]}", {:publication_request => publication_request_params})
+    if res["errors"].nil?
+      new_request = get("/publication_requests/#{params[:id]}")
+      @statuses = get("/statuses")
+      render partial: 'workflow', locals: {publication_request: new_request}
+    else
+      # @publication_request.save
+      render :json => res.parsed_response["errors"]
+    end
+  end
+
 
   private
 
   def publication_request_params
-    params.require(:publication_request).permit(:event, :description, :dimensions, :rough_date, :due_date, :event_date, :admin_id, :reviewer_id, :designer_id, :status, :template_id)
+    params.require(:publication_request).permit(:event, :description, :dimensions, :rough_date, :due_date, :event_date, :admin_id, :reviewer_id, :designer_id, :status_id, :template_id)
   end
 end

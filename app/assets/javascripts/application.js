@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-fileupload/basic
+//= require jquery.minicolors
 
 $(document).ready(function(){
 	var tz = jstz.determine();

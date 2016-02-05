@@ -27,8 +27,11 @@
 					<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
 					<%= link_to "Administer Templates", templates_path, class: "btn btn-primary" %>
 				<% end %>
+        <% if can? :manage, Status %>
+          <%= link_to "Edit Workflow", statuses_path, class: "btn btn-primary" %>
+        <% end %>
 			</div>
-		<% end %> 
+		<% end %>
 
 		<% if flash[:error] %>
 			<div class="alert alert-danger alert-dismissible" role="alert">

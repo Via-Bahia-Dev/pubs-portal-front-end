@@ -33,7 +33,22 @@ module ApplicationHelper
   def file_size_string(bytes)
     abbreviations = { 0 => "B", 1 => "KB", 2 => "MB", 3 => "GB" } # byte abbreviation to used, keyed by the number of times we square 1000
     times_to_square = (bytes.to_s.chars.length-1) / 3 # number of times we want to squre 1000 to divide our number by
-    "#{(bytes / (1000.0 ** times_to_square)).round(2)} #{abbreviations[times_to_square]}" 
+    "#{(bytes / (1000.0 ** times_to_square)).round(2)} #{abbreviations[times_to_square]}"
+  end
+
+  def remove_hash(hex_color)
+    hex_color[1..-1]
+  end
+
+  def hex_color_to_int(hex)
+    if(hex[0] == '#')
+      hex = remove_hash(hex)
+    end
+    hex.to_i(16)
+  end
+
+  def int_color_to_hex(int)
+    int.to_s(16).rjust(6, '0')
   end
 
 end

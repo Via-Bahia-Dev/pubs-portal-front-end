@@ -1,0 +1,19 @@
+<div class="col-md-6">
+  <div class="btn-group btn-group-lg">
+    <% @statuses.each do |status| %>
+      <% if status['name'] != publication_request['status']['name'] %>
+        <button type="button" class="btn btn-default" data-id="<%=status['id']%>">
+          <% if publication_request['status']['order'] > status['order'] %>
+            Back to
+          <% else %>
+            Move to
+          <% end %>
+          <%= status["name"] %>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+  <span class="current-status">
+    <%= render partial: 'statuses/label', locals: { status: publication_request['status'] } %>
+  </span>
+</div>

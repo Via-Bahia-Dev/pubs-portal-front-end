@@ -13,6 +13,7 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "jquery.minicolors";
 
 .container-fluid {
 	overflow-y: scroll;
@@ -99,7 +100,7 @@ textarea {
 			margin: 4px 0;
     		padding: 3px 5px;
 			a:hover {
-				
+
 			}
 		}
 	}
@@ -112,7 +113,7 @@ textarea {
 		position: relative;
 		display: block;
 		z-index: 1;
-		
+
 	}
 
 	.new_request_attachment {
@@ -128,5 +129,3 @@ textarea {
 		}
 	}
 }
-
-
