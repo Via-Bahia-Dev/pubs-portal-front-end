@@ -9,25 +9,7 @@
 </div>
 
 <div class="row workflow">
-	<div class="col-md-6">
-	  <div class="btn-group btn-group-lg">
-			<% @statuses.each do |status| %>
-				<% if status['name'] != @publication_request['status']['name'] %>
-					<button type="button" class="btn btn-default" data-id="<%=status['id']%>">
-						<% if @publication_request['status']['order'] > status['order'] %>
-							Back to
-						<% else %>
-							Move to
-						<% end %>
-						<%= status["name"] %>
-					</button>
-				<% end %>
-			<% end %>
-	  </div>
-		<span class="current-status">
-			<span class="label label-default" style="background-color: #<%=int_color_to_hex(@publication_request['status']['color'])%>"><%=@publication_request['status']['name']%></span>
-		</span>
-	</div>
+	<%= render partial: 'workflow', locals: { publication_request: @publication_request } %>
 </div>
 
 <div class="row">

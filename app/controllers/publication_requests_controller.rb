@@ -61,9 +61,9 @@ class PublicationRequestsController < ApplicationController
   def update
     res = put("/publication_requests/#{params[:id]}", {:publication_request => publication_request_params})
     if res["errors"].nil?
-      # flash[:success] = "Request for #{res["event"]} submitted!"
-      # redirect_to root_path
-      head :no_content
+      new_request = get("/publication_requests/#{params[:id]}")
+      @statuses = get("/statuses")
+      render partial: 'workflow', locals: {publication_request: new_request}
     else
       # @publication_request.save
       render :json => res.parsed_response["errors"]

@@ -6,13 +6,14 @@ $(document).ready(function() {
       dataType: 'json',
       data: {publication_request: { status_id: $(this).data('id')} }
     })
-    .done(function() {
+    .done(function(data) {
       console.log("success");
-      location.reload();
+      $(".workflow").html(data);
     })
     .fail(function(data) {
       console.log("error");
       console.log(data);
+      $(".workflow").html(data.responseText);
     })
     .always(function() {
       console.log("complete");
