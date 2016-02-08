@@ -34,30 +34,28 @@ $(document).ready(function() {
     $(el).minicolors({
       theme: 'bootstrap',
       defaultValue: hex,
-      swatches: ['#fff', '#000']
+      swatches: swatches,
+      changeDelay: 200,
+      change: function(value) {
+        $.ajax({
+          url: '/statuses/' + $(this).parents(".status").data('id'),
+          type: 'PUT',
+          dataType: 'json',
+          data: {status: {color: $(this).val()}}
+        })
+        .done(function(data) {
+          console.log("success");
+          var id = data['id']
+          $(".status[data-id="+id+"] .status-display").css('background-color', data['status']['color']);
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+      }
     });
   });
-
-  $("input.color").blur(function(event) {
-    $.ajax({
-      url: '/statuses/' + $(this).parents(".status").data('id'),
-      type: 'PUT',
-      dataType: 'json',
-      data: {status: {color: $(this).val()}}
-    })
-    .done(function(data) {
-      console.log("success");
-      var id = data['id']
-      $(".status[data-id="+id+"] .status-display").css('background-color', data['status']['color']);
-    })
-    .fail(function() {
-      console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
-    });
-
-  });
-
 
 })
