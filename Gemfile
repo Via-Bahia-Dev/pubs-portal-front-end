@@ -20,7 +20,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-fileupload-rails'
 
 # jquery color picker
-gem 'jquery-minicolors-rails'
+# gem 'jquery-minicolors-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

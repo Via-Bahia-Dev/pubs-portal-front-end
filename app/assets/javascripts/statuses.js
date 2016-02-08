@@ -34,7 +34,7 @@ $(document).ready(function() {
     $(el).minicolors({
       theme: 'bootstrap',
       defaultValue: hex,
-      swatches: swatches
+      swatches: ['#fff', '#000']
     });
   });
 
