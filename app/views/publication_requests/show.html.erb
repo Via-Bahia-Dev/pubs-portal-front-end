@@ -36,14 +36,136 @@
 		</div>
 	</div>
 
-	<div class="col-md-8 col-xs-8">
-		<div class="table-responsive">
+	<div class="col-md-5 details-module">
+	  <div class="module-heading" id="details-module-heading">
+			<h3>Details</h3>
+		</div>
+		<div class="module-content">
+			<ul class="list" id="details-list">
+				<li class="item">
+					<strong class="item-name">
+						Status
+					</strong>
+					<span class="current-status">
+						<%= render partial: 'statuses/label', locals: { status: @publication_request["status"] } %>
+					</span>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Name of the event
+					</strong>
+					<div class="editable-field inactive">
+						<%= @publication_request["event"] %>
+					</div>
+					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Dimensions
+					</strong>
+					<div class="editable-field inactive">
+						<%= @publication_request["dimensions"] %>
+					</div>
+					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Description
+					</strong>
+					<div class="editable-field inactive">
+						<%= @publication_request["description"] %>
+					</div>
+					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="module-heading" id="people-module-heading">
+			<h3>People</h3>
+		</div>
+		<div class="module-content">
+			<ul class="list" id="people-list">
+				<li class="item">
+					<strong class="item-name">
+						Designer
+					</strong>
+					<div class="editable-field inactive">
+						<%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %>
+					</div>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Requester
+					</strong>
+					<div class="editable-field inactive">
+						<%= "#{@publication_request['user']['first_name']} #{@publication_request['user']['last_name']}" %>
+					</div>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Reviewer
+					</strong>
+					<div class="editable-field inactive">
+						<%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="module-heading" id="dates-module-heading">
+			<h3>Dates</h3>
+		</div>
+		<div class="module-content">
+			<ul class="list" id="dates-list">
+				<li class="item">
+					<strong class="item-name">
+						Rough Draft Due
+					</strong>
+					<div class="editable-field inactive">
+						<%= date_from(@publication_request["rough_date"]) %>
+					</div>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Final Draft Due
+					</strong>
+					<div class="editable-field inactive">
+						<%= date_from(@publication_request["due_date"]) %>
+					</div>
+				</li>
+
+				<li class="item">
+					<strong class="item-name">
+						Event Date
+					</strong>
+					<div class="editable-field inactive">
+						<%= date_from(@publication_request["event_date"]) %>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- <div class="col-md-8 col-xs-8">
+		<div class="table-responsive details">
 			<table class="table">
 				<tbody>
 					<tr>
 						<td class="lead">Name of the event</td>
-						<td><%= @publication_request["event"] %></td>
-						<td></td>
+						<td>
+							<div class="editable-field inactive">
+								<%= @publication_request["event"] %>
+								<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+							</div>
+						</td>
 						<td class="lead">Date of the event</td>
 						<td><%= date_from(@publication_request["event_date"]) %> </td>
 					</tr>
@@ -80,7 +202,7 @@
 			</table>
 		</div>
 
-	</div>
+	</div> -->
 </div>
 
 <hr>

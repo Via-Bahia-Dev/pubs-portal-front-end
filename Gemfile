@@ -54,6 +54,9 @@ gem 'tzinfo-data'
 # Clickable URLs in text
 gem 'rails_autolink'
 
+# Inline form editing
+gem 'x-editable-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

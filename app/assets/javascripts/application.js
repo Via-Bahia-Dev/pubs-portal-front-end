@@ -15,6 +15,8 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require jquery-fileupload/basic
+//= require editable/bootstrap-editable
+//= require editable/rails
 
 $(document).ready(function(){
 	var tz = jstz.determine();

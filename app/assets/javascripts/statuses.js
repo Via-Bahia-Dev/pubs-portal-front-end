@@ -9,11 +9,15 @@ $(document).ready(function() {
     .done(function(data) {
       console.log("success");
       $(".workflow").html(data);
+      $(".details-module .current-status").html($(".workflow .current-status").html());
+      $(".workflow .current-status").hide();
     })
     .fail(function(data) {
       console.log("error");
       console.log(data);
       $(".workflow").html(data.responseText);
+      $(".details-module .current-status").html($(".workflow .current-status").html());
+      $(".workflow .current-status").hide();
     })
     .always(function() {
       console.log("complete");

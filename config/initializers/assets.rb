@@ -16,6 +16,9 @@ Rails.application.config.assets.precompile += %w(jquery.minicolors.js)
 
 Rails.application.config.assets.precompile += %w(jquery.minicolors.css)
 
+Rails.application.config.assets.precompile += %w( editable/loading.gif )
+Rails.application.config.assets.precompile += %w( editable/clear.png )
+
 Rails.application.config.assets.precompile += %w(comments.js)
 Rails.application.config.assets.precompile += %w(publication_requests.js)
 Rails.application.config.assets.precompile += %w(request_attachments.js)

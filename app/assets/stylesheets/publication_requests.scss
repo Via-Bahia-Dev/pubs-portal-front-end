@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "bootstrap";
+
 .workflow {
 	margin-bottom: 20px;
 }
@@ -46,4 +48,43 @@
 	transform: scale(1.1);
 	box-shadow: 2px 2px 8px 8px rgba(0,0,0,0.2);
 	z-index: 999;
+}
+
+.module-content .list {
+	padding-left: 0px;
+	list-style: none;
+}
+
+.item-name {
+	width: 40%;
+	display: inline-block;
+}
+
+.item {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.editable-field {
+	display: inline-block;
+	border-radius: 2px;
+	cursor: text;
+	box-shadow: 0 0 0 0;
+	padding-left: 5px;
+	&:hover {
+		box-shadow: 0 0 0 1px $gray-light;
+		.overlay-icon {
+			opacity: 1;
+		}
+	}
+
+	.overlay-icon {
+		top: 0px;
+		opacity: 0;
+		padding: 8px;
+		background-color: $gray-lighter;
+		border-left: 1px solid $gray-light;
+		cursor: pointer;
+		color: $gray-light;
+	}
 }
