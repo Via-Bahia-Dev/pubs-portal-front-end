@@ -12,6 +12,9 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(freewall.js)
 Rails.application.config.assets.precompile += %w(jstz.min.js)
 Rails.application.config.assets.precompile += %w(rails-timezone.min.js)
+Rails.application.config.assets.precompile += %w(jquery.minicolors.js)
+
+Rails.application.config.assets.precompile += %w(jquery.minicolors.css)
 
 Rails.application.config.assets.precompile += %w(comments.js)
 Rails.application.config.assets.precompile += %w(publication_requests.js)

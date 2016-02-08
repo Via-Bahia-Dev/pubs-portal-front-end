@@ -1,4 +1,5 @@
-<%= stylesheet_link_tag "templates.css" %>
+<%= stylesheet_link_tag "templates" %>
+<%= stylesheet_link_tag "statuses" %>
 <%= stylesheet_link_tag "publication_requests" %>
 
 <div class="page-header">
@@ -36,7 +37,7 @@
 				</div>
 			</div>
 
-			
+
 		</div>
 	</div>
 
@@ -49,10 +50,8 @@
 					<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
 
 <% end %>
-
-

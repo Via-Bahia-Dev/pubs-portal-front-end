@@ -16,17 +16,29 @@
 
 .request-thumb {
 	margin: 10px;
+	min-width: 200px;
 	background-color: #F7F7F9;
 	text-align: center;
 	display: inline-block;
 	position: relative;
 	overflow: hidden;
-	padding: 5px;
+	padding: 5px 15px;
 	a {
 		display: inline-block;
 		position: relative;
 		height: 100%;
 		width: 100%;
+		color: black;
+		&:hover {
+			text-decoration: none;
+			color: black;
+		}
+		&:active {
+			text-decoration: none;
+		}
+		&:focus {
+			text-decoration: none;
+		}
 	}
 }
 
