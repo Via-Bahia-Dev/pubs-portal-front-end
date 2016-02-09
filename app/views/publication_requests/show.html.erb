@@ -42,7 +42,7 @@
 		</div>
 		<div class="module-content">
 			<ul class="list" id="details-list">
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Status
 					</strong>
@@ -51,34 +51,32 @@
 					</span>
 				</li>
 
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Name of the event
 					</strong>
 					<%= link_to '#', id: 'event-field', class: 'editable-field editable', data: { pk: @publication_request["id"], model: 'publication_request', name: 'event', type: "text", url: publication_request_path(@publication_request["id"]), title: 'Event'} do %>
 						<%= @publication_request["event"] %>
 					<% end %>
-					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+
 				</li>
 
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Dimensions
 					</strong>
 					<%= link_to '#', id: 'dimen-field', class: 'editable-field inactive', data: { pk: @publication_request["id"], model: 'publication_request', name: 'dimensions', type: 'text', url: publication_request_path(@publication_request["id"]), title: 'Dimensions' } do %>
 						<%= @publication_request["dimensions"] %>
 					<% end %>
-					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
 				</li>
 
-				<li class="item">
+				<li class="item item-full">
 					<strong class="item-name">
 						Description
 					</strong>
 					<%= link_to '#', id: 'descr-field', class: 'editable-field inactive', data: { pk: @publication_request["id"], model: 'publication_request', name: 'description', type: 'textarea', url: publication_request_path(@publication_request["id"]), title: 'Description' } do %>
-						<%= @publication_request["description"].strip %>
+						<%= simple_format(@publication_request["description"]) %>
 					<% end %>
-					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
 				</li>
 			</ul>
 		</div>
@@ -90,7 +88,7 @@
 		</div>
 		<div class="module-content">
 			<ul class="list" id="people-list">
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Designer
 					</strong>
@@ -99,7 +97,7 @@
 					</div>
 				</li>
 
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Requester
 					</strong>
@@ -108,7 +106,7 @@
 					</div>
 				</li>
 
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Reviewer
 					</strong>
@@ -124,7 +122,7 @@
 		</div>
 		<div class="module-content">
 			<ul class="list" id="dates-list">
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Rough Draft Due
 					</strong>
@@ -133,7 +131,7 @@
 					</div>
 				</li>
 
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Final Draft Due
 					</strong>
@@ -142,7 +140,7 @@
 					</div>
 				</li>
 
-				<li class="item">
+				<li class="item item-half">
 					<strong class="item-name">
 						Event Date
 					</strong>
