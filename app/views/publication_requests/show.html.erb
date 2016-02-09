@@ -55,9 +55,9 @@
 					<strong class="item-name">
 						Name of the event
 					</strong>
-					<div class="editable-field inactive">
+					<%= link_to '#', id: 'event-field', class: 'editable-field editable', data: { pk: @publication_request["id"], model: 'publication_request', name: 'event', type: "text", url: publication_request_path(@publication_request["id"]), title: 'Event'} do %>
 						<%= @publication_request["event"] %>
-					</div>
+					<% end %>
 					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
 				</li>
 
@@ -65,9 +65,9 @@
 					<strong class="item-name">
 						Dimensions
 					</strong>
-					<div class="editable-field inactive">
+					<%= link_to '#', id: 'dimen-field', class: 'editable-field inactive', data: { pk: @publication_request["id"], model: 'publication_request', name: 'dimensions', type: 'text', url: publication_request_path(@publication_request["id"]), title: 'Dimensions' } do %>
 						<%= @publication_request["dimensions"] %>
-					</div>
+					<% end %>
 					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
 				</li>
 
@@ -75,9 +75,9 @@
 					<strong class="item-name">
 						Description
 					</strong>
-					<div class="editable-field inactive">
-						<%= @publication_request["description"] %>
-					</div>
+					<%= link_to '#', id: 'descr-field', class: 'editable-field inactive', data: { pk: @publication_request["id"], model: 'publication_request', name: 'description', type: 'textarea', url: publication_request_path(@publication_request["id"]), title: 'Description' } do %>
+						<%= @publication_request["description"].strip %>
+					<% end %>
 					<span class="glyphicon glyphicon-pencil overlay-icon"></span>
 				</li>
 			</ul>

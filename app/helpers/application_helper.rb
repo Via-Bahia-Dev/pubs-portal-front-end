@@ -51,4 +51,8 @@ module ApplicationHelper
     int.to_s(16).rjust(6, '0')
   end
 
+  def xeditable? object = nil
+    can?(:edit, object) ? true : false
+  end
+
 end

@@ -62,8 +62,13 @@ class PublicationRequestsController < ApplicationController
     res = put("/publication_requests/#{params[:id]}", {:publication_request => publication_request_params})
     if res["errors"].nil?
       new_request = get("/publication_requests/#{params[:id]}")
-      @statuses = get("/statuses")
-      render partial: 'workflow', locals: {publication_request: new_request}
+
+      if params.include? :status_id
+        @statuses = get("/statuses")
+        render partial: 'workflow', locals: {publication_request: new_request}
+      else
+        head :no_content
+      end
     else
       # @publication_request.save
       render :json => res.parsed_response["errors"]
