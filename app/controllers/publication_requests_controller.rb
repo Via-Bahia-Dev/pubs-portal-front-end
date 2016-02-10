@@ -6,14 +6,7 @@ class PublicationRequestsController < ApplicationController
 
     @statuses = get("/statuses")
 
-    admins = get("/users/admins")
-    @admins_options = admins.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
-
-    designers = get("/users/designers")
-    @designers_options = designers.map { |user| {  user['id'] => "#{user['first_name']} #{user['last_name']}" } }
-
-    reviewers = get("/users/reviewers")
-    @reviewers_options = reviewers.map { |user| {  user['id'] => "#{user['first_name']} #{user['last_name']}" } }
+    get_user_editable_options
 
     # dummy models for form_for
     @comment = Comment.new(:publication_request => @publication_request_obj)
@@ -28,34 +21,17 @@ class PublicationRequestsController < ApplicationController
 
     @template = get("/templates/#{params[:template_id]}")
 
-    admins = get("/users/admins")
-    @admins_options = admins.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
-
-    designers = get("/users/designers")
-    @designers_options = designers.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
-
-    reviewers = get("/users/reviewers")
-    @reviewers_options = reviewers.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
+    get_user_options
 
   end
 
   def create
-    # params[:publication_request][:user_id] = current_user.id
     @publication_request = PublicationRequest.new(publication_request_params)
 
     @template = get("/templates/#{params[:publication_request][:template_id]}")
 
-    admins = get("/users/admins")
-    @admins_options = admins.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
+    get_user_options
 
-    designers = get("/users/designers")
-    @designers_options = designers.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
-
-    reviewers = get("/users/reviewers")
-    @reviewers_options = reviewers.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
-    # We need the ActiveRecord of the model in order to add it to the Publication Request association
-    # @publication_request.templates << Template.find(params[:publication_request][:template_id])
-    # we merge in a list of the Template model in order to build the association on create
     res = post("/publication_requests", {:publication_request => publication_request_params })
     if res["errors"].nil?
       flash[:success] = "Request for #{res["event"]} submitted!"
@@ -68,6 +44,7 @@ class PublicationRequestsController < ApplicationController
   end
 
   def update
+    # go through the params looking for dates and format them to be date objects
     publication_request_params.each do |param, value|
       if param == 'rough_date' || param == 'due_date' || param == 'event_date'
         params[:publication_request][param] = date_obj_from(value)
@@ -78,6 +55,7 @@ class PublicationRequestsController < ApplicationController
     if res["errors"].nil?
       new_request = get("/publication_requests/#{params[:id]}")
 
+      # If we updated the status, need to return the new workflow parial
       if publication_request_params.include? :status_id
         @statuses = get("/statuses")
         render partial: 'workflow', locals: {publication_request: new_request}
@@ -89,7 +67,6 @@ class PublicationRequestsController < ApplicationController
       render :json => res.parsed_response["errors"]
     end
   end
-
 
   private
 

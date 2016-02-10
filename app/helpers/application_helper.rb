@@ -1,6 +1,8 @@
 module ApplicationHelper
   include SessionsHelper
   include CommentsHelper
+  include PublicationRequestsHelper
+  include UsersHelper
 
   def field_class(resource, field_name)
     if resource.errors[field_name].present?
