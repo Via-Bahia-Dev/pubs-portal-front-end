@@ -92,16 +92,25 @@
 					<strong class="item-name">
 						Designer
 					</strong>
-					<div class="editable-field inactive">
-						<%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %>
-					</div>
+
+					<%= link_to '#', id: 'designer-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'designer_id',
+														 type: 'select',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Designer',  source: @designers_options,
+														 value: @publication_request["designer"]["id"]
+													} do %>
+					<% end %>
 				</li>
 
 				<li class="item item-half">
 					<strong class="item-name">
 						Requester
 					</strong>
-					<div class="editable-field inactive">
+					<div class="non-editable-field">
 						<%= "#{@publication_request['user']['first_name']} #{@publication_request['user']['last_name']}" %>
 					</div>
 				</li>
@@ -110,9 +119,17 @@
 					<strong class="item-name">
 						Reviewer
 					</strong>
-					<div class="editable-field inactive">
-						<%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %>
-					</div>
+					<%= link_to '#', id: 'reviewer-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'reviewer_id',
+														 type: 'select',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Reviewer',  source: @reviewers_options,
+														 value: @publication_request["reviewer"]["id"]
+													} do %>
+					<% end %>
 				</li>
 			</ul>
 		</div>

@@ -28,4 +28,18 @@ $(document).ready(function() {
 
   });
 
+  $(".editable-field#designer-field").editable({
+    display: function(value, sourceData) {
+      $(this).text($.fn.editableutils.itemsByValue(value, sourceData)[0].text);
+      $(this).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>')
+    }
+  });
+
+  $(".editable-field#reviewer-field").editable({
+    display: function(value, sourceData) {
+      $(this).text($.fn.editableutils.itemsByValue(value, sourceData)[0].text);
+      $(this).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>')
+    }
+  })
+
 });

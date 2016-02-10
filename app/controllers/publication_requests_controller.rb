@@ -6,6 +6,15 @@ class PublicationRequestsController < ApplicationController
 
     @statuses = get("/statuses")
 
+    admins = get("/users/admins")
+    @admins_options = admins.map { |user| [ "#{user['first_name']} #{user['last_name']}", user['id']] }
+
+    designers = get("/users/designers")
+    @designers_options = designers.map { |user| {  user['id'] => "#{user['first_name']} #{user['last_name']}" } }
+
+    reviewers = get("/users/reviewers")
+    @reviewers_options = reviewers.map { |user| {  user['id'] => "#{user['first_name']} #{user['last_name']}" } }
+
     # dummy models for form_for
     @comment = Comment.new(:publication_request => @publication_request_obj)
     @attachment = RequestAttachment.new(:publication_request => @publication_request_obj)
