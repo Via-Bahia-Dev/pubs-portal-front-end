@@ -3,7 +3,6 @@ $(document).ready(function() {
     $.ajax({
       url: window.location.pathname,
       type: 'PUT',
-      dataType: 'json',
       data: {publication_request: { status_id: $(this).data('id')} }
     })
     .done(function(data) {
@@ -14,10 +13,6 @@ $(document).ready(function() {
     })
     .fail(function(data) {
       console.log("error");
-      console.log(data);
-      $(".workflow").html(data.responseText);
-      $(".details-module .current-status").html($(".workflow .current-status").html());
-      $(".workflow .current-status").hide();
     })
     .always(function() {
       console.log("complete");
@@ -44,7 +39,6 @@ $(document).ready(function() {
         $.ajax({
           url: '/statuses/' + $(this).parents(".status").data('id'),
           type: 'PUT',
-          dataType: 'json',
           data: {status: {color: $(this).val()}}
         })
         .done(function(data) {

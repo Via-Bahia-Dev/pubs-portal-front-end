@@ -78,7 +78,7 @@ class PublicationRequestsController < ApplicationController
     if res["errors"].nil?
       new_request = get("/publication_requests/#{params[:id]}")
 
-      if params.include? :status_id
+      if publication_request_params.include? :status_id
         @statuses = get("/statuses")
         render partial: 'workflow', locals: {publication_request: new_request}
       else
