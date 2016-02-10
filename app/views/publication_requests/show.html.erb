@@ -137,24 +137,40 @@
 		<div class="module-heading" id="dates-module-heading">
 			<h3>Dates</h3>
 		</div>
+		
 		<div class="module-content">
 			<ul class="list" id="dates-list">
+
 				<li class="item item-half">
 					<strong class="item-name">
 						Rough Draft Due
 					</strong>
-					<div class="editable-field inactive">
-						<%= date_from(@publication_request["rough_date"]) %>
-					</div>
+					<%= content_tag(:div, id: 'rough-date', class: 'editable-field inactive', data: { model: 'publication_request', name: 'rough_date', url: publication_request_path(@publication_request["id"]) }) do %>
+						<span class="date"><%= date_from(@publication_request["rough_date"]) %></span>
+						<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+					<% end %>
 				</li>
 
 				<li class="item item-half">
 					<strong class="item-name">
 						Final Draft Due
 					</strong>
-					<div class="editable-field inactive">
+					<%= link_to '#', id: 'due-date-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'due_date',
+														 type: 'date',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Select date',
+														 tpl: "<input type='text' class='form-control'></input>",
+													 } do %>
 						<%= date_from(@publication_request["due_date"]) %>
-					</div>
+					<% end %>
+
+					<!-- <div class="editable-field inactive">
+						<%= date_from(@publication_request["due_date"]) %>
+					</div> -->
 				</li>
 
 				<li class="item item-half">

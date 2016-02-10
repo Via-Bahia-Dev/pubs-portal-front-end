@@ -17,6 +17,8 @@
 //= require jquery-fileupload/basic
 //= require editable/bootstrap-editable
 //= require editable/rails
+//= require moment
+//= require bootstrap-datetimepicker
 
 $(document).ready(function(){
 	var tz = jstz.determine();

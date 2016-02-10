@@ -68,6 +68,12 @@ class PublicationRequestsController < ApplicationController
   end
 
   def update
+    publication_request_params.each do |param, value|
+      if param == 'rough_date' || param == 'due_date' || param == 'event_date'
+        params[:publication_request][param] = date_obj_from(value)
+      end
+    end
+
     res = put("/publication_requests/#{params[:id]}", {:publication_request => publication_request_params})
     if res["errors"].nil?
       new_request = get("/publication_requests/#{params[:id]}")
