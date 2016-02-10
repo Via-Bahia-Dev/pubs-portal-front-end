@@ -43,12 +43,12 @@ $(document).ready(function() {
   });
 
   var currentDatePicker = '';
-  $("#dates-list").on('click', '.editable-field#rough-date', function(event) {
+  $("#dates-list").on('click', '.editable-date', function(event) {
     event.preventDefault();
     var currentDate = $(this).children('span.date').html();
     $(this).after('<div class="form-inline date-form">'+
                           '<div class="form-group date-field">'+
-                            '<div class="input-group date" id="rough-date-picker">' +
+                            '<div class="input-group date">' +
                                 '<input type="text" class="form-control" value='+currentDate+' />' +
                                 '<span class="input-group-addon">' +
                                     '<span class="glyphicon glyphicon-calendar"></span>' +
@@ -58,7 +58,7 @@ $(document).ready(function() {
                         '<div class="editable-buttons"><button type="submit" class="btn btn-primary btn-sm editable-submit"><i class="glyphicon glyphicon-ok"></i></button><button type="button" class="btn btn-default btn-sm editable-cancel"><i class="glyphicon glyphicon-remove"></i></button></div>'+
                       '</div>');
     $(this).hide();
-    currentDatePicker = $("#rough-date-picker").datetimepicker({
+    currentDatePicker = $(".date-form .date").datetimepicker({
       format: 'MM/DD/YYYY',
       showTodayButton: true
     });
