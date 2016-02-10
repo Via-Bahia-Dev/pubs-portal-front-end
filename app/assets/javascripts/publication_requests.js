@@ -116,11 +116,14 @@ $(document).ready(function() {
     var name = $field.data('name');
     var val = $($(this).parents('.date-form').get(0)).find('input').val();
 
-    var params = {
-      [model]: {
-        [name]: val
-      }
-    };
+    var params = {}
+    params[model] = {}
+    params[model][name] = val;
+    // var params = {
+    //   [model]: {
+    //     [name]: val
+    //   }
+    // };
     $.ajax({
       url: $field.data('url'),
       type: 'PUT',
