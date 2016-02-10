@@ -62,7 +62,24 @@ $(document).ready(function() {
       format: 'MM/DD/YYYY',
       showTodayButton: true
     });
+
+    $(currentDatePicker).bind("clickoutside", function(event) {
+      if($(event.target).closest(".item")[0] != $(this).closest(".item")[0]) {
+        $(this).parents('.date-form').siblings('.editable-field').show();
+        $(this).parents('.date-form').remove();
+        console.log("Really Clicked outside!");
+      }
+
+    })
+
+    // $(currentDatePicker).children('input').blur(function(event) {
+    //   $(this).parents('.date-form').siblings('.editable-field').show();
+    //   $(this).parents('.form-inline').remove();
+    // });
   });
+
+
+
 
   $("#dates-list").on('click', '.editable-cancel', function(event) {
     $(this).parents('.date-form').siblings('.editable-field').show();
