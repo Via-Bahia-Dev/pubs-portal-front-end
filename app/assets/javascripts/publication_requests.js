@@ -149,7 +149,7 @@ $(document).ready(function() {
     placement: 'right',
     html: true,
     container: ".editable-template",
-    trigger: 'focus',
+    // trigger: 'focus',
     title: 'Choose a template'
   });
 
