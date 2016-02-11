@@ -3,6 +3,7 @@
 <%= javascript_include_tag "comments" %>
 <%= javascript_include_tag "request_attachments" %>
 <%= javascript_include_tag "statuses" %>
+<%= javascript_include_tag "jquery.ba-outside-events.min" %>
 
 <div class="page-header">
 	<h1><%= @publication_request["event"] %></h1>
@@ -36,51 +37,187 @@
 		</div>
 	</div>
 
-	<div class="col-md-8 col-xs-8">
-		<div class="table-responsive">
-			<table class="table">
-				<tbody>
-					<tr>
-						<td class="lead">Name of the event</td>
-						<td><%= @publication_request["event"] %></td>
-						<td></td>
-						<td class="lead">Date of the event</td>
-						<td><%= date_from(@publication_request["event_date"]) %> </td>
-					</tr>
+	<div class="col-md-5 details-module">
+	  <div class="module-heading" id="details-module-heading">
+			<h3>Details</h3>
+		</div>
+		<div class="module-content">
+			<ul class="list" id="details-list">
 
-					<tr>
-						<td rowspan="2" class="lead">Dimensions</td>
-						<td rowspan="2"><%= @publication_request["dimensions"] %></td>
-						<td rowspan="2"></td>
-						<td class="lead">Date the rough draft is due</td>
-						<td><%=date_from(@publication_request["rough_date"]) %></td>
-					</tr>
+				<li class="item item-half">
+					<strong class="item-name">
+						Status
+					</strong>
+					<span class="current-status">
+						<%= render partial: 'statuses/label', locals: { status: @publication_request["status"] } %>
+					</span>
+				</li>
 
-					<tr>
-						<td class="lead">Date the final version is due</td>
-						<td><%= date_from(@publication_request["due_date"]) %></td>
-					</tr>
+				<li class="item item-half">
+					<strong class="item-name">
+						Name of the event
+					</strong>
+					<%= link_to '#', id: 'event-field', class: 'editable-field editable',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'event',
+														 type: "text",
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Event'
+													 } do %>
+						<%= @publication_request["event"] %>
+					<% end %>
 
-					<tr>
-						<td rowspan="3" class="lead">Description</td>
-						<td colspan="2" rowspan="3"><%= @publication_request["description"] %></td>
-						<td class="lead">Admin for this request</td>
-						<td><%= "#{@publication_request['admin']['first_name']} #{@publication_request['admin']['last_name']}" %></td>
-					</tr>
-					<tr>
-						<td class="lead">Designer for this request</td>
-						<td><%= "#{@publication_request['designer']['first_name']} #{@publication_request['designer']['last_name']}" %></td>
-					</tr>
-					<tr>
-						<td class="lead">Reviewer for this request</td>
-						<td><%= "#{@publication_request['reviewer']['first_name']} #{@publication_request['reviewer']['last_name']}" %></td>
-					</tr>
+				</li>
 
-				</tbody>
-			</table>
+				<li class="item item-half">
+					<strong class="item-name">
+						Dimensions
+					</strong>
+					<%= link_to '#', id: 'dimen-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'dimensions',
+														 type: 'text',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Dimensions'
+													 } do %>
+						<%= @publication_request["dimensions"] %>
+					<% end %>
+				</li>
+
+				<li class="item item-full">
+					<strong class="item-name">
+						Description
+					</strong>
+					<%= link_to '#', id: 'descr-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'description',
+														 type: 'textarea',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Description'
+													 } do %>
+						<%= simple_format(@publication_request["description"]) %>
+					<% end %>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-md-3">
+		<div class="module-heading" id="people-module-heading">
+			<h3>People</h3>
+		</div>
+		<div class="module-content">
+			<ul class="list" id="people-list">
+				<li class="item item-half">
+					<strong class="item-name">
+						Designer
+					</strong>
+
+					<%= link_to '#', id: 'designer-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'designer_id',
+														 type: 'select',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Designer',  source: @designers_options,
+														 value: @publication_request["designer"]["id"]
+													} do %>
+					<% end %>
+				</li>
+
+				<li class="item item-half">
+					<strong class="item-name">
+						Requester
+					</strong>
+					<div class="non-editable-field">
+						<%= "#{@publication_request['user']['first_name']} #{@publication_request['user']['last_name']}" %>
+					</div>
+				</li>
+
+				<li class="item item-half">
+					<strong class="item-name">
+						Reviewer
+					</strong>
+					<%= link_to '#', id: 'reviewer-field', class: 'editable-field inactive',
+													 data: {
+														 pk: @publication_request["id"],
+														 model: 'publication_request',
+														 name: 'reviewer_id',
+														 type: 'select',
+														 url: publication_request_path(@publication_request["id"]),
+														 title: 'Reviewer',  source: @reviewers_options,
+														 value: @publication_request["reviewer"]["id"]
+													} do %>
+					<% end %>
+				</li>
+
+			</ul>
 		</div>
 
+		<div class="module-heading" id="dates-module-heading">
+			<h3>Dates</h3>
+		</div>
+
+		<div class="module-content">
+			<ul class="list" id="dates-list">
+
+				<li class="item item-half">
+					<strong class="item-name">
+						Rough Draft Due
+					</strong>
+					<%= content_tag(:div, id: 'rough-date', class: 'editable-field editable-date inactive',
+																data: {
+																	model: 'publication_request',
+																	name: 'rough_date',
+																	url: publication_request_path(@publication_request["id"])
+																	}) do %>
+						<span class="date"><%= date_from(@publication_request["rough_date"]) %></span>
+						<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+					<% end %>
+				</li>
+
+				<li class="item item-half">
+					<strong class="item-name">
+						Final Draft Due
+					</strong>
+					<%= content_tag(:div, id: 'due-date', class: 'editable-field editable-date inactive',
+																data: {
+																	model: 'publication_request',
+																	name: 'due_date',
+																	url: publication_request_path(@publication_request["id"])
+																}) do %>
+						<span class="date"><%= date_from(@publication_request["due_date"]) %></span>
+						<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+					<% end %>
+				</li>
+
+				<li class="item item-half">
+					<strong class="item-name">
+						Event Date
+					</strong>
+					<%= content_tag(:div, id: 'event-date', class: 'editable-field editable-date inactive',
+																data: {
+																	model: 'publication_request',
+																	name: 'event_date',
+																	url: publication_request_path(@publication_request["id"])
+																}) do %>
+						<span class="date"><%= date_from(@publication_request["event_date"]) %></span>
+						<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+					<% end %>
+				</li>
+
+			</ul>
+		</div>
 	</div>
+
 </div>
 
 <hr>

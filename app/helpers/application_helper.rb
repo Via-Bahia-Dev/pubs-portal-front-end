@@ -1,6 +1,8 @@
 module ApplicationHelper
   include SessionsHelper
   include CommentsHelper
+  include PublicationRequestsHelper
+  include UsersHelper
 
   def field_class(resource, field_name)
     if resource.errors[field_name].present?
@@ -30,6 +32,10 @@ module ApplicationHelper
     DateTime.parse(datetime_string).in_time_zone(zone)
   end
 
+  def date_obj_from(date_string)
+    DateTime.strptime(date_string, "%m/%d/%Y")
+  end
+
   def file_size_string(bytes)
     abbreviations = { 0 => "B", 1 => "KB", 2 => "MB", 3 => "GB" } # byte abbreviation to used, keyed by the number of times we square 1000
     times_to_square = (bytes.to_s.chars.length-1) / 3 # number of times we want to squre 1000 to divide our number by
@@ -49,6 +55,10 @@ module ApplicationHelper
 
   def int_color_to_hex(int)
     int.to_s(16).rjust(6, '0')
+  end
+
+  def xeditable? object = nil
+    can?(:edit, object) ? true : false
   end
 
 end
