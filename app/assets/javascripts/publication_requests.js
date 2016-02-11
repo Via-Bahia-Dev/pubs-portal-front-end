@@ -145,12 +145,32 @@ $(document).ready(function() {
 
   });
 
-  $(".editable-template").popover({
+  $("#chosen-template").popover({
     placement: 'right',
     html: true,
     container: ".editable-template",
-    // trigger: 'focus',
+    trigger: 'focus',
     title: 'Choose a template'
+  });
+
+  $("#chosen-template").on('click', '.template-option', function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: $(this).parents('#chosen-template').val(),
+      type: 'PUT',
+      data: { publication_request: { template_id : $(this).data('id') } }
+    })
+    .done(function(data) {
+      console.log("success");
+      $("#chosen-template").html(data);
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
   });
 
 });
