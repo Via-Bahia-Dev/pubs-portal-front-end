@@ -105,13 +105,22 @@
   width: 60%;
 }
 .popover {
+	// Override bootstrap's limit on the popover width
   max-width: 500px !important;
-  // width: 500px !important;
 }
+
+.editable-template {
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: none;
+	}
+}
+
 .new-template-popover {
 	padding: 5px;
   cursor: default;
-  width: 382px;
+  width: 382px; // fits 3 large thumbnails
   max-height: 500px;
   overflow-y: scroll;
 

@@ -63,7 +63,6 @@ class PublicationRequestsController < ApplicationController
         render partial: 'workflow', locals: { publication_request: new_request }
       # If we updated the template, need to return the new template partial
       elsif publication_request_params.include? :template_id
-        # @templates = get("/templates")
         render partial: 'chosen_template', locals: { publication_request: new_request }
       else
         head :no_content

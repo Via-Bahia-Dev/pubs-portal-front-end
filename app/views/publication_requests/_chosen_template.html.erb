@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Template for this Request</h3>
+    <div class="panel-title lead">Template for this Request</div>
   </div>
   <div class="panel-body">
 
@@ -9,7 +9,7 @@
         <%= image_tag(publication_request["template"]["image_large"], class: "img-thumbnail") %>
         <span class="glyphicon glyphicon-pencil overlay-icon bottom"></span>
       <% else %>
-        <h3>No template for this request<span class="glyphicon glyphicon-pencil overlay-icon"></span></h3>
+        <div>No template for this request<span class="glyphicon glyphicon-pencil overlay-icon"></span></div>
       <% end %>
     </a>
 
