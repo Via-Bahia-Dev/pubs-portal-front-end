@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title lead">Template for this Request</div>
+  </div>
+  <div class="panel-body">
+
+    <a href="#" class="editable-field editable-template inactive">
+      <% if publication_request["template"] %>
+        <%= image_tag(publication_request["template"]["image_large"], class: "img-thumbnail") %>
+        <span class="glyphicon glyphicon-pencil overlay-icon bottom"></span>
+      <% else %>
+        <div>No template for this request<span class="glyphicon glyphicon-pencil overlay-icon"></span></div>
+      <% end %>
+    </a>
+
+  </div>
+  <div class="panel-footer">
+    <% if publication_request["template"] %>
+      <p><%= publication_request["template"]["name"] %>, <%= publication_request["template"]["dimensions"] %></p>
+      <% if (publication_request["template"]["link"] != "") && (can? :design, PublicationRequest.find(publication_request['id'])) %>
+        <pre><%= sanitize(link_to("Download Assets", publication_request["template"]["link"], :target => "_blank")) %> </pre>
+      <% end %>
+    <% end %>
+  </div>
+</div>

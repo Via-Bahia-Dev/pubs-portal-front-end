@@ -14,27 +14,8 @@
 </div>
 
 <div class="row">
-	<div class="col-md-4 col-xs-4" id="chosen-template">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Template for this Request</h3>
-			</div>
-			<div class="panel-body">
-				<% if @publication_request["template"] %>
-					<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
-				<% else %>
-					<h3>No template for this request</h3>
-				<% end %>
-			</div>
-			<div class="panel-footer">
-				<% if @publication_request["template"] %>
-					<p><%= @publication_request["template"]["name"] %>, <%= @publication_request["template"]["dimensions"] %></p>
-					<% if (@publication_request["template"]["link"] != "") && (can? :design, PublicationRequest.find(@publication_request['id'])) %>
-						<pre><%= sanitize(link_to("Download Assets", @publication_request["template"]["link"], :target => "_blank")) %> </pre>
-					<% end %>
-				<% end %>
-			</div>
-		</div>
+	<div class="col-md-4 col-xs-4" id="chosen-template" val='<%="#{publication_request_path(@publication_request['id'])}"%>' data-content= '<%=render partial: "choose_new_template", locals: { templates: @templates } %>'>
+		<%= render partial: 'chosen_template', locals: { publication_request: @publication_request } %>
 	</div>
 
 	<div class="col-md-5 details-module">

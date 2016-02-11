@@ -6,6 +6,8 @@ class PublicationRequestsController < ApplicationController
 
     @statuses = get("/statuses")
 
+    @templates = get("/templates")
+
     get_user_editable_options
 
     # dummy models for form_for
@@ -55,10 +57,13 @@ class PublicationRequestsController < ApplicationController
     if res["errors"].nil?
       new_request = get("/publication_requests/#{params[:id]}")
 
-      # If we updated the status, need to return the new workflow parial
+      # If we updated the status, need to return the new workflow partial
       if publication_request_params.include? :status_id
         @statuses = get("/statuses")
-        render partial: 'workflow', locals: {publication_request: new_request}
+        render partial: 'workflow', locals: { publication_request: new_request }
+      # If we updated the template, need to return the new template partial
+      elsif publication_request_params.include? :template_id
+        render partial: 'chosen_template', locals: { publication_request: new_request }
       else
         head :no_content
       end
