@@ -6,6 +6,8 @@ class PublicationRequestsController < ApplicationController
 
     @statuses = get("/statuses")
 
+    @templates = get("/templates")
+
     get_user_editable_options
 
     # dummy models for form_for

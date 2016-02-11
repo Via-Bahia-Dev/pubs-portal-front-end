@@ -20,11 +20,17 @@
 				<h3 class="panel-title">Template for this Request</h3>
 			</div>
 			<div class="panel-body">
-				<% if @publication_request["template"] %>
-					<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
-				<% else %>
-					<h3>No template for this request</h3>
-				<% end %>
+
+				<a href="#" class="editable-field editable-template inactive" val='<%="#{publication_request_path(@publication_request['id'])}"%>' data-content= '<%=render partial: "choose_new_template", locals: { templates: @templates } %>'>
+					<% if @publication_request["template"] %>
+						<%= image_tag(@publication_request["template"]["image_large"], class: "img-thumbnail") %>
+						<span class="glyphicon glyphicon-pencil overlay-icon bottom"></span>
+					<% else %>
+						<h3>No template for this request<span class="glyphicon glyphicon-pencil overlay-icon"></span>
+</h3>
+					<% end %>
+				</a>
+
 			</div>
 			<div class="panel-footer">
 				<% if @publication_request["template"] %>

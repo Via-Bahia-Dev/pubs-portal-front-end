@@ -32,11 +32,11 @@ $(document).ready(function() {
 		//create .ink element if it doesn't exist
 		if(parent.find(".ink").length == 0)
 			parent.prepend("<span class='ink'></span>");
-			
+
 		ink = parent.find(".ink");
 		//incase of quick double clicks stop the previous animation
 		ink.removeClass("animate");
-		
+
 		//set size of .ink
 		if(!ink.height() && !ink.width())
 		{
@@ -44,7 +44,7 @@ $(document).ready(function() {
 			d = Math.max(parent.outerWidth(), parent.outerHeight());
 			ink.css({height: d, width: d});
 		}
-		
+
 		//get click coordinates
 		//logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
 		x = e.pageX - parent.offset().left - ink.width()/2;
@@ -60,10 +60,11 @@ function createWall() {
 	wall.reset({
 		selector: '.template-cell',
 		animate: true,
-		cellW: 'auto', 
-		cellH: 300, // we're using medium images which always have a height of 300
+		// cellW: '20',
+		cellH: '30', // we're using medium images which always have a height of 300
+		fixSize: false,
 		onResize: function() {
-			wall.fitWidth();
+			wall.refresh();
 		}
 	});
 	wall.fitWidth();

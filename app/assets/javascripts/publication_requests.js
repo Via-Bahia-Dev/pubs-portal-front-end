@@ -145,4 +145,12 @@ $(document).ready(function() {
 
   });
 
+  $(".editable-template").popover({
+    placement: 'right',
+    html: true,
+    container: ".editable-template",
+    // trigger: 'focus',
+    title: 'Choose a template'
+  });
+
 });

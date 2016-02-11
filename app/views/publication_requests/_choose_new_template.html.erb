@@ -1,0 +1,7 @@
+<div class="new-template-popover">
+  <% templates.each do |template| %>
+    <%= content_tag(:div, class: 'template-option', data: { id: template['id'] }) do %>
+      <%= image_tag(template['image_large_thumb'], class: 'img-thumbnail') %>
+    <% end %>
+  <% end %>
+</div>
