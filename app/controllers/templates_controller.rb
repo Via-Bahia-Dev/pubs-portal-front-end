@@ -4,7 +4,6 @@ class TemplatesController < ApplicationController
 		@templates = get("/templates")
 	end
 
-
 	def new
 		@template = Template.new
 	end
@@ -26,11 +25,18 @@ class TemplatesController < ApplicationController
 		end
 	end
 
+	def update
+		res = put("/templates/#{params[:id]}", {:template => template_params})
+		if res["errors"].nil?
+			head :no_content
+		end
+	end
+
 	def destroy
 		res = delete("/templates/#{params[:id]}")
 
 	    if res['errors'].nil?
-	      flash[:success] = "Template deleted!" 
+	      flash[:success] = "Template deleted!"
 	      redirect_to templates_path
 	    else
 	      flash[:errors] = res['errors']

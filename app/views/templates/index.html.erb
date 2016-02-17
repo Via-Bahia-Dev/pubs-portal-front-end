@@ -1,3 +1,6 @@
+<div class="page-header">
+  <h1>Templates<small></small></h1>
+</div>
 <% if can? :create, Template %>
 	<%= link_to "Create New Template", new_template_path, class: "btn btn-primary" %>
 <% end %>
@@ -28,19 +31,56 @@
 				<%= image_tag(template["image_small"], class: "image-thumbnail") %>
 			</td>
 			<td class="">
-				<%= template["name"] %>
+				<%= link_to "#", id: 'name-field', class: 'editable-field editable',
+												 data: {
+													 pk: template["id"],
+													 model: 'template',
+													 name: 'name',
+													 type: 'text',
+													 url: template_path(template["id"]),
+													 title: 'Name'
+												 } do %>
+					<%= template["name"] %>
+				<% end %>
 			</td>
 			<td class="">
-				<%= template["dimensions"] %>
+				<%= link_to "#", id: 'dimen-field', class: 'editable-field editable',
+												 data: {
+													 pk: template["id"],
+													 model: 'template',
+													 name: 'dimensions',
+													 type: 'text',
+													 url: template_path(template["id"]),
+													 title: 'Dimensions'
+												 } do %>
+					 <%= template["dimensions"] %>
+				<% end %>
 			</td>
 			<td class="">
-				<%= template["category"] %>
+				<%= link_to "#", id: 'category-field', class: 'editable-field editable',
+												 data: {
+													 pk: template["id"],
+													 model: 'template',
+													 name: 'category',
+													 type: 'text',
+													 url: template_path(template["id"]),
+													 title: 'Category'
+												 } do %>
+					<%= template["category"] %>
+				<% end %>
 			</td>
 			<td class="">
-				<%= template["url"] %>
-			</td>
-			<td class="">
-				<%= link_to "Edit", template_path(template['id']) %>
+				<%= link_to "#", id: 'url-field', class: 'editable-field editable',
+												 data: {
+													 pk: template["id"],
+													 model: 'template',
+													 name: 'link',
+													 type: 'text',
+													 url: template_path(template["id"]),
+													 title: 'Assets URL'
+												 } do %>
+				  <%= template["url"] %>
+				<% end %>
 			</td>
 			<td>
 				<%= link_to "Delete", template_path(template['id']), method: :delete %>
