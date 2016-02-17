@@ -1,3 +1,7 @@
+<% if can? :create, Template %>
+	<%= link_to "Create New Template", new_template_path, class: "btn btn-primary" %>
+<% end %>
+
 <table class="templates table table-striped">
 	<thead>
 		<th>
