@@ -182,6 +182,12 @@ textarea {
 	}
 }
 
+.editable-disabled {
+	&:hover {
+		cursor: not-allowed !important;
+	}
+}
+
 .date-field {
   width: 60%;
 }

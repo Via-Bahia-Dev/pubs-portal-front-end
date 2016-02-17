@@ -1,21 +1,76 @@
+<div class="page-header">
+  <h1>Users<small></small></h1>
+</div>
+
 <% if can? :create, User %>
-	<%= link_to "Add User", new_user_path, id: 'add-user' %>
+	<%= link_to "Add User", new_user_path, id: 'add-user', class: "btn btn-primary" %>
 <% end %>
 
-<h1>JoyPact Users</h1>
-
-<table id="users-table">
+<table class="users table table-striped">
 	<thead>
 		<th>First Name</th>
 		<th>Last Name</th>
 		<th>Email</th>
+		<th colspan="2"></th>
 	</thead>
 	<tbody>
 		<% @users.each do |user| %>
 			<tr>
-				<td><%= link_to user["first_name"], user_path(user["id"]) %></td>
-				<td><%= user["last_name"] %></td>
-				<td><%= user["email"] %></td>
+				<td><%= link_to "#", id: 'first-name-field', class: 'editable-field editable',
+														 data: {
+															 pk: user["id"],
+															 model: 'user',
+															 name: 'first_name',
+															 type: 'text',
+															 url: user_path(user["id"]),
+															 title: 'First Name'
+														 } do %>
+						<%= user["first_name"]%>
+					<% end %>
+				</td>
+				<td><%= link_to "#", id: 'last-name-field', class: 'editable-field editable',
+														 data: {
+															 pk: user["id"],
+															 model: 'user',
+															 name: 'last_name',
+															 type: 'text',
+															 url: user_path(user["id"]),
+															 title: 'last Name'
+														 } do %>
+						<%= user["last_name"]%>
+					<% end %>
+				</td>
+				<td>
+					<% if user["id"] != current_user.id %>
+						<%= link_to "#", id: 'email-field', class: 'editable-field editable',
+															 data: {
+																 pk: user["id"],
+																 model: 'user',
+																 name: 'email',
+																 type: 'text',
+																 url: user_path(user["id"]),
+																 title: 'Email'
+															 } do %>
+							<%= user["email"]%>
+						<% end %>
+					<% else %>
+					<%= link_to "#", id: 'email-field', class: 'editable-field editable editable-disabled',
+														 data: {
+															 pk: user["id"],
+															 model: 'user',
+															 name: 'email',
+															 type: 'text',
+															 url: user_path(user["id"]),
+															 title: 'Email',
+															 disabled: true
+														 } do %>
+						<%= user["email"]%>
+					<% end %>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to "Edit", user_path(user["id"]) %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

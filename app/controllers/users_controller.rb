@@ -29,10 +29,14 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		res = self.class.put("/users/#{params[:id]}.json", { :user => user_params })
+		res = put("/users/#{params[:id]}", { :user => user_params })
 		if res["errors"].nil?
-			flash[:success] = "#{@user.first_name} #{@user.last_name} successfully updated!"
-			redirect_to users_path
+			if request.xhr?
+				head :no_content
+			else
+				flash[:success] = "#{@user.first_name} #{@user.last_name} successfully updated!"
+				redirect_to users_path
+			end
 		else
 			flash.now[:error] = res.parsed_response["errors"]
 			render :edit
