@@ -35,13 +35,12 @@ class TemplatesController < ApplicationController
 	def destroy
 		res = delete("/templates/#{params[:id]}")
 
-	    if res['errors'].nil?
-	      flash[:success] = "Template deleted!"
-	      redirect_to templates_path
-	    else
-	      flash[:errors] = res['errors']
-	      redirect_to templates_path
-	    end
+    if res['errors'].nil?
+      head :no_content
+    else
+      flash[:errors] = res['errors']
+      redirect_to templates_path
+    end
 	end
 
 	private

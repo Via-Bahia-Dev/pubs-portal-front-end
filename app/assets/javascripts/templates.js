@@ -27,4 +27,27 @@ $(document).ready(function() {
     }
   });
 
+  $(".templates").popover({
+    selector: '.template-delete',
+    title: 'Delete Template?',
+    placement: 'left',
+    html: true,
+    trigger: 'focus'
+  }).parent().on('click', '#confirm-delete', function () {
+    $.ajax({
+      url: $(this).parents('div.popover').siblings('a.template-delete').attr('val'),
+      type: 'DELETE',
+    })
+    .done(function() {
+      $("a[val=\""+$(this)[0].url+"\"]").parents('tr.template').slideToggle('slow');
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
+  })
+
 });

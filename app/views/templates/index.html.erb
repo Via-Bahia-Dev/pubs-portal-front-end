@@ -83,7 +83,10 @@
 				<% end %>
 			</td>
 			<td>
-				<%= link_to "Delete", template_path(template['id']), method: :delete %>
+				<a class="template-delete delete-link" href="#" val='<%="#{template_path(template['id'])}"%>' data-content='<%= render partial: "/layouts/confirm_delete", locals: { object: "Template" } %>'>
+					<span class="glyphicon glyphicon-trash"></span>Delete
+				</a>
+				<!-- <%= link_to "Delete", template_path(template['id']), method: :delete %> -->
 			</td>
 		</tr>
 	<% end %>
