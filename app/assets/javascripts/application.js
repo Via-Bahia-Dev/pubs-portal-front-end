@@ -27,4 +27,12 @@ $(document).ready(function(){
 	if($("#home-btn a").attr('href') == window.location.pathname) {
 		$("#home-btn").addClass('active');
 	}
+	else {
+		$("#admin-dropdown li>a").each(function(index, el) {
+			if($(el).attr('href') == window.location.pathname) {
+				$("#admin-dropdown").addClass('active');
+				$(el).closest('li').addClass('active');
+			}
+		});
+	}
 })
