@@ -23,4 +23,8 @@
 $(document).ready(function(){
 	var tz = jstz.determine();
 	document.cookie = 'jstz_time_zone='+window.RailsTimeZone.to(tz.name())+';';
+
+	if($("#home-btn a").attr('href') == window.location.pathname) {
+		$("#home-btn").addClass('active');
+	}
 })
