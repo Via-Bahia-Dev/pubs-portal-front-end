@@ -18,22 +18,43 @@
 	<div class="container-fluid top-bar">
 
 		<% if signed_in? %>
-			<%= link_to "Home", root_path, id: "home" %>
-			<% if can? :index, User %>
-				<%= link_to "Users List", users_path, id: "users-list" %>
-			<% end %>
-			<%= link_to "View Profile", user_path(current_user), id: "view-profile" %>
-			<%= link_to "Sign Out", sign_out_path, id: "sign-out", :method => :delete %>
-			<div class="col-md-4 col-xs-4 right">
-				<% if can? :create, Template %>
-					<%= link_to "Upload Template", new_template_path, class: "btn btn-primary" %>
-					<%= link_to "Administer Templates", templates_path, class: "btn btn-primary" %>
-				<% end %>
-        <% if can? :manage, Status %>
-          <%= link_to "Edit Workflow", statuses_path, class: "btn btn-primary" %>
+      <ul class="nav nav-pills">
+        <li role="presentation" id="home-btn"><%= link_to "Home", root_path %></li>
+        <% if(can?(:create, Template) || can?(:create, User) || can?(:create, Status)) %>
+          <li role="presentation" class="dropdown" id="admin-dropdown">
+            <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Admin
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="admin-dropdown">
+              <% if can? :create, Template %>
+                <li>
+                  <%= link_to "Templates", templates_path %>
+                </li>
+              <% end %>
+              <% if can? :create, User %>
+                <li>
+                  <%= link_to "Users", users_path %>
+                </li>
+              <% end %>
+              <% if can? :create, Status %>
+                <li>
+                  <%= link_to "Workflow", statuses_path %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
         <% end %>
-			</div>
-		<% end %>
+
+        <li role="presentation" id="account-btn">
+          <%= link_to "Account", user_path(current_user) %>
+        </li>
+
+        <li role="presentation" class="right" id="sign-out-btn">
+          <%= link_to "Sign Out", sign_out_path, :method => :delete %>
+        </li>
+      </ul>
+    <% end %>
 
 		<% if flash[:error] %>
 			<div class="alert alert-danger alert-dismissible" role="alert">

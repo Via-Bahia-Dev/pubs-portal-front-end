@@ -14,3 +14,11 @@
 	box-shadow: 2px 2px 8px 8px rgba(0,0,0,0.4);
 	z-index: 999;
 }
+
+.template-delete {
+	position: relative;
+	top: 9px; // move link down to line up with editable elements
+	.glyphicon {
+		margin-right: 3px;
+	}
+}

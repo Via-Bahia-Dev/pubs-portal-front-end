@@ -23,4 +23,18 @@
 $(document).ready(function(){
 	var tz = jstz.determine();
 	document.cookie = 'jstz_time_zone='+window.RailsTimeZone.to(tz.name())+';';
+
+	if($("#home-btn a").attr('href') == window.location.pathname) {
+		$("#home-btn").addClass('active');
+	} else if ($("#account-btn a").attr('href') == window.location.pathname) {
+		$("#account-btn").addClass('active');
+	}
+	else {
+		$("#admin-dropdown li>a").each(function(index, el) {
+			if($(el).attr('href') == window.location.pathname) {
+				$("#admin-dropdown").addClass('active');
+				$(el).closest('li').addClass('active');
+			}
+		});
+	}
 })

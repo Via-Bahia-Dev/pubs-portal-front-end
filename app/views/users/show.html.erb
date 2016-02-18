@@ -1,7 +1,71 @@
-<h1><%= @user.first_name %> <%= @user.last_name %></h1>
-<% if can? :update, @user %>
-	<%= link_to "Edit profile", edit_user_path(@user), id: "edit-profile" %>
+<div class="page-header">
+  <h1>User Info<small></small></h1>
+</div>
+
+<div class="row">
+	<div class="col-md-2">
+	  <h3>Profile</h3>
+	</div>
+  <div class="col-md-6 user-info">
+		<div class="name">
+			Name:
+			<% if can? :update, @user %>
+				<%= link_to "#", id: 'first-name-field', class: 'editable-field editable',
+														 data: {
+															 pk: @user.id,
+															 model: 'user',
+															 name: 'first_name',
+															 type: 'text',
+															 url: user_path(@user.id),
+															 title: 'First Name'
+														 } do %>
+						<%= @user.first_name%>
+					<% end %>
+
+					<%= link_to "#", id: 'last-name-field', class: 'editable-field editable',
+															 data: {
+																 pk: @user.id,
+																 model: 'user',
+																 name: 'last_name',
+																 type: 'text',
+																 url: user_path(@user.id),
+																 title: 'last Name'
+															 } do %>
+							<%= @user.last_name%>
+						<% end %>
+			<% else %>
+				<%= @user.first_name %> <%= @user.last_name %>
+			<% end %>
+	  </div>
+		<div class="email">
+			Email: <%= @user.email %> <small>(to change your email, ask an admin)</small>
+		</div>
+	</div>
+
+</div>
+
+<hr>
+
+<% if @user == current_user %>
+	<div class="row">
+		<div class="col-md-2">
+			<h3>Change Password<small></small></h3>
+		</div>
+		<div class="col-md-6">
+			<%= form_for @user, url: update_password_user_path(@user), method: :put do |f| %>
+        <%= errors_from_json @errors %>
+				<%= f.label :current_password, "Current Password", class: "control-label" %>
+			  <%= f.password_field :current_password, class: "form-control", placeholder: "enter your current password" %>
+
+				<%= f.label :password, "New Password", class: "control-label" %>
+				<%= f.password_field :password, class: "form-control", placeholder: "enter a new password" %>
+
+				<%= f.label :password_confirmation, "Confirm New Password", class: "control-label" %>
+				<%= f.password_field :password_confirmation, class: "form-control", placeholder: "enter the password again" %>
+
+				<%= f.submit "Update Password", class: "btn btn-primary" %>
+
+			<% end %>
+		</div>
+	</div>
 <% end %>
-
-<h3>Email:</h3> <%= @user.email %>
-
