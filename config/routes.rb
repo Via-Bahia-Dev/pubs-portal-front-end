@@ -11,7 +11,12 @@ Rails.application.routes.draw do
 
   resources :passwords, only: [:create]
 
-  resources :users
+  resources :users do
+    member do
+      put 'update_password'
+      put 'reset_password'
+    end
+  end
 
   resources :templates # will change this when done testing
 
