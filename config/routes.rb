@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'sign_in' => "sessions#create"
   delete 'sign_out' => "sessions#destroy"
 
+  resources :passwords, only: [:create]
+
   resources :users
 
   resources :templates # will change this when done testing

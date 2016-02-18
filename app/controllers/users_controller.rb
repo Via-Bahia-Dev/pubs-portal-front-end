@@ -6,7 +6,14 @@ class UsersController < ApplicationController
 	end
 
 	def show
-    @user = User.find(get("/users/#{params[:id]}")["id"])
+		res = get("/users/#{params[:id]}")
+
+		# Need to check if res is json at all.
+		# If user is unauthorized to see this user, res will be unauthoraized page
+		if res.include? "id"
+	    @user = User.find(res["id"])
+			@pass_form = ChangePasswordForm.new(@user)
+		end
 	end
 
 	def new
@@ -26,6 +33,7 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
+		@pass_form = ChangePasswordForm.new(@user)
 	end
 
 	def update

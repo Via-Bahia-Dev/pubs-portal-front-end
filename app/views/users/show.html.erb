@@ -44,11 +44,30 @@
 
 </div>
 
-<div class="row">
-	<div class="col-md-2">
-		<h3>Change Password<small></small></h3>
+<hr>
+
+<% if can? :edit, @user %>
+	<div class="row">
+		<div class="col-md-2">
+			<h3>Change Password<small></small></h3>
+		</div>
+		<div class="col-md-6">
+			<%= form_for @pass_form, url: passwords_path, method: :post do |f| %>
+
+				<%= f.hidden_field :user_id, :value => @user.id %>
+
+				<%= f.label :current_password, "Current Password", class: "control-label" %>
+			  <%= f.password_field :current_password, class: "form-control", placeholder: "enter your current password" %>
+
+				<%= f.label :password, "New Password", class: "control-label" %>
+				<%= f.password_field :password, class: "form-control", placeholder: "enter a new password" %>
+
+				<%= f.label :password_confirmation, "Confirm New Password", class: "control-label" %>
+				<%= f.password_field :password_confirmation, class: "form-control", placeholder: "enter the password again" %>
+
+				<%= f.submit "Update Password", class: "btn btn-primary" %>
+
+			<% end %>
+		</div>
 	</div>
-	<div class="col-md-6">
-	  
-	</div>
-</div>
+<% end %>
