@@ -38,7 +38,7 @@
 			<% end %>
 	  </div>
 		<div class="email">
-			Email: <%= @user.email %> <small>(to change your password, ask an admin)</small>
+			Email: <%= @user.email %> <small>(to change your email, ask an admin)</small>
 		</div>
 	</div>
 
@@ -46,7 +46,7 @@
 
 <hr>
 
-<% if can? :edit, @user %>
+<% if @user == current_user %>
 	<div class="row">
 		<div class="col-md-2">
 			<h3>Change Password<small></small></h3>

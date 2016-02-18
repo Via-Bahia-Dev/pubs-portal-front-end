@@ -46,6 +46,10 @@
           </li>
         <% end %>
 
+        <li role="presentation" id="account-btn">
+          <%= link_to "Account", user_path(current_user) %>
+        </li>
+
         <li role="presentation" class="right" id="sign-out-btn">
           <%= link_to "Sign Out", sign_out_path, :method => :delete %>
         </li>

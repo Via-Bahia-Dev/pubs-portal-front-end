@@ -26,6 +26,8 @@ $(document).ready(function(){
 
 	if($("#home-btn a").attr('href') == window.location.pathname) {
 		$("#home-btn").addClass('active');
+	} else if ($("#account-btn a").attr('href') == window.location.pathname) {
+		$("#account-btn").addClass('active');
 	}
 	else {
 		$("#admin-dropdown li>a").each(function(index, el) {
