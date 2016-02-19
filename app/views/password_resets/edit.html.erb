@@ -2,20 +2,24 @@
   <h1>Reset Password<small></small></h1>
 </div>
 
-<%= form_for @user, :url => password_reset_path(params[:id]), class: "form-inline" do |f| %>
-  <%= errors_from_json @errors %>
+<div class="row">
+  <div class="col-md-offset-4 col-md-4 col-xs-12">
+    <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+      <%= errors_from_json @errors %>
 
-  <div class="field form-group">
-    <%= f.label :password, "New Password", class: "control-label" %>
-    <%= f.password_field :password, class: "form-control", placeholder: "enter a new password" %>
-  </div>
+      <div class="field form-group">
+        <%= f.label :password, "New Password", class: "control-label" %>
+        <%= f.password_field :password, class: "form-control input-lg", placeholder: "enter a new password" %>
+      </div>
 
-  <div class="field form-group">
-    <%= f.label :password_confirmation, "Confirm New Password", class: "control-label" %>
-    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "enter the password again" %>
-  </div>
+      <div class="field form-group">
+        <%= f.label :password_confirmation, "Confirm New Password", class: "control-label" %>
+        <%= f.password_field :password_confirmation, class: "form-control input-lg", placeholder: "enter the password again" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Set Password", class: "btn btn-primary" %>
+      <div class="actions">
+        <%= f.submit "Set Password", class: "btn btn-primary btn-block btn-lg" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

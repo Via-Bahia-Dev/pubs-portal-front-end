@@ -20,7 +20,7 @@ module APIHelper
   private
   # checks if the response was successful and returns the appropriate json
   def check_success(res)
-    if res.success?
+    if res.success? && res.parsed_response
       res.parsed_response["data"]
     elsif res.code == 403
       render :file => "layouts/unauthorized", status: :unauthorized

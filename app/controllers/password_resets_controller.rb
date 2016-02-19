@@ -3,7 +3,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    # user = get("/users/show", { :user => params[:email] })
     post("/password_resets", { :email => params[:email] })
     flash[:success] = "Email sent with password reset instructions"
     redirect_to root_url
@@ -15,7 +14,6 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    byebug
     res = put("/password_resets/#{params[:id]}", { :user => params[:user]})
 
     if res["errors"].nil?
