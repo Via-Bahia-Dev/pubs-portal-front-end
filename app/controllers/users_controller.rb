@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		res = get("/users/#{params[:id]}")
+		res = get("/users/show/#{params[:id]}")
 
 		# Need to check if res is json at all.
 		# If user is unauthorized to see this user, res will be unauthoraized page
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		res = post("/users.json",{ :user => user_params })
+		res = post("/users", { :user => user_params })
 		if res["errors"].nil?
 			flash[:success] = "#{res["first_name"]} #{res["last_name"]} added!"
 			redirect_to users_path

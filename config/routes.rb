@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'sign_in' => "sessions#create"
   delete 'sign_out' => "sessions#destroy"
 
-  resources :passwords, only: [:create]
+  resources :password_resets
 
   resources :users do
     member do

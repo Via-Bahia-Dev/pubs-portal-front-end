@@ -1,8 +1,8 @@
 module APIHelper
   # include HTTParty
 
-  def get(url)
-    check_success(self.class.get(url, :headers => auth_headers))
+  def get(url, params = {})
+    check_success(self.class.get(url, :query => params, :headers => auth_headers))
   end
 
   def post(url, params = {})
