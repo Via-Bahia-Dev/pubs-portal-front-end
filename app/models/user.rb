@@ -41,6 +41,22 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+	def send_password_reset
+		generate_token(:password_reset_token)
+		self.password_reset_sent_at = Time.zone.now
+		save!
+		UserMailer.password_reset(self).deliver_now
+	end
+
+	def generate_token(column)
+		loop do
+			self[column] = SecureRandom.urlsafe_base64
+			unless User.exists?(column => self[column])
+				break
+			end
+		end
+	end
+
   private
     def give_user_role
       self.roles=(self.roles << :user)

@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Reset Password <small></small></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-4 col-md-4 col-xs-12">
+    <%= form_tag password_resets_path, :method => :post do %>
+      <div class="field form-group">
+        <%= label_tag :email %>
+        <%= email_field_tag :email, params[:email], class: "form-control input-lg" %>
+      </div>
+
+      <div class="actions field form-group">
+        <%= submit_tag "Reset Password", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>
