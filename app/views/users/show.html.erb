@@ -68,4 +68,23 @@
 			<% end %>
 		</div>
 	</div>
+  <hr>
+<% end %>
+
+
+<% if can? :manage, User %>
+  <div class="row">
+    <div class="col-md-2">
+      <h3>Roles</h3>
+    </div>
+    <div class="col-md-6"
+      <div id="set-roles" data-url='<%= user_path(@user) %>'>
+        <% for role in User.ROLES %>
+          <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {class: "role-check-box", :name => "user[roles][]"} %>
+          <%= label_tag "user_roles_#{role}", role.to_s.humanize %><br />
+        <% end %>
+        <%= hidden_field_tag "user[roles][]", "" %>
+      </div>
+    </div>
+  </div>
 <% end %>
