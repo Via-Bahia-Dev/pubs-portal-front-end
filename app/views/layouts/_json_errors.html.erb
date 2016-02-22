@@ -9,7 +9,7 @@
 
 		<ul>
 			<% errors.each do |attribute, messages| %>
-		  		<li><strong><%= "#{attribute.capitalize}" %> </strong> <%= "#{messages.join(',')}" %></li>
+		  		<li><strong><%= "#{attribute.capitalize}".humanize %> </strong> <%= "#{messages.join(',')}" %></li>
 			<% end %>
 		</ul>
 	</div>

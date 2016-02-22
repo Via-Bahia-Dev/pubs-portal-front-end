@@ -5,7 +5,6 @@ class RequestAttachmentsController < ApplicationController
     if res["errors"].nil?
       render partial: 'show', locals: { attachment: res }
     else
-      byebug
       render partial: 'invalid_file', locals: { errors: res["errors"] }
       # render json: { errors: res["errors"] }, status: :unprocessable_entity
     end
