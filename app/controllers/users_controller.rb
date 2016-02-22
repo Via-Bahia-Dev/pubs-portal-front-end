@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 		# If user is unauthorized to see this user, res will be unauthoraized page
 		if res.include? "id"
 	    @user = User.find(res["id"])
+			@user_json = res
 		end
 	end
 
@@ -67,7 +68,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :first_name, :last_name, :roles_mask)
+      params.require(:user).permit(:email, :password, :first_name, :last_name, :roles_mask, roles: [])
     end
 
 		def user_password_params
