@@ -6,7 +6,6 @@ $(document).ready(function() {
 	$("#create-request-templates").hide();
 
 	$("#create-request-btn").click(function(e) {
-		$("#create-request-btn span").toggleClass("rotate");
 		$("#create-request-templates").slideToggle();
 		createWall();
 	});
@@ -17,7 +16,6 @@ $(document).ready(function() {
 
 	$("#current-requests").hide();
 	$("#view-requests-btn").click(function() {
-		$("#view-requests-btn span").toggleClass("rotate");
 		$("#current-requests").slideToggle();
 	});
 
