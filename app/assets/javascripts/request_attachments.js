@@ -87,11 +87,19 @@ $(document).ready(function() {
 	});
 
 	$("#attachments").on('click', '.attachment', function(e) {
-		$("#attachment-modal").css('display', 'block');
-		$("#attachment-modal .modal-content").attr('src', $(this).find(".media-object").data('orig'));
-		$("#attachment-modal #caption #name").html($(this).find(".filename").html());
-		$("#attachment-modal #caption #details").html($(this).find(".details").html());
-		$("#attachment-modal #caption #options a").attr('href', $(this).find(".attachment-thumb-options a").attr('href'));
+
+		// If this is an image, show the modal
+		if($(this).find(".image").length) {
+			$("#attachment-modal").css('display', 'block');
+			$("#attachment-modal .modal-content").attr('src', $(this).find(".media-object").data('orig'));
+			$("#attachment-modal #caption #name").html($(this).find(".filename").html());
+			$("#attachment-modal #caption #details").html($(this).find(".details").html());
+			$("#attachment-modal #caption #options a").attr('href', $(this).find(".attachment-thumb-options a").attr('href'));
+		} else {
+			e.preventDefault();
+			// window.open($('.non-image .attachment-download').prop('href'), '_blank');
+			// window.location.href = $('.non-image .attachment-download').attr('href');
+		}
 	});
 
 	$("#attachment-modal .close").click(function(){
