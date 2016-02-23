@@ -1,0 +1,6 @@
+<% if errors.has_value?(["is invalid"]) %>
+<!-- Invalid file type caused this error. Send a special message -->
+  <%= errors_from_json({"file_type" => ["is invalid. Please upload an image, zip/rar, pdf, or psd."]}) %>
+<% else %>
+  <%= errors_from_json(errors) %>
+<% end %>
