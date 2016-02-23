@@ -8,7 +8,13 @@ class SessionsController < ApplicationController
 		if response.success?
 			session[:user_email] = response.parsed_response["user_email"]
 			session[:auth_token] = response.parsed_response["auth_token"]
-			redirect_to root_path
+			if session[:return_to]
+				stored_location = session[:return_to]
+				clear_stored_location
+				redirect_to stored_location
+			else
+				redirect_to root_path
+			end
 		else
 			flash[:error] = "email or password was not valid!"
 			redirect_to root_path

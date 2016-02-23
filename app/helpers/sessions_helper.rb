@@ -19,4 +19,13 @@ module SessionsHelper
 	def auth_headers
 		{ "X-User-Email" => current_user_email, "X-Auth-Token" => current_user_token }
 	end
+
+	def store_location
+		session[:return_to] = request.fullpath
+	end
+
+	def clear_stored_location
+		session[:return_to] = nil
+	end
+
 end
