@@ -7,13 +7,7 @@ class UsersController < ApplicationController
 
 	def show
 		res = get("/users/show/#{params[:id]}")
-
-		# Need to check if res is json at all.
-		# If user is unauthorized to see this user, res will be unauthoraized page
-		if res.include? "id"
-	    @user = User.find(res["id"])
-			@user_json = res
-		end
+  	@user = User.find(res["id"])
 	end
 
 	def new
