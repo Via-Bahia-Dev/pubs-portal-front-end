@@ -21,7 +21,7 @@ class PublicationRequestsController < ApplicationController
       @publication_request.template_id = params[:template_id]
     end
 
-    @template = get("/templates/#{params[:template_id]}")
+    @template = get("/templates/#{params[:template_id]}") if params[:template_id]
 
     get_user_options
 
@@ -30,7 +30,7 @@ class PublicationRequestsController < ApplicationController
   def create
     @publication_request = PublicationRequest.new(publication_request_params)
 
-    @template = get("/templates/#{params[:publication_request][:template_id]}")
+    @template = get("/templates/#{params[:publication_request][:template_id]}") if params[:publication_request][:template_id]
 
     get_user_options
 
