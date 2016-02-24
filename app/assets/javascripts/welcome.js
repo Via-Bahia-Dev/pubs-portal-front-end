@@ -3,25 +3,29 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready(function() {
-	$("#create-request-templates").hide();
+	// $("#create-request-templates").hide();
+	//
+	// $("#create-request-btn").click(function(e) {
+	// 	$("#create-request-templates").slideToggle();
+	// 	createWall();
+	// });
+	//
+	// $("#create-request-templates").click(function(e) {
+	// 	e.stopImmediatePropagation();
+	// });
 
-	$("#create-request-btn").click(function(e) {
-		$("#create-request-templates").slideToggle();
+	$("#create-request-templates").on('shown.bs.collapse', function(event) {
 		createWall();
 	});
 
-	$("#create-request-templates").click(function(e) {
-		e.stopImmediatePropagation();
-	});
-
-	$("#current-requests").hide();
-	$("#view-requests-btn").click(function() {
-		$("#current-requests").slideToggle();
-	});
-
-	$("#current-requests").click(function(e) {
-		e.stopImmediatePropagation();
-	});
+	// $("#current-requests").hide();
+	// $("#view-requests-btn").click(function() {
+	// 	$("#current-requests").slideToggle();
+	// });
+	//
+	// $("#current-requests").click(function(e) {
+	// 	e.stopImmediatePropagation();
+	// });
 
 
 	var parent, ink, d, x, y;

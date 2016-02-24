@@ -3,6 +3,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 
+#accordion {
+
+	.panel-title {
+		text-align: center;
+		font-size: 24px;
+
+		a {
+			display: block;
+		}
+	}
+}
+
 #create-request-btn, #view-requests-btn {
 	padding: 10px;
 	margin: 10px;
@@ -32,7 +44,7 @@ span.rotate {
 	// -moz-transform:rotate(90deg);
  //    -webkit-transform:rotate(90deg);
  //    -o-transform:rotate(90deg);
- //    -ms-transform:rotate(90deg); 
+ //    -ms-transform:rotate(90deg);
 	// // position: absolute;
 	// animation: rotate 0.5s linear;
 
@@ -69,6 +81,3 @@ span.rotate {
 // 	    transform: scaleY(1);
 // 	}
 // }
-
-
-

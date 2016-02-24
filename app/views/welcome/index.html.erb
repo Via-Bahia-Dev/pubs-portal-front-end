@@ -19,38 +19,74 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<div id="create-request-btn">
-				<div class="title">Submit a Publication Request</div> <!--<span class="glyphicon glyphicon-chevron-right"></span>-->
+			<div class="panel-group" id="accordion" aria-multiselectable="true">
 
-				<div id="create-request-templates" class="well">
-					<div class="row">
-						<div class="col-md-12">
-							<h3>Choose a template to base your publication request on</h3>
-						</div>
-					</div>
+			  <div class="panel panel-default">
+			    <div class="panel-heading" role="tab" id="create-request-heading">
+			      <h3 class="panel-title">
+			        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#create-request-templates" aria-expanded="true" aria-controls="create-request-templates">
+								Submit a Publication Request
+			        </a>
+			      </h3>
+			    </div>
+			    <div id="create-request-templates" class="panel-collapse collapse" role="tabpanel" aria-labelledby="create-request-heading">
+			      <div class="panel-body">
 
-					<div class="wall" id="templates-wall">
-						<div class="col-md-12">
-							<%= render partial: '/templates/index', locals: { templates: @templates } %>
-						</div>
+							<div class="row">
+								<div class="col-md-12">
+									<h3>Choose a template to base your publication request on</h3>
+								</div>
+							</div>
+
+							<div class="wall" id="templates-wall">
+								<div class="col-md-12">
+									<%= render partial: '/templates/index', locals: { templates: @templates } %>
+								</div>
+							</div>
+
+			      </div>
+			    </div>
+			  </div>
+
+				<div class="panel panel-default">
+				  <div class="panel-heading" role="tab" id="current-requests-heading">
+				    <h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#current-requests" aria-expanded="true" aria-controls="current-requests">
+								View Publication Requests
+			        </a>
+						</h4>
+				  </div>
+					<div id="current-requests" class="panel-collapse collapse" role="tabpanel" aria-labelledby="current-requests-heading">
+					  <div class="panel-body">
+
+							<ul class="nav nav-pills">
+								<li role="presentation" class="dropdown">
+									<a id="filter-dropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Switch filter
+										<span class="caret"></span>
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="filter-dropdown">
+										<li>
+											<%= link_to "All Requests", "#", id: "all-issues" %>
+										</li>
+										<li>
+											<%= link_to "Mine to Design", "#", id: "mine-to-design" %>
+										</li>
+										<li>
+											<%= link_to "Mine to Review", "#", id: "mine-to-review" %>
+										</li>
+										<li>
+											<%= link_to "Requested by Me", "#", id: "my-requests" %>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
+
+					  </div>
 					</div>
 				</div>
 			</div>
-
-
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div id="view-requests-btn">
-				<div class="title">Current In-Progress Requests</div> <!--<span class="glyphicon glyphicon-chevron-right"></span> -->
-
-				<div id="current-requests" class="well">
-					<%= render partial: '/publication_requests/index', locals: { requests: @requests } %>
-				</div>
-			</div>
-
 		</div>
 	</div>
 
