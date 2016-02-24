@@ -21,16 +21,18 @@ class PublicationRequestsController < ApplicationController
       @publication_request.template_id = params[:template_id]
     end
 
-    @template = get("/templates/#{params[:template_id]}")
+    @template = get("/templates/#{params[:template_id]}") if params[:template_id]
 
     get_user_options
 
   end
 
   def create
+    format_request_param_dates(params)
+
     @publication_request = PublicationRequest.new(publication_request_params)
 
-    @template = get("/templates/#{params[:publication_request][:template_id]}")
+    @template = get("/templates/#{params[:publication_request][:template_id]}") if params[:publication_request][:template_id]
 
     get_user_options
 
@@ -47,11 +49,7 @@ class PublicationRequestsController < ApplicationController
 
   def update
     # go through the params looking for dates and format them to be date objects
-    publication_request_params.each do |param, value|
-      if param == 'rough_date' || param == 'due_date' || param == 'event_date'
-        params[:publication_request][param] = date_obj_from(value)
-      end
-    end
+    format_request_param_dates(params)
 
     res = put("/publication_requests/#{params[:id]}", {:publication_request => publication_request_params})
     if res["errors"].nil?

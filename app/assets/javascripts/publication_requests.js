@@ -173,4 +173,16 @@ $(document).ready(function() {
 
   });
 
+  /* New Form */
+  $(".new_publication_request .date").datetimepicker({
+    format: 'MM/DD/YYYY',
+    showTodayButton: true
+  });
+  $(".date input").each(function(index, el) {
+    if($(el).attr('value')) {
+      var d = new Date($(el).attr('value'));
+      $(el).val((d.getMonth()+1) + "/" + (d.getDate()+1) + "/" + d.getFullYear());
+    }
+  });
+
 });

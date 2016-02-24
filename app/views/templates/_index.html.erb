@@ -1,3 +1,16 @@
+<!-- <button type="button" class="btn btn-primary btn-lg template-cell">
+  No Template
+</button> -->
+<div class="template-cell">
+	<%= link_to(new_publication_request_path) do %>
+		<div class="img-thumbnail no-template">
+			<span class="glyphicon glyphicon-ban-circle"></span>
+			<p>
+				No Template
+			</p>
+		</div>
+	<% end %>
+</div>
 <% templates.each do |template| %>
 	<div class="template-cell">
 		<%= link_to(image_tag(template['image_medium'], class: "img-thumbnail"), new_publication_request_path(:template_id => template['id'])) %>
