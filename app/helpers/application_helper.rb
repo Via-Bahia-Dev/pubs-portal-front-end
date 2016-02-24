@@ -33,7 +33,11 @@ module ApplicationHelper
   end
 
   def date_obj_from(date_string)
-    DateTime.strptime(date_string, "%m/%d/%Y")
+    begin
+      DateTime.strptime(date_string, "%m/%d/%Y")
+    rescue Exception => e
+      nil
+    end
   end
 
   def file_size_string(bytes)

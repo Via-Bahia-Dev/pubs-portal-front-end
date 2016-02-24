@@ -28,6 +28,12 @@ class PublicationRequestsController < ApplicationController
   end
 
   def create
+    publication_request_params.each do |param, value|
+      if param == 'rough_date' || param == 'due_date' || param == 'event_date'
+        params[:publication_request][param] = date_obj_from(value)
+      end
+    end
+
     @publication_request = PublicationRequest.new(publication_request_params)
 
     @template = get("/templates/#{params[:publication_request][:template_id]}") if params[:publication_request][:template_id]
