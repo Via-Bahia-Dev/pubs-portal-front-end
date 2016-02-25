@@ -3,35 +3,17 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready(function() {
-	// $("#create-request-templates").hide();
-	//
-	// $("#create-request-btn").click(function(e) {
-	// 	$("#create-request-templates").slideToggle();
-	// 	createWall();
-	// });
-	//
-	// $("#create-request-templates").click(function(e) {
-	// 	e.stopImmediatePropagation();
-	// });
-	var templateWall;
-	var $requestWall;
+
+	var $templateIsotope;
+	var $requestIsotope;
 	$("#create-request-templates").on('shown.bs.collapse', function(event) {
-		createTemplateWall();
+		createTemplateIsotope();
 	});
 
 	$("#current-requests").on('shown.bs.collapse', function(event) {
 		// createRequestsWall();
 		createRequestIsotope();
 	});
-
-	// $("#current-requests").hide();
-	// $("#view-requests-btn").click(function() {
-	// 	$("#current-requests").slideToggle();
-	// });
-	//
-	// $("#current-requests").click(function(e) {
-	// 	e.stopImmediatePropagation();
-	// });
 
 
 	var parent, ink, d, x, y;
@@ -65,53 +47,15 @@ $(document).ready(function() {
 
 });
 
-function createTemplateWall() {
-	templateWall = new freewall("#templates-wall");
-	templateWall.reset({
-		selector: '.template-cell',
-		animate: true,
-		// cellW: '20',
-		cellH: '30', // we're using medium images which always have a height of 300
-		fixSize: false,
-		onResize: function() {
-			templateWall.refresh();
-		}
-	});
-	templateWall.fitWidth();
-
-
-	$(window).trigger("resize");
-
-}
-
-function createRequestsWall() {
-	requestWall = new freewall("#requests-wall");
-	requestWall.reset({
-		selector: '.request-cell',
-		animate: true,
-		cellW: 'auto',
-		cellH: '170',
-		// gutterX: '10',
-		fixSize: false,
-		onResize: function() {
-			requestWall.fitWidth();
-		}
-	});
-	requestWall.fitWidth();
-	$(".filter").click(function(event) {
-		$("#filter-dropdown ~ ul>li").removeClass('active');
-		$(this).closest('li').addClass('active');
-		var filter = $(this).data('filter');
-		if(filter) {
-			requestWall.filter(filter);
-		} else {
-			requestWall.unFilter();
-		}
+function createTemplateIsotope() {
+	$templateIsotope = $("#templates-wall").isotope({
+		itemSelector: '.template-cell',
+		layoutMode: 'fitRows'
 	});
 
 }
 function createRequestIsotope() {
-	$requestWall = $("#requests-wall").isotope({
+	$requestIsotope = $("#requests-wall").isotope({
 		itemSelector: '.request-cell',
 		layoutMode: 'fitRows'
 	});
@@ -122,9 +66,9 @@ function createRequestIsotope() {
 		$(this).closest(".choose-filter").children('.filter-name').html($(this).html());
 		var filter = $(this).data('filter');
 		if(filter) {
-			$requestWall.isotope({ filter: filter });
+			$requestIsotope.isotope({ filter: filter });
 		} else {
-			requestWall.unFilter();
+			requestIsotope.unFilter();
 		}
 	});
 }
