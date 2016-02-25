@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w(jstz.min.js)
 Rails.application.config.assets.precompile += %w(rails-timezone.min.js)
 Rails.application.config.assets.precompile += %w(jquery.minicolors.js)
 Rails.application.config.assets.precompile += %w(jquery.ba-outside-events.min.js)
+Rails.application.config.assets.precompile += %w(isotope.pkgd.min.js)
 
 Rails.application.config.assets.precompile += %w(jquery.minicolors.css)
 
