@@ -119,6 +119,7 @@ function createRequestIsotope() {
 	$(".filter").click(function(event) {
 		$("#filter-dropdown ~ ul>li").removeClass('active');
 		$(this).closest('li').addClass('active');
+		$(this).closest(".choose-filter").children('.filter-name').html($(this).html());
 		var filter = $(this).data('filter');
 		if(filter) {
 			$requestWall.isotope({ filter: filter });
