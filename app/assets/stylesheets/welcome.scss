@@ -15,13 +15,18 @@
 	}
 }
 
-.filter-name {
-	font-size: 24px;
-	display: inline-block;
+.view-controls {
+	.view-control {
+		margin: 0px 5px;
+		padding: 5px;
+	}
+
+	.view-control-name {
+		font-size: 24px;
+		display: inline-block;
+	}
 }
-#filter-dropdown {
-	display: inline-block;
-}
+
 
 #create-request-btn, #view-requests-btn {
 	padding: 10px;

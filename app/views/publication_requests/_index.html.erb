@@ -2,9 +2,17 @@
 	<div class="col-md-12">
 		<% requests.each do |request| %>
 			<% if can? :read, PublicationRequest.find(request["id"]) %>
-				<%= content_tag(:div, class: "request-thumb img-thumbnail request-cell status-#{request["status"]["id"]} designer-#{request["designer_id"]} reviewer-#{request["reviewer_id"]} user-#{request["user"]["id"]}") do %>
+				<%= content_tag(:div, class: "request-thumb img-thumbnail request-cell status-#{request['status']['id']} designer-#{request['designer_id']} reviewer-#{request['reviewer_id']} user-#{request['user']['id']}",
+															data: {
+																createdat: request["created_at"],
+																updatedat: request["updated_at"],
+																eventaame: request["event"],
+																designername: "#{request['designer']['first_name']} #{request['designer']['last_name']}",
+																reviewername: "#{request['reviewer']['first_name']} #{request['reviewer']['last_name']}",
+																status: request["status"]["order"]
+																}) do %>
 					<%= link_to(publication_request_path(request["id"])) do %>
-						<h3><%= request["event"] %></h3>
+						<h3 class="event-name"><%= request["event"] %></h3>
 						<hr>
 						<p><%= render partial: 'statuses/label', locals: { status: request['status'] } %></p>
 					<% end %>

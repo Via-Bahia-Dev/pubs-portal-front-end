@@ -1,6 +1,6 @@
-<ul class="nav nav-pills">
-  <li role="presentation" class="choose-filter dropdown">
-    <div class="filter-name">All Requests</div>
+<ul class="nav nav-pills view-controls">
+  <li role="presentation" class="view-control choose-filter dropdown">
+    <div class="view-control-name filter-name">All Requests</div>
     <a id="filter-dropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Switch filter
       <span class="caret"></span>
@@ -25,4 +25,33 @@
       <% end %>
     </ul>
   </li>
+
+  <li role="presentation" class="view-control choose-order dropdown">
+    <div class="view-control-name order-name">Order by <span>Date Created</span></div>
+    <a id="order-dropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Switch order
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="order-dropdown">
+      <li class="active">
+        <%= link_to "Date Created", "#", class: "order", id: "all-issues", data: { order: "createdAt" } %>
+      </li>
+      <li>
+        <%= link_to "Date Updated", "#", class: "order", id: "all-issues", data: { order: "updatedAt" } %>
+      </li>
+      <li>
+        <%= link_to "Event Name", "#", class: "order", id: "mine-to-design", data: { order: "eventName" } %>
+      </li>
+      <li>
+        <%= link_to "Designer Name", "#", class: "order", id: "mine-to-review", data: { order: "designerName" } %>
+      </li>
+      <li>
+        <%= link_to "Reviewer Name", "#", class: "order", id: "my-requests", data: { order: "reviewerName" } %>
+      </li>
+      <li>
+        <%= link_to "Status", "#", class: "order", id: "my-requests", data: { order: "status" } %>
+      </li>
+    </ul>
+  </li>
+
 </ul>

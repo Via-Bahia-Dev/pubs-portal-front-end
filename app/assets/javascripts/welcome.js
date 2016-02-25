@@ -57,7 +57,29 @@ function createTemplateIsotope() {
 function createRequestIsotope() {
 	$requestIsotope = $("#requests-wall").isotope({
 		itemSelector: '.request-cell',
-		layoutMode: 'fitRows'
+		layoutMode: 'fitRows',
+		getSortData: {
+			createdAt: function(el) {
+				var date = new Date($(el).data('createdat'));
+				return date.getTime(); // return numeric representation of date
+			},
+			updatedAt: function(el) {
+				var date = new Date($(el).data('updatedat'));
+				return date.getTime(); // return numeric representation of date
+			},
+			eventName: function(el) {
+				// upper case of event name so lower case doesn't come later
+				return $(el).find('.event-name').text().toUpperCase();
+			},
+			designerName: function(el) {
+				return $(el).data('designername').toUpperCase(); // just in case someone enters their name lazily
+			},
+			reviewerName: function(el) {
+				return $(el).data('reviewername').toUpperCase();
+			},
+			status: '[data-status] parseInt'
+		},
+		sortBy: 'createdAt'
 	});
 
 	$(".filter").click(function(event) {
@@ -67,8 +89,16 @@ function createRequestIsotope() {
 		var filter = $(this).data('filter');
 		if(filter) {
 			$requestIsotope.isotope({ filter: filter });
-		} else {
-			requestIsotope.unFilter();
+		}
+	});
+
+	$(".order").click(function(event) {
+		$("#order-dropdown ~ ul>li").removeClass('active');
+		$(this).closest('li').addClass('active');
+		$(this).closest(".choose-order").find('.order-name span').html($(this).html());
+		var order = $(this).data('order');
+		if(order) {
+			$requestIsotope.isotope( { sortBy: order });
 		}
 	});
 }
