@@ -14,14 +14,15 @@ $(document).ready(function() {
 	// 	e.stopImmediatePropagation();
 	// });
 	var templateWall;
-	var requestWall;
+	var $requestWall;
 	$("#create-request-templates").on('shown.bs.collapse', function(event) {
 		createTemplateWall();
 	});
 
 	$("#current-requests").on('shown.bs.collapse', function(event) {
-		createRequestsWall();
-	})
+		// createRequestsWall();
+		createRequestIsotope();
+	});
 
 	// $("#current-requests").hide();
 	// $("#view-requests-btn").click(function() {
@@ -103,6 +104,24 @@ function createRequestsWall() {
 		var filter = $(this).data('filter');
 		if(filter) {
 			requestWall.filter(filter);
+		} else {
+			requestWall.unFilter();
+		}
+	});
+
+}
+function createRequestIsotope() {
+	$requestWall = $("#requests-wall").isotope({
+		itemSelector: '.request-cell',
+		layoutMode: 'fitRows'
+	});
+
+	$(".filter").click(function(event) {
+		$("#filter-dropdown ~ ul>li").removeClass('active');
+		$(this).closest('li').addClass('active');
+		var filter = $(this).data('filter');
+		if(filter) {
+			$requestWall.isotope({ filter: filter });
 		} else {
 			requestWall.unFilter();
 		}

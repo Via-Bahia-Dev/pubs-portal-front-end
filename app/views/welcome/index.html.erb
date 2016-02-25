@@ -1,6 +1,8 @@
 <%= stylesheet_link_tag "templates" %>
 <%= stylesheet_link_tag "statuses" %>
 <%= stylesheet_link_tag "publication_requests" %>
+<%= javascript_include_tag 'freewall' %>
+<%= javascript_include_tag 'isotope.pkgd.min' %>
 
 <div class="page-header">
 	<h1>Publishing Portal</h1>
@@ -67,7 +69,7 @@
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="filter-dropdown">
 										<li class="active">
-											<%= link_to "All Requests", "#", class: "filter", id: "all-issues", data: { filter: '' } %>
+											<%= link_to "All Requests", "#", class: "filter", id: "all-issues", data: { filter: "*" } %>
 										</li>
 										<li>
 											<%= link_to "Mine to Design", "#", class: "filter", id: "mine-to-design", data: { filter: ".designer-#{current_user.id}" } %>
