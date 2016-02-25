@@ -66,17 +66,17 @@
 										<span class="caret"></span>
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="filter-dropdown">
-										<li>
-											<%= link_to "All Requests", "#", id: "all-issues" %>
+										<li class="active">
+											<%= link_to "All Requests", "#", class: "filter", id: "all-issues", data: { filter: '' } %>
 										</li>
 										<li>
-											<%= link_to "Mine to Design", "#", id: "mine-to-design" %>
+											<%= link_to "Mine to Design", "#", class: "filter", id: "mine-to-design", data: { filter: ".designer-#{current_user.id}" } %>
 										</li>
 										<li>
-											<%= link_to "Mine to Review", "#", id: "mine-to-review" %>
+											<%= link_to "Mine to Review", "#", class: "filter", id: "mine-to-review", data: { filter: ".reviewer-#{current_user.id}" } %>
 										</li>
 										<li>
-											<%= link_to "Requested by Me", "#", id: "my-requests" %>
+											<%= link_to "Requested by Me", "#", class: "filter", id: "my-requests", data: { filter: ".user-#{current_user.id}" } %>
 										</li>
 									</ul>
 								</li>
