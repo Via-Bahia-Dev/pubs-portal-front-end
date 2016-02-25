@@ -11,9 +11,18 @@ $(document).ready(function() {
 	});
 
 	$("#current-requests").on('shown.bs.collapse', function(event) {
-		// createRequestsWall();
 		createRequestIsotope();
 	});
+
+	$("#accordion .accordion-link").hover(
+		function() {
+			togglePanelClass($(this).closest('.panel'));
+		});
+
+	function togglePanelClass(el) {
+		$(el).toggleClass('panel-default');
+		$(el).toggleClass('panel-info');
+	}
 
 
 	var parent, ink, d, x, y;
