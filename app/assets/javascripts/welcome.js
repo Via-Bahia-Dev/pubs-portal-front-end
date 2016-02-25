@@ -3,24 +3,16 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready(function() {
-	$("#create-request-templates").hide();
 
-	$("#create-request-btn").click(function(e) {
-		$("#create-request-templates").slideToggle();
-		createWall();
+	var $templateIsotope;
+	var $requestIsotope;
+	$("#create-request-templates").on('shown.bs.collapse', function(event) {
+		createTemplateIsotope();
 	});
 
-	$("#create-request-templates").click(function(e) {
-		e.stopImmediatePropagation();
-	});
-
-	$("#current-requests").hide();
-	$("#view-requests-btn").click(function() {
-		$("#current-requests").slideToggle();
-	});
-
-	$("#current-requests").click(function(e) {
-		e.stopImmediatePropagation();
+	$("#current-requests").on('shown.bs.collapse', function(event) {
+		// createRequestsWall();
+		createRequestIsotope();
 	});
 
 
@@ -51,33 +43,62 @@ $(document).ready(function() {
 		//set the position and add class .animate
 		ink.css({top: y+'px', left: x+'px'}).addClass("animate");
 	})
-})
 
-function createWall() {
-	var wall = new freewall("#templates-wall");
-	wall.reset({
-		selector: '.template-cell',
-		animate: true,
-		// cellW: '20',
-		cellH: '30', // we're using medium images which always have a height of 300
-		fixSize: false,
-		onResize: function() {
-			wall.refresh();
+
+});
+
+function createTemplateIsotope() {
+	$templateIsotope = $("#templates-wall").isotope({
+		itemSelector: '.template-cell',
+		layoutMode: 'fitRows'
+	});
+
+}
+function createRequestIsotope() {
+	$requestIsotope = $("#requests-wall").isotope({
+		itemSelector: '.request-cell',
+		layoutMode: 'fitRows',
+		getSortData: {
+			createdAt: function(el) {
+				var date = new Date($(el).data('createdat'));
+				return date.getTime(); // return numeric representation of date
+			},
+			updatedAt: function(el) {
+				var date = new Date($(el).data('updatedat'));
+				return date.getTime(); // return numeric representation of date
+			},
+			eventName: function(el) {
+				// upper case of event name so lower case doesn't come later
+				return $(el).find('.event-name').text().toUpperCase();
+			},
+			designerName: function(el) {
+				return $(el).data('designername').toUpperCase(); // just in case someone enters their name lazily
+			},
+			reviewerName: function(el) {
+				return $(el).data('reviewername').toUpperCase();
+			},
+			status: '[data-status] parseInt'
+		},
+		sortBy: 'createdAt'
+	});
+
+	$(".filter").click(function(event) {
+		$("#filter-dropdown ~ ul>li").removeClass('active');
+		$(this).closest('li').addClass('active');
+		$(this).closest(".choose-filter").children('.filter-name').html($(this).html());
+		var filter = $(this).data('filter');
+		if(filter) {
+			$requestIsotope.isotope({ filter: filter });
 		}
 	});
-	wall.fitWidth();
 
-	// var wall2 = new freewall("#requests-wall");
-	// wall2.reset({
-	// 	selector: '.request-cell',
-	// 	animate: true,
-	// 	cellW: 20,
-	// 	cellH: 200,
-	// 	onResize: function() {
-	// 		wall2.fitWidth();
-	// 	}
-	// });
-	// wall2.fitWidth();
-
-	$(window).trigger("resize");
+	$(".order").click(function(event) {
+		$("#order-dropdown ~ ul>li").removeClass('active');
+		$(this).closest('li').addClass('active');
+		$(this).closest(".choose-order").find('.order-name span').html($(this).html());
+		var order = $(this).data('order');
+		if(order) {
+			$requestIsotope.isotope( { sortBy: order });
+		}
+	});
 }
