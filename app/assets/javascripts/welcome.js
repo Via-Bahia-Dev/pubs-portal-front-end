@@ -89,7 +89,7 @@ function createRequestsWall() {
 		selector: '.request-cell',
 		animate: true,
 		cellW: 'auto',
-		cellH: '130',
+		cellH: '170',
 		// gutterX: '10',
 		fixSize: false,
 		onResize: function() {

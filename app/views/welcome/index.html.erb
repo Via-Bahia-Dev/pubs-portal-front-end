@@ -78,6 +78,11 @@
 										<li>
 											<%= link_to "Requested by Me", "#", class: "filter", id: "my-requests", data: { filter: ".user-#{current_user.id}" } %>
 										</li>
+										<% @statuses.each do |status| %>
+											<li>
+												<%= link_to "#{status["name"]} Requests", "#", class: "filter", id: "#{status["name"]}-requests", data: { filter: ".status-#{status["id"]}"} %>
+											</li>
+										<% end %>
 									</ul>
 								</li>
 							</ul>
