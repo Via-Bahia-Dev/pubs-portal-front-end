@@ -1,0 +1,28 @@
+<ul class="nav nav-pills">
+  <li role="presentation" class="choose-filter dropdown">
+    <div class="filter-name">All Requests</div>
+    <a id="filter-dropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Switch filter
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="filter-dropdown">
+      <li class="active">
+        <%= link_to "All Requests", "#", class: "filter", id: "all-issues", data: { filter: "*" } %>
+      </li>
+      <li>
+        <%= link_to "Mine to Design", "#", class: "filter", id: "mine-to-design", data: { filter: ".designer-#{current_user.id}" } %>
+      </li>
+      <li>
+        <%= link_to "Mine to Review", "#", class: "filter", id: "mine-to-review", data: { filter: ".reviewer-#{current_user.id}" } %>
+      </li>
+      <li>
+        <%= link_to "Requested by Me", "#", class: "filter", id: "my-requests", data: { filter: ".user-#{current_user.id}" } %>
+      </li>
+      <% @statuses.each do |status| %>
+        <li>
+          <%= link_to "#{status["name"]} Requests", "#", class: "filter", id: "#{status["name"]}-requests", data: { filter: ".status-#{status["id"]}"} %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+</ul>
