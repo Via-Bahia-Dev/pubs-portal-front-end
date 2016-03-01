@@ -20,9 +20,9 @@
 			    <%= f.text_field :link, class: "form-control input-lg", placeholder: "e.g. Dropbox link" %>
 			</div>
 
-			<div class="field form-group <%=field_class(@template, :category) %>">
-			    <%= f.label :category, "Category of the template", class: "control-label" %>
-			    <%= f.text_field :category, class: "form-control input-lg", placeholder: "e.g. Welcome Night" %>
+			<div class="field form-group <%=field_class(@template, :all_tags) %>">
+			    <%= f.label :all_tags, "Tags for this template", class: "control-label" %>
+					<%= f.select :all_tags, @tag_options, { prompt: "Select tags or create new ones", include_hidden: false }, { class: "form-control", multiple: true } %>
 			</div>
 
 			<div class="field form-group <%=field_class(@template, :image) %>">

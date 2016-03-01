@@ -6,6 +6,8 @@ class TemplatesController < ApplicationController
 
 	def new
 		@template = Template.new
+		@tags = get("/tags")
+		@tag_options = @tags.map { |tag| tag["name"] }
 	end
 
 	def create
@@ -17,6 +19,7 @@ class TemplatesController < ApplicationController
 			redirect_to root_path
 		else
 			@template.save #this will get the errors in the model
+			@tags = get("/tags")
 			# we're actually using these errors for error messages for now, not the json from the api
 			# just more convenient
 
@@ -45,6 +48,6 @@ class TemplatesController < ApplicationController
 
 	private
     def template_params
-    	params.require(:template).permit(:name, :user_id, :dimensions, :image, :link, :category)
+    	params.require(:template).permit(:name, :user_id, :dimensions, :image, :link, :category, :all_tags => [])
   	end
 end

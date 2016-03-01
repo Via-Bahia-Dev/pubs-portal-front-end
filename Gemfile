@@ -19,6 +19,9 @@ gem 'uglifier', '>= 1.3.0'
 # jquery file upload
 gem 'jquery-fileupload-rails'
 
+# select 2
+gem "select2-rails"
+
 # jquery color picker
 # gem 'jquery-minicolors-rails'
 

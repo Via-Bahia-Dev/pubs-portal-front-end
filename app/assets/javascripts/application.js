@@ -19,6 +19,7 @@
 //= require editable/rails
 //= require moment
 //= require bootstrap-datetimepicker
+//= require select2
 
 $(document).ready(function(){
 	var tz = jstz.determine();

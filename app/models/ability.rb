@@ -5,69 +5,82 @@ class Ability
     user ||= User.new # guest user (not logged in)
 
     if user.roles == []
-      can :create, :session
-      can :create, :password_reset
-      can :update, :password_reset
+      guest_abilities
     end
 
     if user.has_role? :user
-      can :destroy, :session # users can sign out
-      can :show, User, :id => user.id # users can view their own profile
-      can :update, User, :id => user.id # users can update their own profile
-      can :update_password, User, :id => user.id # users can change their own password
-      can :admins, User
-      can :reviewers, User
-      can :designers, User
-      can :read, RequestAttachment
-      can :create, RequestAttachment
-      can :update, RequestAttachment, :user_id => user.id
-      can :destroy, RequestAttachment, :user_id => user.id
-      can :read, Comment
-      can :create, Comment
-      can :update, Comment, :user_id => user.id
-      can :destroy, Comment, :user_id => user.id
-      can :read, Template
-
-      can :read, PublicationRequest, :user_id => user.id
+      user_user_abilities(user)
+      user_attachment_abilities(user)
+      user_comment_abilities(user)
+      user_template_abilities
+      user_request_abilities(user)
+      user_status_abilities
     end
 
     if user.has_role? :designer
-      can :read, PublicationRequest, :designer_id => user.id
-      can :design, PublicationRequest, :designer_id => user.id
+      designer_request_abilities(user)
     end
 
     if user.has_role? :reviewer
-      can :read, PublicationRequest, :reviewer_id => user.id
-      can :review, PublicationRequest, :reviewer_id => user.id
+      reviewer_request_abilities(user)
     end
 
     can :manage, :all if user.has_role? :admin
 
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
+
+  def guest_abilities
+    can :create, :session
+    can :create, :password_reset
+    can :update, :password_reset
+  end
+
+  def user_user_abilities(user)
+    can :destroy, :session # users can sign out
+    can :show, User, :id => user.id # users can view their own profile
+    can :update, User, :id => user.id # users can update their own profile
+    can :update_password, User, :id => user.id # users can change their own password
+    can :admins, User
+    can :reviewers, User
+    can :designers, User
+  end
+
+  def user_attachment_abilities(user)
+    standard_crud(user, RequestAttachment)
+  end
+
+  def user_comment_abilities(user)
+    standard_crud(user, Comment)
+  end
+
+  def user_template_abilities
+    can :read, Template
+  end
+
+  def user_status_abilities
+    can :read, Status
+  end
+
+  def user_request_abilities(user)
+    can :read, PublicationRequest, :user_id => user.id
+    can :create, PublicationRequest
+  end
+
+  def designer_request_abilities(user)
+    can :read, PublicationRequest, :designer_id => user.id
+    can :design, PublicationRequest, :designer_id => user.id
+  end
+
+  def reviewer_request_abilities(user)
+    can :read, PublicationRequest, :reviewer_id => user.id
+    can :review, PublicationRequest, :reviewer_id => user.id
+  end
+
+  def standard_crud(user, model)
+    can :create, model
+    can :read, model
+    can :update, model, :user_id => user.id
+    can :destroy, model, :user_id => user.id
+  end
+
 end

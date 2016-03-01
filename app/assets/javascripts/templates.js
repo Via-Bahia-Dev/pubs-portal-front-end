@@ -48,6 +48,13 @@ $(document).ready(function() {
       console.log("complete");
     });
 
+  });
+
+  $("#template_all_tags").select2({
+    theme: 'bootstrap',
+    tags: true,
+    tokenSeparators: [','],
+    placeholder: 'Select tags or create new ones'
   })
 
 });
