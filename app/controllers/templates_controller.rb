@@ -2,12 +2,12 @@ class TemplatesController < ApplicationController
 
 	def index
 		@templates = get("/templates")
+		get_tag_editable_select_options
 	end
 
 	def new
 		@template = Template.new
-		@tags = get("/tags")
-		@tag_options = @tags.map { |tag| tag["name"] }
+		get_tag_select_options
 	end
 
 	def create
@@ -19,7 +19,7 @@ class TemplatesController < ApplicationController
 			redirect_to root_path
 		else
 			@template.save #this will get the errors in the model
-			@tags = get("/tags")
+			get_tag_select_options
 			# we're actually using these errors for error messages for now, not the json from the api
 			# just more convenient
 
