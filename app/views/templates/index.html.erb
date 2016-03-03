@@ -57,7 +57,7 @@
 				<% end %>
 			</td>
 			<td class="">
-				<%= link_to "#", id: 'tags-field', class: 'editable-field editable',
+				<!-- <%= link_to "#", id: 'tags-field', class: 'editable-field editable',
 												 data: {
 													 pk: template["id"],
 													 model: 'template',
@@ -68,7 +68,8 @@
                            value: template["tags"].map { |tag| tag["name"] },
                            source: @tag_options
 												 } do %>
-				<% end %>
+				<% end %> -->
+        <%= select_tag "template[all_tags]", options_for_select(@tag_options, template["tags"].map { |tag| tag["name"] }), include_hidden: false, class: "template-tags form-control input-lg", style: "width: 80%;", multiple: true, data: { url: "/templates/#{template['id']}" }  %>
 			</td>
 			<td class="">
 				<%= link_to "#", id: 'url-field', class: 'editable-field editable',

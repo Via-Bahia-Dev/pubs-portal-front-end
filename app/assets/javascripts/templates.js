@@ -79,11 +79,28 @@ $(document).ready(function() {
 
   });
 
-  $("#template_all_tags").select2({
+  $(".template-tags").select2({
     theme: 'bootstrap',
     tags: true,
     tokenSeparators: [','],
     placeholder: 'Select tags or create new ones'
+  }).on('change', function(event) {
+    var tags = $(this).val();
+    $.ajax({
+      url: $(this).data('url'),
+      type: 'PUT',
+      data: { template: { all_tags: tags } }
+    })
+    .done(function() {
+      console.log("success");
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+
   });
 
 });

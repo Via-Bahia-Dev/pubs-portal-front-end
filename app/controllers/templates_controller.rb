@@ -2,7 +2,8 @@ class TemplatesController < ApplicationController
 
 	def index
 		@templates = get("/templates")
-		get_tag_editable_select_options
+		# get_tag_editable_select_options
+		get_tag_select_options
 	end
 
 	def new
