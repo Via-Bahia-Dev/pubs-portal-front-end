@@ -79,12 +79,18 @@ $(document).ready(function() {
 
   });
 
-  $(".template-tags").select2({
+  $(".template-tags, #template_all_tags").select2({
     theme: 'bootstrap',
     tags: true,
-    tokenSeparators: [','],
-    placeholder: 'Select tags or create new ones'
-  }).on('change', function(event) {
+    tokenSeparators: [',', '.', ' ', '/', '\\', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '`', '~'],
+    placeholder: 'Select tags or create new ones',
+    createTag: function(obj) {
+      // make all tags lower case
+      return { id: obj.term, text: obj.term.toLowerCase(), tag: true }
+    }
+  });
+
+  $(".template-tags").on('change', function(event) {
     var tags = $(this).val();
     $.ajax({
       url: $(this).data('url'),
