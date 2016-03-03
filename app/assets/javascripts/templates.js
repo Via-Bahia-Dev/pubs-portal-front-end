@@ -82,7 +82,7 @@ $(document).ready(function() {
   $(".template-tags, #template_all_tags").select2({
     theme: 'bootstrap',
     tags: true,
-    tokenSeparators: [',', '.', ' ', '/', '\\', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '`', '~'],
+    tokenSeparators: [',', '.', ' ', '/', '\\', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '`', '~', '{', '}', '[', ']', ';', ':'],
     placeholder: 'Select tags or create new ones',
     createTag: function(obj) {
       // make all tags lower case

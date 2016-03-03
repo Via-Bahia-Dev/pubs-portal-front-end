@@ -16,6 +16,11 @@
 		z-index: 999;
 	}
 
+	img {
+		display: block;
+		margin: 0px auto;
+	}
+
 	a {
 		transition: all 0.2s ease-in-out;
 		&:hover {
