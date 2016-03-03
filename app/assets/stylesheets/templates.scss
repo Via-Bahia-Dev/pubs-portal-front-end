@@ -5,6 +5,7 @@
 	display: inline-block;
 	margin: 10px;
 	transition: all 0.2s ease-in-out;
+	border-radius: 5px; // need to match bootstrap panel
 	&:hover {
 		position: relative;
 		box-shadow: 0px 0px 8px 8px rgba(0,0,0,0.2);

@@ -12,7 +12,7 @@
 	<% end %>
 </div>
 <% templates.each do |template| %>
-	<div class="template-cell">
+	<%= content_tag(:div, class: "template-cell #{template['tags'].map { |tag| tag['name'] }.join(' ')}") do %>
 		<%= link_to(new_publication_request_path(:template_id => template['id'])) do %>
 			<div class="panel panel-default">
 			  <div class="panel-body">
@@ -27,5 +27,5 @@
 			  </div>
 			</div>
 		<% end %>
-	</div>
+	<% end %>
 <% end %>

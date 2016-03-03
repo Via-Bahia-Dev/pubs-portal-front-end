@@ -1,0 +1,6 @@
+<div>
+  Filter by tags
+</div>
+<div>
+  <%= select_tag "filter-tags", options_for_select(@tag_options), class: "form-control input-lg", multiple: true, style: "width: 100%" %>
+</div>
