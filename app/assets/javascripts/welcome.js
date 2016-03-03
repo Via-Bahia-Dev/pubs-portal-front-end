@@ -73,7 +73,7 @@ function createTemplateIsotope() {
 		} else {
 			filter.push("*");
 		}
-		$templateIsotope.isotope( { filter: filter.join(' ')});
+		$templateIsotope.isotope( { filter: filter.join('')});
 	});
 
 }
