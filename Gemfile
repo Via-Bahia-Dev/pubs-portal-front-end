@@ -19,6 +19,11 @@ gem 'uglifier', '>= 1.3.0'
 # jquery file upload
 gem 'jquery-fileupload-rails'
 
+# select 2
+# gem "select2-rails"
+# waiting for https://github.com/argerim/select2-rails/pull/134 to be merged
+gem "select2-rails", ">= 4.0.0", github: 'nilbus/select2-rails', branch: 'full'
+
 # jquery color picker
 # gem 'jquery-minicolors-rails'
 

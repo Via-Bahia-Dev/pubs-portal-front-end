@@ -13,7 +13,7 @@ class RequestAttachment < ActiveRecord::Base
 	validates_presence_of :user_id
 
 	default_scope { order(created_at: :desc) }
-	
+
 	def check_file_type
 		if is_image_type?
 			{ large: "x500>", medium: "x300>", small: "x100>", large_thumb: "100x100#", thumb: "50x50#" }
@@ -23,7 +23,7 @@ class RequestAttachment < ActiveRecord::Base
 	end
 
 	def is_image_type?
-		content_type = /\Aimage\/.*\Z/
+		file.content_type =~ /\Aimage\/.*\Z/
 	end
 
 	def request_attachment_urls

@@ -24,7 +24,6 @@ $(document).ready(function() {
 		$(el).toggleClass('panel-info');
 	}
 
-
 	var parent, ink, d, x, y;
 	$(".request-thumb a").click(function(e) {
 		parent = $(this).parent();
@@ -53,13 +52,28 @@ $(document).ready(function() {
 		ink.css({top: y+'px', left: x+'px'}).addClass("animate");
 	})
 
-
 });
 
 function createTemplateIsotope() {
 	$templateIsotope = $("#templates-wall").isotope({
 		itemSelector: '.template-cell',
 		layoutMode: 'fitRows'
+	});
+
+	$("#filter-tags").select2({
+		theme: 'bootstrap',
+		placeholder: 'Filter templates by tags'
+	}).on('change', function(e) {
+		var filter = []
+		var tags = $(this).val();
+		if(tags) {
+			for(var i = 0; i < tags.length; i++) {
+				filter.push("."+tags[i]);
+			}
+		} else {
+			filter.push("*");
+		}
+		$templateIsotope.isotope( { filter: filter.join('')});
 	});
 
 }

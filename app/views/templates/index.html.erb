@@ -17,7 +17,7 @@
 			Dimensions
 		</th>
 		<th>
-			Category
+			Tags
 		</th>
 		<th>
 			Assets URL
@@ -57,17 +57,19 @@
 				<% end %>
 			</td>
 			<td class="">
-				<%= link_to "#", id: 'category-field', class: 'editable-field editable',
+				<!-- <%= link_to "#", id: 'tags-field', class: 'editable-field editable',
 												 data: {
 													 pk: template["id"],
 													 model: 'template',
-													 name: 'category',
-													 type: 'text',
+													 name: 'all_tags',
+													 type: 'select2',
 													 url: template_path(template["id"]),
-													 title: 'Category'
+													 title: 'Tags',
+                           value: template["tags"].map { |tag| tag["name"] },
+                           source: @tag_options
 												 } do %>
-					<%= template["category"] %>
-				<% end %>
+				<% end %> -->
+        <%= select_tag "template[all_tags]", options_for_select(@tag_options, template["tags"].map { |tag| tag["name"] }), include_hidden: false, class: "template-tags form-control input-lg", style: "width: 80%;", multiple: true, data: { url: "/templates/#{template['id']}" }  %>
 			</td>
 			<td class="">
 				<%= link_to "#", id: 'url-field', class: 'editable-field editable',
@@ -79,7 +81,7 @@
 													 url: template_path(template["id"]),
 													 title: 'Assets URL'
 												 } do %>
-				  <%= template["url"] %>
+				  <%= sanitize(template["link"]) %>
 				<% end %>
 			</td>
 			<td>

@@ -2,10 +2,13 @@ class TemplatesController < ApplicationController
 
 	def index
 		@templates = get("/templates")
+		# get_tag_editable_select_options
+		get_tag_select_options
 	end
 
 	def new
 		@template = Template.new
+		get_tag_select_options
 	end
 
 	def create
@@ -17,6 +20,7 @@ class TemplatesController < ApplicationController
 			redirect_to root_path
 		else
 			@template.save #this will get the errors in the model
+			get_tag_select_options
 			# we're actually using these errors for error messages for now, not the json from the api
 			# just more convenient
 
@@ -45,6 +49,6 @@ class TemplatesController < ApplicationController
 
 	private
     def template_params
-    	params.require(:template).permit(:name, :user_id, :dimensions, :image, :link, :category)
+    	params.require(:template).permit(:name, :user_id, :dimensions, :image, :link, :category, :all_tags => [])
   	end
 end
