@@ -81,7 +81,7 @@
 													 url: template_path(template["id"]),
 													 title: 'Assets URL'
 												 } do %>
-				  <%= template["url"] %>
+				  <%= sanitize(template["link"]) %>
 				<% end %>
 			</td>
 			<td>
