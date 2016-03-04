@@ -10,6 +10,8 @@ class Template < ActiveRecord::Base
 	has_many :taggings, dependent: :destroy
 	has_many :tags, through: :taggings
 
+	default_scope { order(name: :asc) }
+
 	def all_tags=(names)
 		self.tags = names.map do |name|
 			Tag.where(name: name.strip).first_or_create!
