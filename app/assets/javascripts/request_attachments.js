@@ -35,11 +35,11 @@ $(document).ready(function() {
 				} else {
 					// prepend the new attachment
 					$new_attachment = $("#attachments").prepend($(data.result).hide().fadeIn());
-					$('.progress-bar').toggleClass('progress-bar-info progress-bar-success progress-bar-striped');
+					// $('.progress-bar').toggleClass('progress-bar-info progress-bar-success progress-bar-striped');
 					$('.progress-bar').html('Upload Complete');
-					setTimeout(function(){
-						hideProgressBar();
-					}, 3000);
+					// setTimeout(function(){
+					// 	hideProgressBar();
+					// }, 3000);
 					$('.container-fluid').animate( { scrollTop: $('.container-fluid').scrollTop() + ($new_attachment.offset().top - ($(window).height() / 2))}, 1000);
 				}
 			},
@@ -53,6 +53,7 @@ $(document).ready(function() {
 		            'width',
 		            progress + '%'
 		        );
+				$('.progress .progress-bar').html(progress+'%');
 			},
 			always: function(e, data) {
 				hideProgressBar();
@@ -124,6 +125,6 @@ $(document).ready(function() {
 
 function hideProgressBar() {
 	$('.progress').hide();
-	$('.progress-bar').toggleClass('progress-bar-info progress-bar-success progress-bar-striped');
+	$('.progress-bar').css('width', '0%');
 	$('.progress-bar').html('');
 }
