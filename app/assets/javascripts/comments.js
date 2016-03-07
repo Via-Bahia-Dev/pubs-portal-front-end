@@ -80,6 +80,20 @@ $(document).ready(function() {
 		$comment.hide();
 
 	});
+
+	// Cancel button clicked
+  $("#comments").on('click', '.editable-cancel', function(event) {
+    cancelEditComment(this);
+  });
+
+	/*
+   * Cancel the comment edit
+   * Reveals the original field and removes the form
+   */
+  function cancelEditComment(element) {
+    $(element).parents('.edit-comment-form').siblings('.text').show();
+    $(element).parents('.edit-comment-form').remove();
+  }
 });
 
 function formatCommentForm () {
