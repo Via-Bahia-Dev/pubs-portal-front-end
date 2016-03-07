@@ -2,6 +2,9 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
+	$.fn.editable.defaults.mode = 'inline';
+  $.fn.editable.defaults.send = 'always';
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
 	var ctrlKeyCode = 17;
 	var enterKeyCode = 13;
@@ -52,6 +55,30 @@ $(document).ready(function() {
 			.fail(function(data) {
 				console.log(data);
 			});
+	});
+
+	$("#comments").on('click', '.comment-edit', function(event) {
+		event.preventDefault();
+		var $comment = $(this).parents('.comment').find('.comment-content .text')
+		var currentComment = $comment.children('p').html();
+		$comment.after('<div class="edit-comment-form">'+
+                          '<div class="form-group">'+
+                            '<div class="input-group edit-comment">' +
+                                '<textarea class="form-control" rows="3" name="comment[content]" >' + currentComment + '</textarea>' +
+                            '</div>' +
+                        '</div>'+
+                        // buttons
+                        '<div class="editable-buttons">'+
+                            '<button type="submit" class="btn btn-primary btn-sm editable-submit">'+
+                                '<i class="glyphicon glyphicon-ok"></i>'+
+                            '</button>'+
+                            '<button type="button" class="btn btn-default btn-sm editable-cancel">'+
+                                '<i class="glyphicon glyphicon-remove"></i>'+
+                            '</button>'+
+                        '</div>'+
+                    '</div>');
+		$comment.hide();
+
 	});
 });
 
