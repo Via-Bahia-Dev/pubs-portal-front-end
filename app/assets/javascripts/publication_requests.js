@@ -34,7 +34,7 @@ $(document).ready(function() {
 
   $(".editable-field#descr-field").editable({
     display: function(value) {
-      $(this).html(simpleFormat(value));
+      $(this).html(value);
     }
   });
 
