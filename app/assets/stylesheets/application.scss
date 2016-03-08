@@ -175,6 +175,19 @@ textarea {
   }
 }
 
+.editable-field[data-type="textarea"]+.editable-container {
+	width: 100% !important;
+	.form-group {
+		width: 100%;
+		.editable-input {
+			width: 100%;
+			textarea {
+				width: 100%;
+			}
+		}
+	}
+}
+
 .editable-empty {
 	font-style: italic;
 	color: $gray-light;
