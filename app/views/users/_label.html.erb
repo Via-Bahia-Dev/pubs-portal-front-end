@@ -1,7 +1,5 @@
-<div class="user">
-	<span class="user-initials">
-		<strong><%= "#{user['first_name'][0]}#{user['last_name'][0]}" %></strong>
-	</span>
+<div class="user-item-label">
+	<%= render partial: 'users/initials', locals: { user: user } %>
 </div>
 <div>
 	<span class="user-name">

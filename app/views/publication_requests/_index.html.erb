@@ -15,7 +15,25 @@
 						<h3 class="event-name"><%= request["event"] %></h3>
 						<div class="request-thumb-info">
 							<div><%= render partial: 'statuses/label', locals: { status: request['status'] } %></div>
-							<div class="request-user">
+							<div>
+								<span class="badge"><span class="glyphicon glyphicon-comment"></span><%="#{request['comments'].size}"%></span>
+								<span class="badge"><span class="glyphicon glyphicon-paperclip"></span><%="#{request['request_attachments'].size}"%></span>
+							</div>
+							<div class="request-people">
+								<div class="user-label requestor-label" data-toggle="tooltip" data-placement="bottom" title='Requestor: <%="#{request['user']['first_name']} #{request['user']['last_name']}"%>'>
+									<%= render partial: 'users/initials', locals: { user: request['user'] } %>
+								</div>
+								<span class="glyphicon glyphicon-arrow-right"></span>
+								<div class="user-label designer-label" data-toggle="tooltip" data-placement="bottom" title='Designer: <%="#{request['designer']['first_name']} #{request['designer']['last_name']}"%>'>
+									<%= render partial: 'users/initials', locals: { user: request['designer'] } %>
+								</div>
+								<span class="glyphicon glyphicon-arrow-right"></span>
+								<div class="user-label reviewer-label" data-toggle="tooltip" data-placement="bottom" title='Reviewer: <%="#{request['reviewer']['first_name']} #{request['reviewer']['last_name']}"%>'>
+									<%= render partial: 'users/initials', locals: { user: request['reviewer'] } %>
+								</div>
+							</div>
+
+							<!-- <div class="request-user">
 								<small>Requester: <%= "#{request['user']['first_name']} #{request['user']['last_name']}" %></small>
 							</div>
 							<div class="request-designer">
@@ -23,7 +41,7 @@
 							</div>
 							<div class="request-reviewer">
 								<small>Reviewer: <%= "#{request['reviewer']['first_name']} #{request['reviewer']['last_name']}" %></small>
-							</div>
+							</div> -->
 						</div>
 					<% end %>
 				<% end %>

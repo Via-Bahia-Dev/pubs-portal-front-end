@@ -19,7 +19,7 @@
   text-align: center;
   display: inline-block;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   padding: 5px 15px;
   a {
     display: inline-block;
@@ -38,9 +38,16 @@
       text-decoration: none;
     }
   }
+
+  .request-thumb-info {
+    div {
+      margin: 2px 0px;
+    }
+  }
 }
 .request-cell:hover {
-  transform: scale(1.1);
+  // transform: scale(1.1);
+  filter: brightness(1.08);
   box-shadow: 0px 0px 8px 8px rgba(0,0,0,0.2);
   z-index: 999;
 }
