@@ -60,14 +60,16 @@ $(document).ready(function() {
 	$("#comments").on('click', '.comment-edit', function(event) {
 		event.preventDefault();
 		var $comment = $(this).parents('.comment').find('.comment-content .text');
-		var currentComment = $comment.children('p').html();
+		var currentComment = $comment.html().trim();
+		currentComment = replaceNewLineTags(currentComment);
+		currentComment = removeTags(currentComment);
 		if($comment.siblings('.edit-comment-form').length) {
 			return;
 		}
 		$comment.after('<div class="edit-comment-form">'+
                           '<div class="form-group">'+
                             '<div class="input-group edit-comment">' +
-                                '<textarea class="form-control" rows="3" name="comment[content]" >' + currentComment + '</textarea>' +
+                                '<textarea class="form-control" rows="5" name="comment[content]" >' + currentComment + '</textarea>' +
                             '</div>' +
                         '</div>'+
                         // buttons
@@ -121,7 +123,7 @@ $(document).ready(function() {
     })
     .done(function(data) {
       console.log("success");
-			$field.find('.text p').html(val);
+			$field.find('.text').html(simpleFormat(val));
       $field.find('.text').show();
       $('.edit-comment-form').remove();
 			// $field.parents('.comment').find('.comment-edit').show();
@@ -156,4 +158,33 @@ function postComment() {
 			$("#comment_content").val('');
 			formatCommentForm();
 	});
+}
+
+/*
+ * Does inverse of ruby's simple_format
+ * Adding 2 new lines per p tag and 1 per br
+ * Javascript will already do the new lines for p tags, only need to do br
+ */
+function replaceNewLineTags(str) {
+	return str.replace(/<br ?\/>/g, "<br/>\n");
+}
+
+/*
+ * Does equivalent of ruby's simple_format
+ * Replaces new lines with appropriate br or p tags
+ */
+function simpleFormat(str) {
+	var returnRegex = /\r\n?/g;
+	var twoNewLineRegex = /\n\n+/g;
+	var oneNewLineRegex = /([^\n]\n)(?=[^\n])/g;
+	var fstr = str;
+	fstr = fstr.replace(returnRegex, "\n") // \r\n and \r -> \n
+	fstr = fstr.replace(twoNewLineRegex, "</p>\n\n<p>") // 2+ newline  -> paragraph
+	fstr = fstr.replace(oneNewLineRegex, "$1<br/>") // 1 newline   -> br
+	fstr = "<p>" + fstr + "</p>"; // surround with p tags
+	return fstr;
+}
+
+function removeTags(string) {
+	return string.replace(/<[^>]+>/g, "")
 }
