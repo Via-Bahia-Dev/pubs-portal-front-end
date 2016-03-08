@@ -32,7 +32,12 @@ $(document).ready(function() {
     }
   });
 
-  $(".editable-field#descr-field").editable();
+  $(".editable-field#descr-field").editable({
+    display: function(value) {
+      $(this).html(value);
+    },
+    showbuttons: 'bottom'
+  });
 
   $(".editable-field#designer-field").editable({
     display: function(value, sourceData) {

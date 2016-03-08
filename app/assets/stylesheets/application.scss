@@ -148,7 +148,7 @@ textarea {
   padding-left: 5px;
   padding-right: 5px;
   border-bottom: 0 solid black !important;
-  white-space: normal !important;
+  // white-space: normal !important;
   color: black;
   &:hover {
     box-shadow: 0 0 0 1px $gray-light;
@@ -173,6 +173,19 @@ textarea {
     border-left: 0 solid $gray-lighter;
     right: 0;
   }
+}
+
+.editable-field[data-type="textarea"]+.editable-container {
+	width: 100% !important;
+	.form-group {
+		width: 100%;
+		.editable-input {
+			width: 100%;
+			textarea {
+				width: 100%;
+			}
+		}
+	}
 }
 
 .editable-empty {

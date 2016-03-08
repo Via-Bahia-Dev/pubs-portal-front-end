@@ -83,7 +83,7 @@
 														 url: publication_request_path(@publication_request["id"]),
 														 title: 'Description'
 													 } do %>
-						<%= simple_format(@publication_request["description"]) %>
+						<%= @publication_request["description"] %>
 					<% end %>
 				</li>
 

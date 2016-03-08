@@ -1,10 +1,12 @@
 <div class="comment">
-	
+
 	<%= render partial: "users/label", locals: { user: comment['user'] } %>
 
-	<div class="comment-content well">
-		<%= auto_link(simple_format("#{comment['content']}")) %>
-	</div>
+	<%= content_tag :div, class: "comment-content well", data: { model: "comment", name: "content", id: "#{comment['id']}", url: "#{comment_path(comment['id'])}"} do %>
+		<div class="text">
+			<%= auto_link(simple_format("#{comment['content']}")) %>
+		</div>
+	<% end %>
 	<div class="footer">
 		<small>
 			<%= "#{comment_date_format(datetime_from(comment['created_at']))}" %>
@@ -15,8 +17,11 @@
 			- <a href="#" class="comment-delete delete-link" val=<%="#{comment_path(comment['id'])}"%> data-content= '<%= render partial: "/layouts/confirm_delete", locals: { object: "Comment" } %>' data-title="Delete Comment?">
 				Delete
 			</a>
+			- <a href="#" class="comment-edit edit-link" val=<%="#{comment_path(comment['id'])}"%>>
+				Edit
+			</a>
 			<% end %>
 		</small>
-		
+
 	</div>
 </div>

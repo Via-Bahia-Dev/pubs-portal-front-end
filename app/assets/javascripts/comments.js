@@ -2,6 +2,9 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
+	$.fn.editable.defaults.mode = 'inline';
+  $.fn.editable.defaults.send = 'always';
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
 	var ctrlKeyCode = 17;
 	var enterKeyCode = 13;
@@ -53,6 +56,85 @@ $(document).ready(function() {
 				console.log(data);
 			});
 	});
+
+	$("#comments").on('click', '.comment-edit', function(event) {
+		event.preventDefault();
+		var $comment = $(this).parents('.comment').find('.comment-content .text');
+		var currentComment = $comment.html().trim();
+		currentComment = replaceNewLineTags(currentComment);
+		currentComment = removeTags(currentComment);
+		if($comment.siblings('.edit-comment-form').length) {
+			return;
+		}
+		$comment.after('<div class="edit-comment-form">'+
+                          '<div class="form-group">'+
+                            '<div class="input-group edit-comment">' +
+                                '<textarea class="form-control" rows="5" name="comment[content]" >' + currentComment + '</textarea>' +
+                            '</div>' +
+                        '</div>'+
+                        // buttons
+                        '<div class="editable-buttons">'+
+                            '<button type="submit" class="btn btn-primary btn-sm editable-submit">'+
+                                '<i class="glyphicon glyphicon-ok"></i>'+
+                            '</button>'+
+                            '<button type="button" class="btn btn-default btn-sm editable-cancel">'+
+                                '<i class="glyphicon glyphicon-remove"></i>'+
+                            '</button>'+
+                        '</div>'+
+                    '</div>');
+		$comment.hide();
+	});
+
+	// Cancel button clicked
+  $("#comments").on('click', '.editable-cancel', function(event) {
+    cancelEditComment(this);
+  });
+
+	/*
+   * Cancel the comment edit
+   * Reveals the original field and removes the form
+   */
+  function cancelEditComment(element) {
+    $(element).parents('.edit-comment-form').siblings('.text').show();
+    $(element).parents('.edit-comment-form').remove();
+  }
+
+	/*
+   * Inline form submission
+   * Gets the necessary params from the data attributes of the original field
+   * Then submits an ajax request
+   * On success, give the original field the new value and then show it and remove the form
+   */
+  $("#comments").on('click', '.editable-submit', function(event) {
+    event.preventDefault();
+    $field = $(this).parents('.comment-content');
+    var model = $field.data('model');
+    var name = $field.data('name');
+    var val = $field.find('.edit-comment-form textarea').val();
+
+    var params = {}
+    params[model] = {}
+    params[model][name] = val;
+
+    $.ajax({
+      url: $field.data('url'),
+      type: 'PUT',
+      data: params
+    })
+    .done(function(data) {
+      console.log("success");
+			$field.find('.text').html(simpleFormat(val));
+      $field.find('.text').show();
+      $('.edit-comment-form').remove();
+			// $field.parents('.comment').find('.comment-edit').show();
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  });
 });
 
 function formatCommentForm () {

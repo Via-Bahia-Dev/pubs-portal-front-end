@@ -8,12 +8,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    res = put("/comments/#{params[:id]}", {:comment => comment_params})
+
+    if res['errors'].nil?
+      head :no_content
+    else
+      render :json => res.parsed_response["errors"]
+    end
+  end
+
   def destroy
-    
+
     res = delete("/comments/#{params[:id]}")
 
     if res['errors'].nil?
-      head :no_content 
+      head :no_content
     else
       flash[:errors] = res['errors']
       render 'show'
