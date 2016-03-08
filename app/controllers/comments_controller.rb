@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
 
     if res['errors'].nil?
       head :no_content
+    else
+      render :json => res.parsed_response["errors"]
     end
   end
 
