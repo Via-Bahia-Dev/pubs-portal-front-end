@@ -48,8 +48,16 @@ $(document).ready(function() {
 		x = e.pageX - parent.offset().left - ink.width()/2;
 		y = e.pageY - parent.offset().top - ink.height()/2;
 
+		// set parent to hide overflow for ink
+		parent.css('overflow', 'hidden');
+
 		//set the position and add class .animate
 		ink.css({top: y+'px', left: x+'px'}).addClass("animate");
+
+		// set parent to show overflow again when the animation is done, in case tooltips need to show
+		setTimeout(function () {
+			parent.css('overflow', 'visible');
+		}, 650); // 0.65s as determined in app.scss
 	})
 
 });

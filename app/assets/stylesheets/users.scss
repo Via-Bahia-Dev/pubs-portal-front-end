@@ -11,7 +11,7 @@
   }
 }
 
-.user {
+.user-item-label {
 	left: 15px;
 	height: 30px;
 	width: 30px;
@@ -19,6 +19,15 @@
 	background-color: $brand-primary;
 	color: white;
 	border-radius: 3px;
+}
+
+.user-label {
+  height: 30px;
+	width: 30px;
+  background-color: $brand-primary;
+	color: white;
+	border-radius: 3px;
+  display: inline-block;
 }
 
 .user-initials {
