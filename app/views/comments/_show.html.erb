@@ -2,11 +2,11 @@
 
 	<%= render partial: "users/label", locals: { user: comment['user'] } %>
 
-	<div class="comment-content well">
+	<%= content_tag :div, class: "comment-content well", data: { model: "comment", name: "content", id: "#{comment['id']}", url: "#{comment_path(comment['id'])}"} do %>
 		<div class="text">
 			<%= auto_link(simple_format("#{comment['content']}")) %>
 		</div>
-	</div>
+	<% end %>
 	<div class="footer">
 		<small>
 			<%= "#{comment_date_format(datetime_from(comment['created_at']))}" %>

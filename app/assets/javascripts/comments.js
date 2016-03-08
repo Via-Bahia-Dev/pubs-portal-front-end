@@ -59,8 +59,11 @@ $(document).ready(function() {
 
 	$("#comments").on('click', '.comment-edit', function(event) {
 		event.preventDefault();
-		var $comment = $(this).parents('.comment').find('.comment-content .text')
+		var $comment = $(this).parents('.comment').find('.comment-content .text');
 		var currentComment = $comment.children('p').html();
+		if($comment.siblings('.edit-comment-form').length) {
+			return;
+		}
 		$comment.after('<div class="edit-comment-form">'+
                           '<div class="form-group">'+
                             '<div class="input-group edit-comment">' +
@@ -78,7 +81,6 @@ $(document).ready(function() {
                         '</div>'+
                     '</div>');
 		$comment.hide();
-
 	});
 
 	// Cancel button clicked
@@ -94,6 +96,43 @@ $(document).ready(function() {
     $(element).parents('.edit-comment-form').siblings('.text').show();
     $(element).parents('.edit-comment-form').remove();
   }
+
+	/*
+   * Inline form submission
+   * Gets the necessary params from the data attributes of the original field
+   * Then submits an ajax request
+   * On success, give the original field the new value and then show it and remove the form
+   */
+  $("#comments").on('click', '.editable-submit', function(event) {
+    event.preventDefault();
+    $field = $(this).parents('.comment-content');
+    var model = $field.data('model');
+    var name = $field.data('name');
+    var val = $field.find('.edit-comment-form textarea').val();
+
+    var params = {}
+    params[model] = {}
+    params[model][name] = val;
+
+    $.ajax({
+      url: $field.data('url'),
+      type: 'PUT',
+      data: params
+    })
+    .done(function(data) {
+      console.log("success");
+			$field.find('.text p').html(val);
+      $field.find('.text').show();
+      $('.edit-comment-form').remove();
+			// $field.parents('.comment').find('.comment-edit').show();
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+  });
 });
 
 function formatCommentForm () {
