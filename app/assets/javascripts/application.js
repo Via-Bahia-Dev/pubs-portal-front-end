@@ -38,4 +38,33 @@ $(document).ready(function(){
 			}
 		});
 	}
-})
+});
+
+/*
+ * Does inverse of ruby's simple_format
+ * Adding 2 new lines per p tag and 1 per br
+ * Javascript will already do the new lines for p tags, only need to do br
+ */
+function replaceNewLineTags(str) {
+	return str.replace(/<br ?\/>/g, "<br/>\n");
+}
+
+/*
+ * Does equivalent of ruby's simple_format
+ * Replaces new lines with appropriate br or p tags
+ */
+function simpleFormat(str) {
+	var returnRegex = /\r\n?/g;
+	var twoNewLineRegex = /\n\n+/g;
+	var oneNewLineRegex = /([^\n]\n)(?=[^\n])/g;
+	var fstr = str;
+	fstr = fstr.replace(returnRegex, "\n") // \r\n and \r -> \n
+	fstr = fstr.replace(twoNewLineRegex, "</p>\n\n<p>") // 2+ newline  -> paragraph
+	fstr = fstr.replace(oneNewLineRegex, "$1<br/>") // 1 newline   -> br
+	fstr = "<p>" + fstr + "</p>"; // surround with p tags
+	return fstr;
+}
+
+function removeTags(str) {
+	return str.replace(/<[^>]+>/g, "")
+}
