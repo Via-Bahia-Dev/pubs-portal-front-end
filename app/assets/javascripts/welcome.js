@@ -24,6 +24,9 @@ $(document).ready(function() {
 		$(el).toggleClass('panel-info');
 	}
 
+	/*
+	 * Google material ink spot on click
+	 */
 	var parent, ink, d, x, y;
 	$(".request-thumb a").click(function(e) {
 		parent = $(this).parent();
@@ -132,4 +135,31 @@ function createRequestIsotope() {
 			$requestIsotope.isotope( { sortBy: order });
 		}
 	});
+
+	// quick search regex
+	var qsRegex;
+
+	// use value of search field to filter
+	var $quicksearch = $('#request-quicksearch').keyup( debounce( function() {
+		qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+		$requestIsotope.isotope({ filter: function() {
+			return qsRegex ? $(this).text().match( qsRegex ) : true;
+		} });
+	}, 200 ) );
+
+}
+
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+	var timeout;
+	return function debounced() {
+		if ( timeout ) {
+			clearTimeout( timeout );
+		}
+		function delayed() {
+			fn();
+			timeout = null;
+		}
+		timeout = setTimeout( delayed, threshold || 100 );
+	}
 }
