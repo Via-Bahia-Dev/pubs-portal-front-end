@@ -30,6 +30,11 @@
 	}
 }
 
+.hidden-text {
+	visibility: hidden;
+	position: absolute; // get it out of document flow
+}
+
 
 #create-request-btn, #view-requests-btn {
 	padding: 10px;
