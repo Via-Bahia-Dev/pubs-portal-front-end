@@ -89,9 +89,37 @@ function createTemplateIsotope() {
 
 }
 function createRequestIsotope() {
+	// filter functions
+	var filterFns = {
+		quicksearch: function() {
+			qsRegex = new RegExp( $("#request-quicksearch").val(), 'gi' );
+			return qsRegex ? $(this).text().match( qsRegex ) : true;
+		}
+	}
+
+	// store all the filters
+	var filters = {
+		quicksearch: 'quicksearch'
+	}
+
 	$requestIsotope = $("#requests-wall").isotope({
 		itemSelector: '.request-cell',
 		layoutMode: 'fitRows',
+		filter: function() {
+			for(var prop in filters) {
+				var filter = filters[prop];
+				// use the function if it's in our funcions, otherwise, use the text
+				filter = filterFns[filter] || filter;
+
+				if(filter) {
+					// .is() will check the class, as well as if the function is true
+					if(!$(this).is(filter)) {
+						return false
+					}
+				}
+			}
+			return true;
+		},
 		getSortData: {
 			createdAt: function(el) {
 				var date = new Date($(el).data('createdat'));
@@ -122,7 +150,9 @@ function createRequestIsotope() {
 		$(this).closest(".choose-filter").children('.filter-name').html($(this).html());
 		var filter = $(this).data('filter');
 		if(filter) {
-			$requestIsotope.isotope({ filter: filter });
+			// our 'set-filters' are just based on class, so it will use the string
+			filters["set-filter"] = filter;
+			$requestIsotope.isotope('arrange');
 		}
 	});
 
@@ -136,17 +166,12 @@ function createRequestIsotope() {
 		}
 	});
 
-	// quick search regex
-	var qsRegex;
-
 	// use value of search field to filter
-	var $quicksearch = $('#request-quicksearch').keyup( debounce( function() {
-		qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-		$requestIsotope.isotope({ filter: function() {
-			return qsRegex ? $(this).text().match( qsRegex ) : true;
-		} });
-	}, 200 ) );
-
+	var $quicksearch = $('#request-quicksearch').keyup( debounce(
+		// just arrange the isotope when typing; filtering handled by filter list
+		function() {
+			$requestIsotope.isotope('arrange');
+		}, 200 ) );
 }
 
 // debounce so filtering doesn't happen every millisecond
