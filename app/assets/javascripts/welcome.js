@@ -66,10 +66,45 @@ $(document).ready(function() {
 });
 
 function createTemplateIsotope() {
+	// filter functions
+	var filterFns = {
+		quicksearch: function() {
+			qsRegex = new RegExp( $("#template-quicksearch").val(), 'gi' );
+			return qsRegex ? $(this).text().match( qsRegex ) : true;
+		}
+	};
+
+	// store all the filters
+	var filters = {
+		quicksearch: 'quicksearch'
+	};
+
 	$templateIsotope = $("#templates-wall").isotope({
 		itemSelector: '.template-cell',
-		layoutMode: 'fitRows'
+		layoutMode: 'fitRows',
+		filter: function() {
+			for(var prop in filters) {
+				var filter = filters[prop];
+				// use the function if it's in our funcions, otherwise, use the text
+				filter = filterFns[filter] || filter;
+
+				if(filter) {
+					// .is() will check the class, as well as if the function is true
+					if(!$(this).is(filter)) {
+						return false
+					}
+				}
+			}
+			return true;
+		}
 	});
+
+	// use value of search field to filter
+	var $quicksearch = $('#template-quicksearch').keyup( debounce(
+		// just arrange the isotope when typing; filtering handled by filter list
+		function() {
+			$templateIsotope.isotope('arrange');
+		}, 200 ) );
 
 	$("#filter-tags").select2({
 		theme: 'bootstrap',
@@ -84,7 +119,8 @@ function createTemplateIsotope() {
 		} else {
 			filter.push("*");
 		}
-		$templateIsotope.isotope( { filter: filter.join('')});
+		filters["set-filter"] = filter.join('');
+		$templateIsotope.isotope('arrange');
 	});
 
 }
@@ -95,12 +131,12 @@ function createRequestIsotope() {
 			qsRegex = new RegExp( $("#request-quicksearch").val(), 'gi' );
 			return qsRegex ? $(this).text().match( qsRegex ) : true;
 		}
-	}
+	};
 
 	// store all the filters
 	var filters = {
 		quicksearch: 'quicksearch'
-	}
+	};
 
 	$requestIsotope = $("#requests-wall").isotope({
 		itemSelector: '.request-cell',
