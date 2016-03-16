@@ -177,7 +177,17 @@ function createRequestIsotope() {
 			},
 			status: '[data-status] parseInt'
 		},
-		sortBy: 'createdAt'
+		sortBy: 'createdAt',
+		sortAscending: true
+	});
+
+	$(".order-arrow").click(function(event) {
+		$(this).find('span').toggleClass('glyphicon-arrow-up glyphicon-arrow-down');
+		if($(this).find('span').hasClass('glyphicon-arrow-up')) {
+			$requestIsotope.isotope( { sortAscending: true } );
+		} else {
+			$requestIsotope.isotope( { sortAscending: false } );
+		}
 	});
 
 	$(".filter").click(function(event) {
