@@ -5,13 +5,21 @@
 $(document).ready(function() {
 
 	var $templateIsotope;
+	var tempIsoMade = false;
 	var $requestIsotope;
+	var reqIsoMade = false;
 	$("#create-request-templates").on('shown.bs.collapse', function(event) {
-		createTemplateIsotope();
+		if(!tempIsoMade) {
+			createTemplateIsotope();
+		}
+		tempIsoMade = true;
 	});
 
 	$("#current-requests").on('shown.bs.collapse', function(event) {
-		createRequestIsotope();
+		if(!reqIsoMade) {
+			createRequestIsotope();
+		}
+		reqIsoMade = true;
 	});
 
 	$("#accordion .accordion-link").hover(
