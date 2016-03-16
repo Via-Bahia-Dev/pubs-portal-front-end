@@ -197,6 +197,13 @@ function createRequestIsotope() {
 			$requestIsotope.isotope( { sortAscending: false } );
 		}
 	});
+	$(".order-arrow").hover(function() {
+		if($(this).find('span').hasClass('glyphicon-arrow-up')) {
+			$(this).prop('title', 'Ascending');
+		} else {
+			$(this).prop('title', 'Descending');
+		}
+	});
 
 	$(".filter").click(function(event) {
 		$("#filter-dropdown ~ ul>li").removeClass('active');
