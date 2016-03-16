@@ -1,4 +1,4 @@
-<ul class="nav nav-pills view-controls">
+<ul class="nav nav-pills view-controls row">
   <li role="presentation" class="view-control choose-filter dropdown">
     <div class="view-control-name filter-name">All Requests</div>
     <a id="filter-dropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,8 +26,11 @@
     </ul>
   </li>
 
-  <li role="presentation" class="view-control choose-order dropdown">
+  <li role="presentation" class="view-control choose-order dropdown ">
     <div class="view-control-name order-name">Order by <span>Date Created</span></div>
+    <div class="view-control-name order-arrow" title="Ascending">
+      <span class="glyphicon glyphicon-arrow-up"></span>
+    </div>
     <a id="order-dropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Switch order
       <span class="caret"></span>
@@ -52,6 +55,12 @@
         <%= link_to "Status", "#", class: "order", id: "my-requests", data: { order: "status" } %>
       </li>
     </ul>
+
+  </li>
+
+  <li role="presentation" class="view-control quickfilter col-md-5 col-sm-12 col-xs-12">
+    <div class="view-control-name">Quicksearch</div>
+    <%= text_field_tag "request-quicksearch", nil, class: "form-control", placeholder: "Search on any text in the request" %>
   </li>
 
 </ul>

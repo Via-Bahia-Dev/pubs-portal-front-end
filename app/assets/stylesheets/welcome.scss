@@ -24,6 +24,25 @@
 		font-size: 24px;
 		display: inline-block;
 	}
+
+	.quickfilter {
+		// width: 40%;
+	}
+	.tag-filter {
+		// width: 40%;
+	}
+
+	.order-arrow {
+		&:hover {
+			text-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+			cursor: pointer;
+		}
+	}
+}
+
+.hidden-text {
+	visibility: hidden;
+	position: absolute; // get it out of document flow
 }
 
 

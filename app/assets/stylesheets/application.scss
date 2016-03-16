@@ -70,6 +70,10 @@ textarea {
 	resize: vertical;
 }
 
+.select2 {
+	max-width: 100% !important;
+}
+
 .popover {
 	text-align: center !important;
 	.confirm-text {

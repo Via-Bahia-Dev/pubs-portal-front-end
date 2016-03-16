@@ -1,6 +1,3 @@
-<!-- <button type="button" class="btn btn-primary btn-lg template-cell">
-  No Template
-</button> -->
 <div class="template-cell">
 	<%= link_to(new_publication_request_path) do %>
 		<div class="img-thumbnail no-template">
@@ -15,6 +12,9 @@
 	<%= content_tag(:div, class: "template-cell #{template['tags'].map { |tag| tag['name'] }.join(' ')}") do %>
 		<%= link_to(new_publication_request_path(:template_id => template['id'])) do %>
 			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title"><%= "#{template['name']}" %></h4>
+				</div>
 			  <div class="panel-body">
 						<%= image_tag(template['image_medium']) %>
 			  </div>

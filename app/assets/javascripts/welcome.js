@@ -5,13 +5,21 @@
 $(document).ready(function() {
 
 	var $templateIsotope;
+	var tempIsoMade = false;
 	var $requestIsotope;
+	var reqIsoMade = false;
 	$("#create-request-templates").on('shown.bs.collapse', function(event) {
-		createTemplateIsotope();
+		if(!tempIsoMade) {
+			createTemplateIsotope();
+		}
+		tempIsoMade = true;
 	});
 
 	$("#current-requests").on('shown.bs.collapse', function(event) {
-		createRequestIsotope();
+		if(!reqIsoMade) {
+			createRequestIsotope();
+		}
+		reqIsoMade = true;
 	});
 
 	$("#accordion .accordion-link").hover(
@@ -24,6 +32,9 @@ $(document).ready(function() {
 		$(el).toggleClass('panel-info');
 	}
 
+	/*
+	 * Google material ink spot on click
+	 */
 	var parent, ink, d, x, y;
 	$(".request-thumb a").click(function(e) {
 		parent = $(this).parent();
@@ -63,10 +74,45 @@ $(document).ready(function() {
 });
 
 function createTemplateIsotope() {
+	// filter functions
+	var filterFns = {
+		quicksearch: function() {
+			qsRegex = new RegExp( $("#template-quicksearch").val(), 'gi' );
+			return qsRegex ? $(this).text().match( qsRegex ) : true;
+		}
+	};
+
+	// store all the filters
+	var filters = {
+		quicksearch: 'quicksearch'
+	};
+
 	$templateIsotope = $("#templates-wall").isotope({
 		itemSelector: '.template-cell',
-		layoutMode: 'fitRows'
+		layoutMode: 'fitRows',
+		filter: function() {
+			for(var prop in filters) {
+				var filter = filters[prop];
+				// use the function if it's in our funcions, otherwise, use the text
+				filter = filterFns[filter] || filter;
+
+				if(filter) {
+					// .is() will check the class, as well as if the function is true
+					if(!$(this).is(filter)) {
+						return false
+					}
+				}
+			}
+			return true;
+		}
 	});
+
+	// use value of search field to filter
+	var $quicksearch = $('#template-quicksearch').keyup( debounce(
+		// just arrange the isotope when typing; filtering handled by filter list
+		function() {
+			$templateIsotope.isotope('arrange');
+		}, 200 ) );
 
 	$("#filter-tags").select2({
 		theme: 'bootstrap',
@@ -81,14 +127,43 @@ function createTemplateIsotope() {
 		} else {
 			filter.push("*");
 		}
-		$templateIsotope.isotope( { filter: filter.join('')});
+		filters["set-filter"] = filter.join('');
+		$templateIsotope.isotope('arrange');
 	});
 
 }
 function createRequestIsotope() {
+	// filter functions
+	var filterFns = {
+		quicksearch: function() {
+			qsRegex = new RegExp( $("#request-quicksearch").val(), 'gi' );
+			return qsRegex ? $(this).text().match( qsRegex ) : true;
+		}
+	};
+
+	// store all the filters
+	var filters = {
+		quicksearch: 'quicksearch'
+	};
+
 	$requestIsotope = $("#requests-wall").isotope({
 		itemSelector: '.request-cell',
 		layoutMode: 'fitRows',
+		filter: function() {
+			for(var prop in filters) {
+				var filter = filters[prop];
+				// use the function if it's in our funcions, otherwise, use the text
+				filter = filterFns[filter] || filter;
+
+				if(filter) {
+					// .is() will check the class, as well as if the function is true
+					if(!$(this).is(filter)) {
+						return false
+					}
+				}
+			}
+			return true;
+		},
 		getSortData: {
 			createdAt: function(el) {
 				var date = new Date($(el).data('createdat'));
@@ -110,7 +185,24 @@ function createRequestIsotope() {
 			},
 			status: '[data-status] parseInt'
 		},
-		sortBy: 'createdAt'
+		sortBy: 'createdAt',
+		sortAscending: true
+	});
+
+	$(".order-arrow").click(function(event) {
+		$(this).find('span').toggleClass('glyphicon-arrow-up glyphicon-arrow-down');
+		if($(this).find('span').hasClass('glyphicon-arrow-up')) {
+			$requestIsotope.isotope( { sortAscending: true } );
+		} else {
+			$requestIsotope.isotope( { sortAscending: false } );
+		}
+	});
+	$(".order-arrow").hover(function() {
+		if($(this).find('span').hasClass('glyphicon-arrow-up')) {
+			$(this).prop('title', 'Ascending');
+		} else {
+			$(this).prop('title', 'Descending');
+		}
 	});
 
 	$(".filter").click(function(event) {
@@ -119,7 +211,9 @@ function createRequestIsotope() {
 		$(this).closest(".choose-filter").children('.filter-name').html($(this).html());
 		var filter = $(this).data('filter');
 		if(filter) {
-			$requestIsotope.isotope({ filter: filter });
+			// our 'set-filters' are just based on class, so it will use the string
+			filters["set-filter"] = filter;
+			$requestIsotope.isotope('arrange');
 		}
 	});
 
@@ -132,4 +226,26 @@ function createRequestIsotope() {
 			$requestIsotope.isotope( { sortBy: order });
 		}
 	});
+
+	// use value of search field to filter
+	var $quicksearch = $('#request-quicksearch').keyup( debounce(
+		// just arrange the isotope when typing; filtering handled by filter list
+		function() {
+			$requestIsotope.isotope('arrange');
+		}, 200 ) );
+}
+
+// debounce so filtering doesn't happen every millisecond
+function debounce( fn, threshold ) {
+	var timeout;
+	return function debounced() {
+		if ( timeout ) {
+			clearTimeout( timeout );
+		}
+		function delayed() {
+			fn();
+			timeout = null;
+		}
+		timeout = setTimeout( delayed, threshold || 100 );
+	}
 }
