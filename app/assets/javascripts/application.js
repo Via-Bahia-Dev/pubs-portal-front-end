@@ -45,12 +45,17 @@ $(document).ready(function(){
 });
 
 /*
- * For inline editable fields. Adds the Jira style pen next to field
+ * For inline editable fields. Checks for empty field.
+ * Also adds the Jira style pen next to field
  */
-function textFieldDisplay(element, value) {
-	$(element).text(value);
-	$(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
-}
+ function textFieldDisplay(element, value) {
+ 	if(value === "") {
+ 		$(element).text("Empty");
+ 	} else {
+ 		$(element).text(value);
+ 	}
+ 	$(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
+ }
 /*
  * Properly adds values to select box for x-editable. Then adds pen
  */
