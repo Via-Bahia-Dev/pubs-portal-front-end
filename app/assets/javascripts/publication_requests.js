@@ -2,23 +2,6 @@ $(document).ready(function() {
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.send = 'always';
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-
-  function textFieldDisplay(element, value) {
-    $(element).text(value);
-    $(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
-  }
-
-  function selectDisplay(element, value, sourceData) {
-    $(element).text($.fn.editableutils.itemsByValue(value, sourceData)[0].text);
-    $(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
-  }
-
-  function validateRequiredField(value) {
-    if($.trim(value) == '') {
-      return 'This field is required';
-    }
-  }
-
   /*
   Make editable fields for the request
   Different elements have slightly different requirements so do them all individually
