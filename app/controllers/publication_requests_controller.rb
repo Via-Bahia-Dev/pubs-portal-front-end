@@ -66,8 +66,7 @@ class PublicationRequestsController < ApplicationController
         head :no_content
       end
     else
-      # @publication_request.save
-      render :json => res.parsed_response["errors"]
+      render :json => res.parsed_response["errors"], :status => 422
     end
   end
 
