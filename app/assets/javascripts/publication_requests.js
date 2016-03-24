@@ -2,17 +2,6 @@ $(document).ready(function() {
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.send = 'always';
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-
-  function textFieldDisplay(element, value) {
-    $(element).text(value);
-    $(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
-  }
-
-  function selectDisplay(element, value, sourceData) {
-    $(element).text($.fn.editableutils.itemsByValue(value, sourceData)[0].text);
-    $(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
-  }
-
   /*
   Make editable fields for the request
   Different elements have slightly different requirements so do them all individually
@@ -20,6 +9,9 @@ $(document).ready(function() {
   $(".editable-field#event-field").editable({
     display: function(value) {
       textFieldDisplay(this, value);
+    },
+    validate: function(value) {
+      return validateRequiredField(value);
     },
     success: function(response, newValue) {
         $(".page-header h1").html(newValue);
@@ -29,6 +21,9 @@ $(document).ready(function() {
   $(".editable-field#dimen-field").editable({
     display: function(value) {
       textFieldDisplay(this, value);
+    },
+    validate: function(value) {
+      return validateRequiredField(value);
     }
   });
 
@@ -36,18 +31,27 @@ $(document).ready(function() {
     display: function(value) {
       $(this).html(value);
     },
+    validate: function(value) {
+      return validateRequiredField(value);
+    },
     showbuttons: 'bottom'
   });
 
   $(".editable-field#designer-field").editable({
     display: function(value, sourceData) {
       selectDisplay(this, value, sourceData);
+    },
+    validate: function(value) {
+      return validateRequiredField(value);
     }
   });
 
   $(".editable-field#reviewer-field").editable({
     display: function(value, sourceData) {
       selectDisplay(this, value, sourceData);
+    },
+    validate: function(value) {
+      return validateRequiredField(value);
     }
   });
 
@@ -121,32 +125,39 @@ $(document).ready(function() {
     var name = $field.data('name');
     var val = $($(this).parents('.date-form').get(0)).find('input').val();
 
-    var params = {}
-    params[model] = {}
-    params[model][name] = val;
-    // var params = {
-    //   [model]: {
-    //     [name]: val
-    //   }
-    // };
-    $.ajax({
-      url: $field.data('url'),
-      type: 'PUT',
-      data: params
-    })
-    .done(function(data) {
-      console.log("success");
-      var newVal = $('.date-form input').val();
-      $('.editable-field:hidden .date').html(newVal);
-      $('.editable-field:hidden').show();
-      $('.date-form').remove();
-    })
-    .fail(function() {
-      console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
-    });
+    if($.trim(val) == '') {
+      if($('.date-form .editable-error-block').length == 0) {
+        $('.date-form').append('<div class="editable-error-block help-block">This field is required</div>');
+      }
+      $('.date-form').addClass('has-error');
+    } else {
+      var params = {}
+      params[model] = {}
+      params[model][name] = val;
+
+      $.ajax({
+        url: $field.data('url'),
+        type: 'PUT',
+        data: params
+      })
+      .done(function(data) {
+        console.log("success");
+        var newVal = $('.date-form input').val();
+        $('.editable-field:hidden .date').html(newVal);
+        $('.editable-field:hidden').show();
+        $('.date-form').remove();
+      })
+      .fail(function(data) {
+        console.log("error");
+        if($('.date-form .editable-error-block').length == 0) {
+          $('.date-form').append('<div class="editable-error-block help-block">Something went wrong</div>');
+        }
+        $('.date-form').addClass('has-error');
+      })
+      .always(function() {
+        console.log("complete");
+      });
+    }
 
   });
 

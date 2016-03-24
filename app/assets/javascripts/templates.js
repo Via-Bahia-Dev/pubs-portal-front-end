@@ -3,21 +3,20 @@ $(document).ready(function() {
   $.fn.editable.defaults.send = 'always';
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
 
-  function textFieldDisplay(element, value) {
-    if(value === "") {
-      $(element).text("Empty");
-    } else {
-      $(element).text(value);
+  $(".name-field, .dimen-field").editable({
+    display: function(value) {
+      textFieldDisplay(this, value);
+    },
+    validate: function(value) {
+      return validateRequiredField(value);
     }
-    $(element).append('<span class="glyphicon glyphicon-pencil overlay-icon"></span>');
-  }
-
-  $("#name-field, #dimen-field, #url-field").editable({
+  });
+  $(".url-field").editable({
     placeholder: "Empty",
     display: function(value) {
       textFieldDisplay(this, value);
     }
-  });
+  })
 
   $(".editable-field#tags-field").editable({
     placeholder: "None",

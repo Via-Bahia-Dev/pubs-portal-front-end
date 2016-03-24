@@ -33,6 +33,8 @@ class TemplatesController < ApplicationController
 		res = put("/templates/#{params[:id]}", {:template => template_params})
 		if res["errors"].nil?
 			head :no_content
+		else
+			render :json => res.parsed_response["errors"], :status => 422
 		end
 	end
 
