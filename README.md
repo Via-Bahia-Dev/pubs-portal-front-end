@@ -27,9 +27,6 @@ The project is already up and running on Heroku, but if you have multiple heroku
 
 to see if your folder is configured correctly. If it's not, you will have to specify the app you're using every time which is annoying. Basically you need to associate the git project with it's corresponding heroku git repo. While we no longer need to make a heroku remote to push to heroku, we need one for the folder to know which heroku project it belongs to. So we need to make a remote for heroku and then add the repo url to our git config.
 
-## Images
-For images to work in development, you need to link your `public/` folder to the API app's `public/` folder, since the api is what is storing the images. So as to not mess up the folder on production, do this manually for now, being sure not to add the change to staging when committing. Unstage when changing branches.
-
 ```
 $ heroku info --app pubs-portal-front-end
 === pubs-portal-front-end
@@ -48,3 +45,5 @@ $ git config heroku.remote heroku
 
 This will set the new `heroku` remote to the `heroku.remote` config and now heroku will know which app to use. These steps work with any projects.
 
+## Images
+For images to work in development, you need to link your `public/` folder to the API app's `public/` folder, since the api is what is storing the images. So as to not mess up the folder on production, do this manually for now, being sure not to add the change to staging when committing. Unstage when changing branches.
